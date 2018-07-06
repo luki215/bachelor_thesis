@@ -49,7 +49,9 @@
 \usepackage{dcolumn}        % improved alignment of table columns
 \usepackage{booktabs}       % improved horizontal lines in tables
 \usepackage{paralist}       % improved enumerate and itemize
-\usepackage[usenames]{xcolor}  % typesetting in color
+\usepackage[usenames, dvipsnames]{xcolor}  % typesetting in color
+
+\usepackage[colorinlistoftodos,prependcaption,textsize=tiny]{todonotes}
 
 %%% Basic information on the thesis
 
@@ -88,12 +90,12 @@ Dedication.
 
 % Abstract (recommended length around 80-200 words; this is not a copy of your thesis assignment!)
 \def\Abstract{%
-Abstract.
+	Nowadays services like Uber start to surpass taxi companies in comfort of transport. The goal of this thesis is to create a back-end part of the application, which will increase the taxi services efficiency and give the users new and more comfortable ways to use them. 
 }
 
 % 3 to 5 keywords (recommended), each enclosed in curly braces
 \def\Keywords{%
-{key} {words}
+{Taxi} {Ruby on Rails}
 }
 
 %% The hyperref package for clickable links in PDF and also for storing
@@ -115,6 +117,8 @@ Abstract.
 
 %%% Each chapter is kept in a separate file
 \include{preface}
+\include{requirements}
+\include{analysis}
 \include{chap01}
 \include{chap02}
 
