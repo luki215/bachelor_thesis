@@ -1,35 +1,3 @@
 \chapter{Analysis}
-In the beginning of this chapter we analyze more general things like what frameworks and tools we have used and why we have made such decision. Later we go through specific parts of application and describe them. 
-\section{Application software stack}
-For our application we decided to use Ruby on Rails\footnote{ Ruby on Rails framework main page \url{https://rubyonrails.org/}} framework written in Ruby\footnote{ Ruby language main page \url{https://www.ruby-lang.org/}}. 
-Our asynchronous jobs are handled via Sidekiq\footnote{ Sidekiq wiki page \url{https://github.com/mperham/sidekiq/wiki}}. We decided to use PosgreSQL\footnote{ PostgreSQL database main page \url{https://www.postgresql.org/}} as our main database engine. We also run Redis\footnote{ Redis database main page \url{https://redis.io/}} as it is required database for Sidekiq.
-\subsection{Ruby on Rails}
-There are many frameworks in which could be this type of application written equally well - for example ASP.NET(C\#), Spring(Java), Laravel(PHP), Django(Python), ExpressJS(JavaScript).
-
-Here are some advantages and disadvantages of Ruby on Rails which has led us to choose it.
-
-Advantages:
-\begin{itemize}
-	\item Simplicity and expressibility of Ruby - optional parenthesis, return keyword, no semicolons, combination with functional programming 
-	\item Strong Convention over Configuration influence - you have strictly given where to place models, controllers, how to name classes, database tables etc. and you are forced to do it that way. It may seem limiting at first but it brings to project clarity and most of the times it gives you good way to solve your problem without reinventing wheel
-	\item plenty of tools built in - from the routing and security through development-testing-production configurations to the highly sophisticated ORM
-	\item global repository of libraries (Ruby Gems) - most of them in very good quality with clear documentation and test covered
-	\item We are using it for 3 years, so we know proven libraries and ecosystem
-\end{itemize} 
-Disadvantages:
-\begin{itemize}
-	\item it is more difficult to set it up than PHP
-	\item impossible to use standard web hosting
-	\item small base of programmers knowing Ruby
-	\item efficiency compared to some framework \info[]{This can help me in chapter seven!}
-\end{itemize}
-  
-\subsection{PosrtgreSQL}
-We decided to use PostgreSQL, because it is open source and unlike MySQL it supports natively storing JSON, arrays and it has many plugins - for example for storing geo data. None of these features we use in our application now but why not to have this possibility when we would like to optimize something or extend it. Since we use Rails ORM (ActiveRecord), choice of the database is not so critical - we can migrate later to other database.
-\subsection{Sidekiq}
-There are many job processors for Ruby\footnote{ Job processors comparasion \url{http://api.rubyonrails.org/classes/ActiveJob/QueueAdapters.html}}. Ruby on Rails has own abstraction called ActiveJob. 
-
-\section{Customers}
-\section{Employees}
-\section{Vehicles}
-
+In this chapter we would like to explain the thinking process before and during the implementation of the back-end application. We are going through individual parts from the back-end application requirements, explaining problems associated with them and revealing what possibilities we had to solve them and how we decided in the end.
+\section{Orders}

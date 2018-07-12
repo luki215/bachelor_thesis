@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.7.5)  6 JUL 2018 04:54
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.7.5)  10 JUL 2018 21:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2294,34 +2294,38 @@ Package hyperref Info: Option `breaklinks' set `true' on input line 105.
 (./macros.tex
 \c@thm=\count143
 \c@defn=\count144
-) (./thesis.aux (./title.aux) (./preface.aux) (./requirements.aux) (./analysis.
-aux) (./chap01.aux) (./chap02.aux) (./epilog.aux)
-(./bibliography.aux))
+) (./thesis.aux (./title.aux) (./preface.aux) (./requirements.aux
+
+LaTeX Warning: Label `order-process-scheme' multiply defined.
+
+) (./technical_analysis.aux) (./analysis.aux) (./implementation.aux)
+(./testing.aux) (./evaluation.aux) (./epilog.aux) (./bibliography.aux))
 \openout1 = `thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 111.
-LaTeX Font Info:    ... okay on input line 111.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 111.
-LaTeX Font Info:    ... okay on input line 111.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 111.
-LaTeX Font Info:    ... okay on input line 111.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 111.
-LaTeX Font Info:    ... okay on input line 111.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 111.
-LaTeX Font Info:    ... okay on input line 111.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 111.
-LaTeX Font Info:    ... okay on input line 111.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 111.
-LaTeX Font Info:    ... okay on input line 111.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 111.
-LaTeX Font Info:    ... okay on input line 111.
-LaTeX Font Info:    Try loading font information for OT1+lmr on input line 111.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 115.
+LaTeX Font Info:    ... okay on input line 115.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 115.
+LaTeX Font Info:    ... okay on input line 115.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 115.
+LaTeX Font Info:    ... okay on input line 115.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 115.
+LaTeX Font Info:    ... okay on input line 115.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 115.
+LaTeX Font Info:    ... okay on input line 115.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 115.
+LaTeX Font Info:    ... okay on input line 115.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 115.
+LaTeX Font Info:    ... okay on input line 115.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 115.
+LaTeX Font Info:    ... okay on input line 115.
+LaTeX Font Info:    Try loading font information for OT1+lmr on input line 115.
 
- (/usr/share/texmf/tex/latex/lm/ot1lmr.fd
+
+(/usr/share/texmf/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 \AtBeginShipoutBox=\box40
-Package hyperref Info: Link coloring OFF on input line 111.
+Package hyperref Info: Link coloring OFF on input line 115.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
@@ -2331,9 +2335,9 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count145
 )
-LaTeX Info: Redefining \ref on input line 111.
-LaTeX Info: Redefining \pageref on input line 111.
-LaTeX Info: Redefining \nameref on input line 111.
+LaTeX Info: Redefining \ref on input line 115.
+LaTeX Info: Redefining \pageref on input line 115.
+LaTeX Info: Redefining \nameref on input line 115.
 
 (./thesis.out) (./thesis.out)
 \@outlinefile=\write6
@@ -2377,7 +2381,7 @@ Package hyperref Info: Option `pageanchor' set `false' on input line 6.
 
 pdfTeX warning: /usr/bin/pdflatex (file ../img/logo-en.pdf): PDF inclusion: fou
 nd PDF version <1.5>, but at most version <1.4> allowed
-<../img/logo-en.pdf, id=109, 506.4591pt x 156.49065pt>
+<../img/logo-en.pdf, id=149, 506.4591pt x 156.49065pt>
 File: ../img/logo-en.pdf Graphic file (type pdf)
 
 <use ../img/logo-en.pdf>
@@ -2427,7 +2431,30 @@ Package hyperref Info: Option `pageanchor' set `true' on input line 55.
 
 ] [3
 
-]) (./thesis.toc)
+]) (./thesis.toc
+Package hyperref Info: bookmark level for unknown todo defaults to 0 on input l
+ine 5.
+
+Overfull \hbox (2.48836pt too wide) in paragraph at lines 5--5
+\OT1/lmr/m/n/6 DRAFT! |
+ []
+
+
+Overfull \hbox (2.48836pt too wide) in paragraph at lines 5--5
+\OT1/lmr/m/n/6 DRAFT! |
+ []
+
+
+Overfull \hbox (2.48836pt too wide) in paragraph at lines 5--5
+\OT1/lmr/m/n/6 DRAFT! |
+ []
+
+
+Overfull \hbox (2.48836pt too wide) in paragraph at lines 5--5
+\OT1/lmr/m/n/6 DRAFT! |
+ []
+
+)
 \tf@toc=\write7
 \openout7 = `thesis.toc'.
 
@@ -2454,125 +2481,200 @@ LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <12> not available
 
  (./requirements.tex
 Chapter 2.
-) [3
+
+Overfull \hbox (2.48836pt too wide) in paragraph at lines 3--3
+\OT1/lmr/m/n/6 DRAFT! |
+ []
+
+
+Overfull \hbox (2.48836pt too wide) in paragraph at lines 3--3
+\OT1/lmr/m/n/6 DRAFT! |
+ []
+
+
+Overfull \hbox (2.48836pt too wide) in paragraph at lines 3--3
+\OT1/lmr/m/n/6 DRAFT! |
+ []
+
+
+Overfull \hbox (2.48836pt too wide) in paragraph at lines 3--3
+\OT1/lmr/m/n/6 DRAFT! |
+ []
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\todo' on input line 3.
+
+[3
 
 
 
-]
-\openout2 = `analysis.aux'.
+] [4]
+<./images/orders/order_process_scheme.png, id=242, 1047.915pt x 1159.33125pt>
+File: ./images/orders/order_process_scheme.png Graphic file (type png)
 
- (./analysis.tex
+<use ./images/orders/order_process_scheme.png>
+Package pdftex.def Info: ./images/orders/order_process_scheme.png used on input
+ line 62.
+(pdftex.def)             Requested size: 412.56496pt x 456.41833pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<./images/orders/order_planning.png, id=244, 817.0525pt x 3508.10625pt>
+File: ./images/orders/order_planning.png Graphic file (type png)
+
+<use ./images/orders/order_planning.png>
+Package pdftex.def Info: ./images/orders/order_planning.png used on input line 
+67.
+(pdftex.def)             Requested size: 163.40761pt x 701.60883pt.
+
+
+LaTeX Warning: Float too large for page by 25.65907pt on input line 69.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+) [5] [6 <./images/orders/order_process_scheme.png>] [7 <./images/orders/order_
+planning.png>]
+\openout2 = `technical_analysis.aux'.
+
+ (./technical_analysis.tex
 Chapter 3.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 4.
+(Font)              <10> on input line 5.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 4.
+(Font)              <7> on input line 5.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 4.
-LaTeX Font Info:    Try loading font information for OT1+lmtt on input line 4.
+(Font)              <5> on input line 5.
+LaTeX Font Info:    Try loading font information for OT1+lmtt on input line 5.
 (/usr/share/texmf/tex/latex/lm/ot1lmtt.fd
 File: ot1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-Overfull \hbox (37.36594pt too wide) in paragraph at lines 7--8
+Overfull \hbox (37.36594pt too wide) in paragraph at lines 8--9
 \OT1/lmr/m/n/12 equally well - for ex-am-ple ASP.NET(C#), Spring(Java), Lar-ave
 l(PHP), Django(Python),|
  []
 
-Package hyperref Info: bookmark level for unknown todo defaults to 0 on input l
-ine 24.
-[4
+[8
 
 
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 30--30
+Underfull \hbox (badness 10000) in paragraph at lines 32--32
 [][][] \OT1/lmr/m/n/10 Job pro-ces-sors com-para-sion []$\OT1/lmtt/m/n/10 http 
 : / / api . rubyonrails . org / classes / ActiveJob /
  []
 
-) [5]
-\openout2 = `chap01.aux'.
 
- (./chap01.tex
+LaTeX Warning: Marginpar on page 9 moved.
+
+[9] [10]) [11]
+\openout2 = `analysis.aux'.
+
+ (./analysis.tex
 Chapter 4.
-) [6
+) [12
 
 
 
 ]
-\openout2 = `chap02.aux'.
+\openout2 = `implementation.aux'.
 
- (./chap02.tex
+ (./implementation.tex
 Chapter 5.
-) [7
+) [13
+
+
+
+]
+\openout2 = `testing.aux'.
+
+ (./testing.tex
+Chapter 6.
+) [14
+
+
+
+]
+\openout2 = `evaluation.aux'.
+
+ (./evaluation.tex
+Chapter 7.
+) [15
 
 
 
 ]
 \openout2 = `epilog.aux'.
 
- (./epilog.tex) [8
+ (./epilog.tex) [16
 
 
 
 ]
 \openout2 = `bibliography.aux'.
 
- (./bibliography.tex (./thesis.bbl)) [9
+ (./bibliography.tex (./thesis.bbl)) [17
 
 
 
-] (./thesis.lof)
+]
+(./thesis.lof)
 \tf@lof=\write8
 \openout8 = `thesis.lof'.
 
-[10
+ [18
 
 
 ] (./thesis.lot)
 \tf@lot=\write9
 \openout9 = `thesis.lot'.
 
- [11
+ [19
 
-] [12
+] [20
 
 ]
 Appendix A.
-[13
+[21
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 158.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 158.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 164.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 164.
  (./thesis.aux (./title.aux) (./preface.aux) (./requirements.aux)
-(./analysis.aux) (./chap01.aux) (./chap02.aux) (./epilog.aux)
-(./bibliography.aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 158.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 158.
+(./technical_analysis.aux) (./analysis.aux) (./implementation.aux)
+(./testing.aux) (./evaluation.aux) (./epilog.aux) (./bibliography.aux))
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 164.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 164.
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 1F60B4FF723C0B256C400F96CF7A1377;3841.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 158.
+(rerunfilecheck)             Checksum: 5C53D6CCCC72A2DE819D7630762301BD;4487.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 164.
  ) 
 Here is how much of TeX's memory you used:
- 24478 strings out of 493029
- 413459 string characters out of 6136235
- 451850 words of memory out of 5000000
- 27437 multiletter control sequences out of 15000+600000
- 77970 words of font info for 74 fonts, out of 8000000 for 9000
+ 24616 strings out of 493029
+ 416217 string characters out of 6136235
+ 471538 words of memory out of 5000000
+ 27519 multiletter control sequences out of 15000+600000
+ 78280 words of font info for 75 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 62i,9n,78p,491b,2256s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/dv
-ips/lm/lm-rmtt.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}</usr/sha
+ 62i,9n,86p,618b,2256s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texmf/fonts/enc/dvips/lm/lm-rmtt.enc}{/usr/share/texmf/fonts/enc/
+dvips/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}</usr/sha
 re/texmf/fonts/type1/public/lm/lmbx12.pfb></usr/share/texmf/fonts/type1/public/
 lm/lmr10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr12.pfb></usr/share/texm
 f/fonts/type1/public/lm/lmr17.pfb></usr/share/texmf/fonts/type1/public/lm/lmr6.
 pfb></usr/share/texmf/fonts/type1/public/lm/lmr7.pfb></usr/share/texmf/fonts/ty
 pe1/public/lm/lmr8.pfb></usr/share/texmf/fonts/type1/public/lm/lmri12.pfb></usr
 /share/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/pub
-lic/lm/lmtt10.pfb>
-Output written on thesis.pdf (17 pages, 589112 bytes).
+lic/lm/lmtt10.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt12.pfb>
+Output written on thesis.pdf (25 pages, 876657 bytes).
 PDF statistics:
- 311 PDF objects out of 1000 (max. 8388607)
- 51 named destinations out of 1000 (max. 500000)
- 230 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 444 PDF objects out of 1000 (max. 8388607)
+ 87 named destinations out of 1000 (max. 500000)
+ 320 words of extra memory for PDF output out of 10000 (max. 10000000)
 
