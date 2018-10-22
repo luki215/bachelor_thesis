@@ -1,3 +1,23 @@
 \chapter{Analysis}
 In this chapter we would like to explain the thinking process before and during the implementation of the back-end application. We are going through individual parts from the back-end application requirements, explaining problems associated with them and revealing what possibilities we had to solve them and how we decided in the end.
-\section{Orders}
+
+General problems:
+\begin{itemize}
+	\item authorization
+	\item authentication - library vs own solution, storing password
+	\item request params permit
+\end{itemize}
+\section{Customers}
+Use email as main distinguishing field is kind of standard in web authentication. We came to the conclusion that we should use as our identifier telephone number. Despite the standard and the the consequence of this decision - lack of any easy to use library for authentication in Rails. Reasons which led us to this decision:
+\begin{itemize}
+	\item During the order process we must be able to contact customer immediately in case of emergency, so we need the customer's phone anyway.
+	\item Customers are going to register mostly from their phones. That phone can receive SMS for sure - not everyone has direct access to his mail from phone. 
+\end{itemize}
+ decided to use as main. 
+\subsection{Create}
+Besides the authentication and params problems \todo{give links} described in general problems section we also have to to deal with the telephone verification.
+
+We decided to use verification via SMS code.
+
+
+ Registered telephone number must be verified.  Before they can do so, they must go through telephone number confirmation process as follows: Customers receive SMS with registration token. This token is valid for 5 minutes and customer can ask for resend. Resend will invalidate last token, generate new and send it. Confirm is made with provided token and telephone number. 
