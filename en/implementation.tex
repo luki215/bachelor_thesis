@@ -1,4 +1,39 @@
 \chapter{Implementation}
-Implementation chapter describes the applicaton architecture and project file structure. Then we focus on implementation details of the most important parts and how are they solved.
+Implementation chapter describes the application architecture and project file structure. Then we focus on implementation details of the most important parts and how are they solved.
+
+Ruby on Rails framework is tightly connected with the Convention over configuration software design paradigm. In short that means that we as a programmer are forced to use Rails conventions otherwise it will not work. This implies that the whole project file structure or class naming conventions are strictly given. 
+
+Most of the application is solved using these conventions and tools that the framework gives us. In next section we are going to describe them. If you are already familiar with Ruby on Rails framework, you can freely skip next section and explore the source code. 
+
+\section {General architecture}
+
+describe worker and mailer directory.
+
+
+\section {Specific implementation details}
+\subsection {Authentication}
+We created concern \textit{AuthenticableUser} which is included in both Customer and Employees model. The concern takes care of auth token generation and manipulation using \textit{has\_secure\_token} \footnote{\url{https://api.rubyonrails.org/classes/ActiveRecord/SecureToken/ClassMethods.html}} Rails utility. 
+
+\textit{ApiV2Controller} is the one responsible for checking auth token in headers and setting the current user variable for all the controllers.
+
+SMS workers now just print tokens to logs. When we go to production we just sent this token to some third-party SMS gateway API.
+
+Mailer used for employees token sending is not connected to mail server. All the mails now goes Mailtrap\footnote{\url{https://mailtrap.io/}}, which is a fake SMTP server. In production we must switch to real one. Once we have them, just change the \textit{config/environments/production.rb} config.action\_mailer section
+
+\subsection {Authorization}
+We use \textit{Pundit} gem to help us with authorization. For each controller in \textit{api/v2} there is one permissions definition file in \textit{politions} folder with the according name.  This file contains policy class. 
+
+Each method in this policy class is permission definition for the corresponding action in controller. There could also be scope definitions. Their purpose is to return subset of the current entities to which has current user access to. Last type of methods that can appear in these files are custom policy definition methods. These methods check other specific actions needed somewhere in the application and they are called explicitly from views or controllers.
+
+The whole Pundit initialization is in \textit{api/v2/api\_v2\_controller.rb} where is also defined what the application should do if the request is unauthorized. As we can see, our implementation returns error 403 with 'not authorized' error as specified.
+
+In each controller action we must call the \textit{authorize} method which will automatically checks the permissions for us. If we don't want to authorize the request we must explicitly call \textit{skip\_authorization}. In case we don't call it, there will be raised missing authorization exception on such endpoint. This mechanism is there to prevent the situation when programmer forgets to set authorization for the endpoint, which would lead to possible sensitive data exposure.
+
 \section {Customers}
 \subsection{Create}
+We ended with three endpoints: create, confirm and resend confirmation. 
+
+\subsection{Customer favourite location}
+
+\section {Employees}
+how email links are stored in env variables
