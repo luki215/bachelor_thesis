@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.10.24)  17 DEC 2018 20:51
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.10.24)  17 DEC 2018 22:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -857,7 +857,7 @@ Package hyperref Info: Option `pageanchor' set `false' on input line 6.
 
 pdfTeX warning: /Library/TeX/texbin/pdflatex (file ../img/logo-en.pdf): PDF inc
 lusion: found PDF version <1.5>, but at most version <1.4> allowed
-<../img/logo-en.pdf, id=369, 506.4591pt x 156.49065pt>
+<../img/logo-en.pdf, id=473, 506.4591pt x 156.49065pt>
 File: ../img/logo-en.pdf Graphic file (type pdf)
 <use ../img/logo-en.pdf>
 Package pdftex.def Info: ../img/logo-en.pdf  used on input line 9.
@@ -1000,7 +1000,7 @@ Chapter 3.
 
 
 ] [8] [9] [10] [11] [12]
-<./images/orders/order_process_scheme.png, id=549, 1047.915pt x 1159.33125pt>
+<./images/orders/order_process_scheme.png, id=679, 1047.915pt x 1159.33125pt>
 File: ./images/orders/order_process_scheme.png Graphic file (type png)
 <use ./images/orders/order_process_scheme.png>
 Package pdftex.def Info: ./images/orders/order_process_scheme.png  used on inpu
@@ -1051,7 +1051,7 @@ LaTeX Warning: Marginpar on page 20 moved.
 
  (./analysis.tex
 Chapter 5.
-<./images/auth/Auth.png, id=635, 633.36626pt x 422.57875pt>
+<./images/auth/Auth.png, id=765, 633.36626pt x 422.57875pt>
 File: ./images/auth/Auth.png Graphic file (type png)
 <use ./images/auth/Auth.png>
 Package pdftex.def Info: ./images/auth/Auth.png  used on input line 15.
@@ -1082,22 +1082,22 @@ eModel / SecurePassword /
  []
 
 [25] [26]
-Overfull \hbox (79.18372pt too wide) in paragraph at lines 88--88
+Overfull \hbox (79.18372pt too wide) in paragraph at lines 90--90
 [][][][]$\OT1/lmtt/m/n/10 https : / / www . cnet . com / how-[]to / why-[]you-[
 ]are-[]at-[]risk-[]if-[]you-[]use-[]sms-[]for-[]two-[]step-[]verification/$[]| 
 |
  []
 
 [27]
-<./images/orders/order_planning.png, id=682, 817.0525pt x 3508.10625pt>
+<./images/orders/order_planning.png, id=812, 817.0525pt x 3508.10625pt>
 File: ./images/orders/order_planning.png Graphic file (type png)
 <use ./images/orders/order_planning.png>
 Package pdftex.def Info: ./images/orders/order_planning.png  used on input line
- 122.
+ 124.
 (pdftex.def)             Requested size: 163.40761pt x 701.60883pt.
 
 
-LaTeX Warning: Float too large for page by 25.65907pt on input line 124.
+LaTeX Warning: Float too large for page by 25.65907pt on input line 126.
 
 )
 
@@ -1115,22 +1115,29 @@ l.130 \include{analysis}
 
 (./implementation.tex
 Chapter 6.
-
-Underfull \hbox (badness 10000) in paragraph at lines 15--15
-[][][][]$\OT1/lmtt/m/n/10 https : / / api . rubyonrails . org / classes / Activ
-eRecord / SecureToken / ClassMethods .
- []
-
 [30
 
 
 
-]) [31]
+] [31]
+Overfull \hbox (123.16539pt too wide) in paragraph at lines 79--80
+[]\OT1/lmr/m/n/12 The mail tem-plate which will be used for the email is spec-i
+-fied in the \OT1/lmr/m/it/12 views/entity[]mailer/action[]mail.*\OT1/lmr/m/n/1
+2 . |
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 106--106
+[][][][]$\OT1/lmtt/m/n/10 https : / / api . rubyonrails . org / classes / Activ
+eRecord / SecureToken / ClassMethods .
+ []
+
+[32] [33]) [34]
 \openout2 = `testing.aux'.
 
  (./testing.tex
 Chapter 7.
-) [32
+) [35
 
 
 
@@ -1139,21 +1146,21 @@ Chapter 7.
 
  (./evaluation.tex
 Chapter 8.
-) [33
+) [36
 
 
 
 ]
 \openout2 = `epilog.aux'.
 
- (./epilog.tex) [34
+ (./epilog.tex) [37
 
 
 
 ]
 \openout2 = `bibliography.aux'.
 
- (./bibliography.tex (./thesis.bbl)) [35
+ (./bibliography.tex (./thesis.bbl)) [38
 
 
 
@@ -1162,20 +1169,20 @@ Chapter 8.
 \tf@lof=\write8
 \openout8 = `thesis.lof'.
 
- [36
+ [39
 
 
 ] (./thesis.lot)
 \tf@lot=\write9
 \openout9 = `thesis.lot'.
 
- [37
+ [40
 
-] [38
+] [41
 
 ]
 Appendix A.
-[39
+[42
 
 ]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 168.
@@ -1187,7 +1194,7 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 168.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 168.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 168.
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 67048A5D6A673333153A6F76F0F7984C;13405.
+(rerunfilecheck)             Checksum: D0AF5922BA089624C794B788F5CDFA20;16685.
 
 
 LaTeX Warning: There were multiply-defined labels.
@@ -1195,13 +1202,13 @@ LaTeX Warning: There were multiply-defined labels.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 168.
  ) 
 Here is how much of TeX's memory you used:
- 24519 strings out of 492649
- 417561 string characters out of 6129621
- 475488 words of memory out of 5000000
- 27719 multiletter control sequences out of 15000+600000
+ 24592 strings out of 492649
+ 418890 string characters out of 6129621
+ 478896 words of memory out of 5000000
+ 27761 multiletter control sequences out of 15000+600000
  78280 words of font info for 75 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 62i,9n,86p,1151b,1942s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 62i,9n,86p,1151b,1950s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/lm/lm-rmtt.enc}{/usr/loca
 l/texlive/2018/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2018
 /texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}</usr/local/texlive/2018/texmf-dis
@@ -1215,9 +1222,9 @@ t/fonts/type1/public/lm/lmri12.pfb></usr/local/texlive/2018/texmf-dist/fonts/ty
 pe1/public/lm/lmsy10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public
 /lm/lmtt10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/lm/lmtt12
 .pfb>
-Output written on thesis.pdf (43 pages, 984733 bytes).
+Output written on thesis.pdf (46 pages, 1009411 bytes).
 PDF statistics:
- 839 PDF objects out of 1000 (max. 8388607)
- 166 named destinations out of 1000 (max. 500000)
- 765 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 989 PDF objects out of 1000 (max. 8388607)
+ 197 named destinations out of 1000 (max. 500000)
+ 973 words of extra memory for PDF output out of 10000 (max. 10000000)
 
