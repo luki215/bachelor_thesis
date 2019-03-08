@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.10.24)  17 DEC 2018 22:59
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.10.24)  3 JAN 2019 00:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1081,29 +1081,49 @@ Underfull \hbox (badness 10000) in paragraph at lines 34--34
 eModel / SecurePassword /
  []
 
-[25] [26]
-Overfull \hbox (79.18372pt too wide) in paragraph at lines 90--90
+[25]
+Overfull \hbox (86.14941pt too wide) in paragraph at lines 68--68
+\OT1/lmr/m/n/6 https://tools.ietf.org/html/rfc7578  |
+ []
+
+
+Overfull \hbox (86.14941pt too wide) in paragraph at lines 68--68
+\OT1/lmr/m/n/6 https://tools.ietf.org/html/rfc7578  |
+ []
+
+
+Overfull \hbox (86.14941pt too wide) in paragraph at lines 68--68
+\OT1/lmr/m/n/6 https://tools.ietf.org/html/rfc7578  |
+ []
+
+
+Overfull \hbox (86.14941pt too wide) in paragraph at lines 68--68
+\OT1/lmr/m/n/6 https://tools.ietf.org/html/rfc7578  |
+ []
+
+[26] [27]
+Overfull \hbox (79.18372pt too wide) in paragraph at lines 99--99
 [][][][]$\OT1/lmtt/m/n/10 https : / / www . cnet . com / how-[]to / why-[]you-[
 ]are-[]at-[]risk-[]if-[]you-[]use-[]sms-[]for-[]two-[]step-[]verification/$[]| 
 |
  []
 
-[27]
-<./images/orders/order_planning.png, id=812, 817.0525pt x 3508.10625pt>
+[28]
+<./images/orders/order_planning.png, id=826, 817.0525pt x 3508.10625pt>
 File: ./images/orders/order_planning.png Graphic file (type png)
 <use ./images/orders/order_planning.png>
 Package pdftex.def Info: ./images/orders/order_planning.png  used on input line
- 124.
+ 133.
 (pdftex.def)             Requested size: 163.40761pt x 701.60883pt.
 
 
-LaTeX Warning: Float too large for page by 25.65907pt on input line 126.
+LaTeX Warning: Float too large for page by 25.65907pt on input line 135.
 
 )
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[28] [29pdfTeX warning (ext4): destination with the same identifier (name{figur
+[29] [30pdfTeX warning (ext4): destination with the same identifier (name{figur
 e.5.2}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
@@ -1115,29 +1135,49 @@ l.130 \include{analysis}
 
 (./implementation.tex
 Chapter 6.
-[30
+[31
 
 
 
-] [31]
-Overfull \hbox (123.16539pt too wide) in paragraph at lines 79--80
+] [32]
+Overfull \hbox (123.16539pt too wide) in paragraph at lines 78--79
 []\OT1/lmr/m/n/12 The mail tem-plate which will be used for the email is spec-i
 -fied in the \OT1/lmr/m/it/12 views/entity[]mailer/action[]mail.*\OT1/lmr/m/n/1
 2 . |
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 106--106
+Overfull \hbox (142.87779pt too wide) in paragraph at lines 82--82
+\OT1/lmr/m/n/6 https://en.wikipedia.org/wiki/Active[]record[]pattern |
+ []
+
+
+Overfull \hbox (142.87779pt too wide) in paragraph at lines 82--82
+\OT1/lmr/m/n/6 https://en.wikipedia.org/wiki/Active[]record[]pattern |
+ []
+
+
+Overfull \hbox (142.87779pt too wide) in paragraph at lines 82--82
+\OT1/lmr/m/n/6 https://en.wikipedia.org/wiki/Active[]record[]pattern |
+ []
+
+
+Overfull \hbox (142.87779pt too wide) in paragraph at lines 82--82
+\OT1/lmr/m/n/6 https://en.wikipedia.org/wiki/Active[]record[]pattern |
+ []
+
+[33] [34] [35]
+Underfull \hbox (badness 10000) in paragraph at lines 133--133
 [][][][]$\OT1/lmtt/m/n/10 https : / / api . rubyonrails . org / classes / Activ
 eRecord / SecureToken / ClassMethods .
  []
 
-[32] [33]) [34]
+[36]) [37]
 \openout2 = `testing.aux'.
 
  (./testing.tex
 Chapter 7.
-) [35
+) [38
 
 
 
@@ -1146,21 +1186,21 @@ Chapter 7.
 
  (./evaluation.tex
 Chapter 8.
-) [36
+) [39
 
 
 
 ]
 \openout2 = `epilog.aux'.
 
- (./epilog.tex) [37
+ (./epilog.tex) [40
 
 
 
 ]
 \openout2 = `bibliography.aux'.
 
- (./bibliography.tex (./thesis.bbl)) [38
+ (./bibliography.tex (./thesis.bbl)) [41
 
 
 
@@ -1169,20 +1209,20 @@ Chapter 8.
 \tf@lof=\write8
 \openout8 = `thesis.lof'.
 
- [39
+ [42
 
 
 ] (./thesis.lot)
 \tf@lot=\write9
 \openout9 = `thesis.lot'.
 
- [40
+ [43
 
-] [41
+] [44
 
 ]
 Appendix A.
-[42
+[45
 
 ]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 168.
@@ -1194,7 +1234,7 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 168.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 168.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 168.
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: D0AF5922BA089624C794B788F5CDFA20;16685.
+(rerunfilecheck)             Checksum: D2BF1688B0EFC38EB76569C805C651C3;16614.
 
 
 LaTeX Warning: There were multiply-defined labels.
@@ -1202,13 +1242,13 @@ LaTeX Warning: There were multiply-defined labels.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 168.
  ) 
 Here is how much of TeX's memory you used:
- 24592 strings out of 492649
- 418890 string characters out of 6129621
- 478896 words of memory out of 5000000
- 27761 multiletter control sequences out of 15000+600000
+ 24618 strings out of 492649
+ 419379 string characters out of 6129621
+ 482945 words of memory out of 5000000
+ 27778 multiletter control sequences out of 15000+600000
  78280 words of font info for 75 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 62i,9n,86p,1151b,1950s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 62i,9n,86p,1151b,1948s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/lm/lm-rmtt.enc}{/usr/loca
 l/texlive/2018/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2018
 /texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}</usr/local/texlive/2018/texmf-dis
@@ -1222,9 +1262,9 @@ t/fonts/type1/public/lm/lmri12.pfb></usr/local/texlive/2018/texmf-dist/fonts/ty
 pe1/public/lm/lmsy10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public
 /lm/lmtt10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/lm/lmtt12
 .pfb>
-Output written on thesis.pdf (46 pages, 1009411 bytes).
+Output written on thesis.pdf (49 pages, 1026069 bytes).
 PDF statistics:
- 989 PDF objects out of 1000 (max. 8388607)
- 197 named destinations out of 1000 (max. 500000)
+ 1019 PDF objects out of 1200 (max. 8388607)
+ 206 named destinations out of 1000 (max. 500000)
  973 words of extra memory for PDF output out of 10000 (max. 10000000)
 

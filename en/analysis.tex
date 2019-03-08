@@ -34,7 +34,8 @@ As we mentioned in last paragraphs, our token solution is not perfect from the s
 First of all, we don't store passwords in plaintext. We use Rails integrated feature \textit{has\_secure\_password}\footnote{\url{https://api.rubyonrails.org/classes/ActiveModel/SecurePassword/ClassMethods.html}}, which uses BCrypt hash function.
 
 Thanks to the Ruby on Rails framework we also excerpt passwords from the logs and we are not vulnerable to SQL Injection\footnote{\url{https://en.wikipedia.org/wiki/SQL\_injection}}.
-
+\subsection{Secrets}
+suernames, api keys etc...
 \subsubsection{Sending verifying tokens}
 We must send tokens via emails and SMS during the whole authentication process. Because these are actions that are not instant (API request, SMTP request) and because in Rails we can easily create asynchronous workers, we decided to have these functions handled as Sidekiq workers. In exchange for some time spent on configuration we have instant response without blocking webserver threads during account creation/recovery and have ability to automatically resend the message in case of the third party or network failure.
 
@@ -53,14 +54,22 @@ Another option we looked into was \textit{Cancancan} \footnote{\url{https://gith
 Permiting
 
 \subsection{Rendering views}
+	Even though whole view layer is just about displaying simple JSON objects, we use whole separated view layer of the Ruby on Rails framework with the help of the Jbuilder gem\footnote{\url{https://github.com/rails/jbuilder}}.
+	
+	In the beginning of the implementation we thought that we don't have to have the view part separated from the controller. For the simple entities such as vehicles it was sufficient. When we started to have more complicated requirements for the views - such as displaying different attributes for different user roles, most of the controller's code was the view logic which mystified the controllers.
+	
+	Jbuilder allows us to have view code separated from the controllers and provides us simple syntax to extract desired fields and parts from our variables to JSON.
 \subsection{Localization}
 - more languages - errors
  - we translate on our side, frontend on its => bad pattern
 \subsection{Images}
-	- too difficult for front-end to implement and handle api multipart requests
-	- limitation only one image for entity => but enough for us
-	- employee and vehicle images
+	Our employees and vehicles have assigned images. We had to figure out, how to get the image from the client application via the REST to our application. 
+	
+	During the analysis we ended up with two options how to implement it. First is the multipart html requests. \todo{citace https://tools.ietf.org/html/rfc7578}. Second option is to encode the image into Base64 on front-end and then send it in a request body as JSON field. This field is then decoded on the server side and saved.
+	
+	In the end we decided to go with the second option. On both front-end and back-end we have the libraries for processing images this way so the implementation was easier on both sides. Downside of this solution is that we can not transfer much data this way. However we have only one image for each employee and vehicle, this solution is sufficient.
 
+	For the back-end side we decided to use \textit{Carrierwave::Base64} \footnote{\url{https://github.com/y9v/carrierwave-base64}} gem. Besides the out-of-the-box Base64 encoding of specified attribute  which we need, it provide us simple API for the storage settings such as file names. Also when we would like to later switch our storage to use some cloud storage provider as for example S3 by Amazon\footnote{\url{https://aws.amazon.com/s3/}} it would be just the matter of changing few lines in configuration. 
 
 \section{Customers}
 Use email as main distinguishing field is kind of standard in web authentication. We came to the conclusion that we should use as our identifier telephone number. Despite the standard and the the consequence of this decision - lack of any easy to use library for authentication in Rails. Reasons which led us to this decision:

@@ -3,7 +3,7 @@ Implementation chapter describes the application architecture and project file s
 
 Ruby on Rails framework is tightly connected with the Convention over configuration software design paradigm. In short that means that we as a programmer are forced to use Rails conventions otherwise it will not work. This implies that the whole project file structure or class naming conventions are strictly given. 
 
-Most of the application is solved using these conventions and tools that the framework gives us. In next section we are going to describe them. If you are already familiar with Ruby on Rails framework, you are free to skip next section and explore the source code.
+Most of the application is solved using these conventions and tools that the framework gives us. In next section we are going to describe them and the way how we approached to them within our application.
 
 \section {Project architecture}
 	Ruby on Rails is MVC framework. We suppose, that the reader is familiar with the MVC \todo{source} pattern.
@@ -29,7 +29,6 @@ Most of the application is solved using these conventions and tools that the fra
 			\item environments
 			\item initializers
 			\item locales
-			\item application.rb
 			\item database.yml
 			\item routes.rb
 			\item sidekiq.yml
@@ -80,28 +79,55 @@ Most of the application is solved using these conventions and tools that the fra
 		 
 		 In our application we used these mailers for the employees registration and forgotten password mails.
 	\subsection{app/models}
+		Models folder contains all the application models. Ruby on Rails provide rich ORM library called ActiveRecord, which is the implementation of the same named design pattern. \todo{přidat citaci na https://en.wikipedia.org/wiki/Active\_record\_pattern - toho týpka coto pojmenoval}
+		
+		In our application each of the model classes corresponds to one database table. In the model classes we also define relations between the models and validations of the model attributes. 
+		
+		In the models folder there is folder called \textit{concerns}. This folder contains separated logic which is used by more models. In our application we use the concerns for authentication, user roles and notification - all of them are used by the Customer and Employee model, thus it is convenient to have it separated at a separate place.
+		
+		Another interesting pattern we use a lot in our application are model scopes. Scopes allows us to have defined commonly used filters or queries directly on the model class. For example we have scope \textit{dispatchers} for the \textit{Employee} model, which selects dispatchers only from the set of employees.
 		
 	\subsection{app/policies}
+		Policies folder is the place where we have all the permission definitions which uses the Pundit gem. Basic principles how the policy definition works and how it is connected with the rest of the application is described later in the \ref{implementation_authorization} 
 	\subsection{app/uploaders}
+		Here lies the configuration file for our \textit{Carierwave} uploader used for images of the employees and vehicles. 
 	\subsection{app/validators}
+		During the creation of the order model we end up with the complicated validator definition. For the better code readability we decide separate that validator to custom file, which lies in this folder. 
+		
+		Even though the orders validator is the only one such complicated that we felt the urge to separate it to its own file, this folder can be used in the future for other complicated validators in the application.
+		  
 	\subsection{app/views}
+		In this folder is the view part of the application.  In the \textit{employee\_mailer} folder we can find templates for the emails. Inside the \textit{api/v2} we have the Jbuilder templates for our endpoints. \textit{Index.*} is usually for showing collection of specified items, \textit{show.*} is for displaying one specific item. Files starting with underscore are called partials. Partials are separated parts of views which are used on more places across the views.
 	\subsection{app/workers}
+		In the workers folder lies all the Sidekiq workers. In general we can say that if there is some code running asynchronously in our application, it is in this folder. 
 	\subsection{config/environments}
+		Here lies the configuration files specific for the development, testing and production environment. Especially we can find there mail and logs configurations. 
 	\subsection{config/initializers}
+		Ruby on Rails has special folder for initialization and configuration of the modules and classes used in the application. Especially there are initializers for Google Maps API, Sidekiq (asynchronous jobs), Kaminari (pagination), Lograge (logs formatting), CML (our order scheduler) and CORS.
 	\subsection{config/locales}
-	\subsection{config/application.rb}
+		Inside this folder we have for each language one YAML file which defines translations for the whole application.dss
 	\subsection{config/database.yml}
+		Database YAML file define which database we use on which environment and specifies how to connect to database server and which database use there.
 	\subsection{config/routes.rb}
+		Inside routes file we define all our API endpoints. Ruby on Rails has actions index, show, create, update and destroy on each entity by default. It requires for each resource having controller of the same name, where are the actions defined as methods.
 	\subsection{config/sidekiq.yml}
+		Inside the sidekiq configuration file we can set thread count which will the job processor run on and also job queue names - in our case mailers and default queue which is processing everything except the mails.
 	\subsection{db/migrate}
+		Whole database is created and modified through migrations. Each of these migrations is described in its specific file. Some of them are generated via Rails CLI.
 	\subsection{db/seeds.rb}
+		Inside seeds file are defined initial data which are inserted to the database when the \textit{rake db:seed} command is called. In our application we use it for setting up the initial administrator account.
 	\subsection{db/schema.rb}
+		This file is automatically generated by the Ruby on Rails from the migrations. It contains whole database schema with the table columns properties and table indexes.
 	\subsection{lib}
+		This folder contains in our application only custom Rake task definitions. In our case the generator tasks for generating mock data.
 	\subsection{public}
+		Public folder is for the application static assets. Especially this is the place where all the vehicle and employee images are located.
 	\subsection{spec/factories}
+		For the mocks generation in our tests we use FactoryBot\footnote{\url{https://github.com/thoughtbot/factory_bot}} gem. Factories folder holds definitions of these factories from which mocks are created.
 	\subsection{spec/requests}
+		The only tests we have written as part of the thesis are in this folder. Each entity has its own file inside which are the tests structured using the \textit{Context} and \textit{Describe} blocks.
 	\subsection{Gemfile}
-
+		Gemfile specifies library (gem) project dependencies. Each gem record also contains version described based on which the libraries can be automatically updated. This file is similar to the \textit{package.json} file in javascript NPM projects.
 \section {Specific implementation details}
 \subsection {Authentication}
 We created concern \textit{AuthenticableUser} which is included in both Customer and Employees model. The concern takes care of auth token generation and manipulation using \textit{has\_secure\_token} \footnote{\url{https://api.rubyonrails.org/classes/ActiveRecord/SecureToken/ClassMethods.html}} Rails utility. 
@@ -112,7 +138,7 @@ SMS workers now just print tokens to logs. When we go to production we just sent
 
 Mailer used for employees token sending is not connected to mail server. All the mails now goes Mailtrap\footnote{\url{https://mailtrap.io/}}, which is a fake SMTP server. In production we must switch to real one. Once we have them, just change the \textit{config/environments/production.rb} config.action\_mailer section
 
-\subsection {Authorization}
+\label{implementation_authorization}\subsection {Authorization}
 We use \textit{Pundit} gem to help us with authorization. For each controller in \textit{api/v2} there is one permissions definition file in \textit{politions} folder with the according name.  This file contains policy class. 
 
 Each method in this policy class is permission definition for the corresponding action in controller. There could also be scope definitions. Their purpose is to return subset of the current entities to which has current user access to. Last type of methods that can appear in these files are custom policy definition methods. These methods check other specific actions needed somewhere in the application and they are called explicitly from views or controllers.
