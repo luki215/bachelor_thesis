@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.10.24)  3 JAN 2019 00:50
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.10.24)  18 MAR 2019 01:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -770,7 +770,8 @@ Package hyperref Info: Option `breaklinks' set `true' on input line 108.
 ) (./thesis.aux (./title.aux) (./preface.aux) (./requirements.aux) (./specifica
 tion.aux) (./technical_analysis.aux) (./analysis.aux
 
-LaTeX Warning: Label `order-process-scheme' multiply defined.
+LaTeX Warning: Label `order-process-normal-order-combined-with-scheduled' multi
+ply defined.
 
 ) (./implementation.aux) (./testing.aux) (./evaluation.aux) (./epilog.aux)
 (./bibliography.aux))
@@ -857,7 +858,7 @@ Package hyperref Info: Option `pageanchor' set `false' on input line 6.
 
 pdfTeX warning: /Library/TeX/texbin/pdflatex (file ../img/logo-en.pdf): PDF inc
 lusion: found PDF version <1.5>, but at most version <1.4> allowed
-<../img/logo-en.pdf, id=473, 506.4591pt x 156.49065pt>
+<../img/logo-en.pdf, id=497, 506.4591pt x 156.49065pt>
 File: ../img/logo-en.pdf Graphic file (type pdf)
 <use ../img/logo-en.pdf>
 Package pdftex.def Info: ../img/logo-en.pdf  used on input line 9.
@@ -1000,7 +1001,7 @@ Chapter 3.
 
 
 ] [8] [9] [10] [11] [12]
-<./images/orders/order_process_scheme.png, id=679, 1047.915pt x 1159.33125pt>
+<./images/orders/order_process_scheme.png, id=709, 1047.915pt x 1159.33125pt>
 File: ./images/orders/order_process_scheme.png Graphic file (type png)
 <use ./images/orders/order_process_scheme.png>
 Package pdftex.def Info: ./images/orders/order_process_scheme.png  used on inpu
@@ -1051,7 +1052,7 @@ LaTeX Warning: Marginpar on page 20 moved.
 
  (./analysis.tex
 Chapter 5.
-<./images/auth/Auth.png, id=765, 633.36626pt x 422.57875pt>
+<./images/auth/Auth.png, id=795, 633.36626pt x 422.57875pt>
 File: ./images/auth/Auth.png Graphic file (type png)
 <use ./images/auth/Auth.png>
 Package pdftex.def Info: ./images/auth/Auth.png  used on input line 15.
@@ -1108,38 +1109,161 @@ Overfull \hbox (79.18372pt too wide) in paragraph at lines 99--99
 |
  []
 
-[28]
-<./images/orders/order_planning.png, id=826, 817.0525pt x 3508.10625pt>
-File: ./images/orders/order_planning.png Graphic file (type png)
-<use ./images/orders/order_planning.png>
-Package pdftex.def Info: ./images/orders/order_planning.png  used on input line
- 133.
-(pdftex.def)             Requested size: 163.40761pt x 701.60883pt.
+[28] [29]
+<./images/orders/legend.png, id=867, 232.87pt x 295.1025pt>
+File: ./images/orders/legend.png Graphic file (type png)
+<use ./images/orders/legend.png>
+Package pdftex.def Info: ./images/orders/legend.png  used on input line 158.
+(pdftex.def)             Requested size: 163.00787pt x 206.57033pt.
+ [30pdfTeX warning (ext4): destination with the same identifier (name{figure.5.
+2}) has been already used, duplicate ignored
 
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.170 
+       <./images/orders/legend.png>]
+<./images/orders/scheduled_naive_arrive_counting.png, id=875, 515.9275pt x 102.
+3825pt>
+File: ./images/orders/scheduled_naive_arrive_counting.png Graphic file (type pn
+g)
+<use ./images/orders/scheduled_naive_arrive_counting.png>
+Package pdftex.def Info: ./images/orders/scheduled_naive_arrive_counting.png  u
+sed on input line 172.
+(pdftex.def)             Requested size: 361.14679pt x 71.66725pt.
+ [31pdfTeX warning (ext4): destination with the same identifier (name{figure.5.
+3}) has been already used, duplicate ignored
 
-LaTeX Warning: Float too large for page by 25.65907pt on input line 135.
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.202 	I
+        n case that the queue is empty as in \textit{1b)} calculate the arri...
+ <./images/orders/scheduled_naive_arrive_counting.png>]
+<./images/orders/add-1.png, id=885, 273.02pt x 148.555pt>
+File: ./images/orders/add-1.png Graphic file (type png)
+<use ./images/orders/add-1.png>
+Package pdftex.def Info: ./images/orders/add-1.png  used on input line 208.
+(pdftex.def)             Requested size: 191.11269pt x 103.98778pt.
+<./images/orders/add-2.png, id=887, 393.47pt x 112.42pt>
+File: ./images/orders/add-2.png Graphic file (type png)
+<use ./images/orders/add-2.png>
+Package pdftex.def Info: ./images/orders/add-2.png  used on input line 218.
+(pdftex.def)             Requested size: 275.42711pt x 78.69345pt.
+<./images/orders/add-3.png, id=889, 555.07375pt x 254.9525pt>
+File: ./images/orders/add-3.png Graphic file (type png)
+<use ./images/orders/add-3.png>
+Package pdftex.def Info: ./images/orders/add-3.png  used on input line 227.
+(pdftex.def)             Requested size: 388.54897pt x 178.46552pt.
 
-)
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[29] [30pdfTeX warning (ext4): destination with the same identifier (name{figur
-e.5.2}) has been already used, duplicate ignored
+<./images/orders/add-4.png, id=891, 684.5575pt x 461.725pt>
+File: ./images/orders/add-4.png Graphic file (type png)
+<use ./images/orders/add-4.png>
+Package pdftex.def Info: ./images/orders/add-4.png  used on input line 238.
+(pdftex.def)             Requested size: 410.73766pt x 277.03714pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[32pdfTeX warning (ext4): destination with the same identifier (name{figure.5.4
+}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.245 		
+        pdfTeX warning (ext4): destination with the same identifier (name{figur
+e.5.5}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.245 		
+         <./images/orders/add-1.png> <./images/orders/add-2.png>]
+<./images/orders/add-5.png, id=905, 615.29875pt x 315.1775pt>
+File: ./images/orders/add-5.png Graphic file (type png)
+<use ./images/orders/add-5.png>
+Package pdftex.def Info: ./images/orders/add-5.png  used on input line 247.
+(pdftex.def)             Requested size: 369.1821pt x 189.10796pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<./images/orders/add-6.png, id=907, 813.0375pt x 477.785pt>
+File: ./images/orders/add-6.png Graphic file (type png)
+<use ./images/orders/add-6.png>
+Package pdftex.def Info: ./images/orders/add-6.png  used on input line 260.
+(pdftex.def)             Requested size: 406.51776pt x 238.8919pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<./images/orders/add-7.png, id=909, 473.77pt x 113.42375pt>
+File: ./images/orders/add-7.png Graphic file (type png)
+<use ./images/orders/add-7.png>
+Package pdftex.def Info: ./images/orders/add-7.png  used on input line 272.
+(pdftex.def)             Requested size: 331.63673pt x 79.39607pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[33pdfTeX warning (ext4): destination with the same identifier (name{figure.5.6
+}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.279 	
+        <./images/orders/add-3.png>]
+<./images/orders/changing_arrive_time_longer.png, id=922, 554.07pt x 113.42375p
+t>
+File: ./images/orders/changing_arrive_time_longer.png Graphic file (type png)
+<use ./images/orders/changing_arrive_time_longer.png>
+Package pdftex.def Info: ./images/orders/changing_arrive_time_longer.png  used 
+on input line 283.
+(pdftex.def)             Requested size: 387.84636pt x 79.39607pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+) [34pdfTeX warning (ext4): destination with the same identifier (name{figure.5
+.7}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
 l.130 \include{analysis}
-                         <./images/orders/order_planning.png>]
+                         <./images/orders/add-4.png>] [35pdfTeX warning (ext4):
+ destination with the same identifier (name{figure.5.8}) has been already used,
+ duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.130 \include{analysis}
+                        pdfTeX warning (ext4): destination with the same identi
+fier (name{figure.5.9}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.130 \include{analysis}
+                        pdfTeX warning (ext4): destination with the same identi
+fier (name{figure.5.10}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.130 \include{analysis}
+                         <./images/orders/add-5.png> <./images/orders/add-6.png
+> <./images/orders/add-7.png>] [36pdfTeX warning (ext4): destination with the s
+ame identifier (name{figure.5.11}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.130 \include{analysis}
+                         <./images/orders/changing_arrive_time_longer.png>]
 \openout2 = `implementation.aux'.
 
 
 (./implementation.tex
 Chapter 6.
-[31
+[37
 
 
 
-] [32]
+] [38]
 Overfull \hbox (123.16539pt too wide) in paragraph at lines 78--79
 []\OT1/lmr/m/n/12 The mail tem-plate which will be used for the email is spec-i
 -fied in the \OT1/lmr/m/it/12 views/entity[]mailer/action[]mail.*\OT1/lmr/m/n/1
@@ -1166,18 +1290,18 @@ Overfull \hbox (142.87779pt too wide) in paragraph at lines 82--82
 \OT1/lmr/m/n/6 https://en.wikipedia.org/wiki/Active[]record[]pattern |
  []
 
-[33] [34] [35]
+[39] [40] [41]
 Underfull \hbox (badness 10000) in paragraph at lines 133--133
 [][][][]$\OT1/lmtt/m/n/10 https : / / api . rubyonrails . org / classes / Activ
 eRecord / SecureToken / ClassMethods .
  []
 
-[36]) [37]
+[42]) [43]
 \openout2 = `testing.aux'.
 
  (./testing.tex
 Chapter 7.
-) [38
+) [44
 
 
 
@@ -1186,21 +1310,21 @@ Chapter 7.
 
  (./evaluation.tex
 Chapter 8.
-) [39
+) [45
 
 
 
 ]
 \openout2 = `epilog.aux'.
 
- (./epilog.tex) [40
+ (./epilog.tex) [46
 
 
 
 ]
 \openout2 = `bibliography.aux'.
 
- (./bibliography.tex (./thesis.bbl)) [41
+ (./bibliography.tex (./thesis.bbl)) [47
 
 
 
@@ -1209,20 +1333,20 @@ Chapter 8.
 \tf@lof=\write8
 \openout8 = `thesis.lof'.
 
- [42
+ [48
 
 
 ] (./thesis.lot)
 \tf@lot=\write9
 \openout9 = `thesis.lot'.
 
- [43
+ [49
 
-] [44
+] [50
 
 ]
 Appendix A.
-[45
+[51
 
 ]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 168.
@@ -1234,7 +1358,7 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 168.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 168.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 168.
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: D2BF1688B0EFC38EB76569C805C651C3;16614.
+(rerunfilecheck)             Checksum: 4BC8E29977514D761C0A54488F71CE54;17436.
 
 
 LaTeX Warning: There were multiply-defined labels.
@@ -1242,13 +1366,13 @@ LaTeX Warning: There were multiply-defined labels.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 168.
  ) 
 Here is how much of TeX's memory you used:
- 24618 strings out of 492649
- 419379 string characters out of 6129621
- 482945 words of memory out of 5000000
- 27778 multiletter control sequences out of 15000+600000
+ 24708 strings out of 492649
+ 421545 string characters out of 6129621
+ 484033 words of memory out of 5000000
+ 27829 multiletter control sequences out of 15000+600000
  78280 words of font info for 75 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 62i,9n,86p,1151b,1948s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 62i,9n,86p,1226b,1948s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/lm/lm-rmtt.enc}{/usr/loca
 l/texlive/2018/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2018
 /texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}</usr/local/texlive/2018/texmf-dis
@@ -1262,9 +1386,9 @@ t/fonts/type1/public/lm/lmri12.pfb></usr/local/texlive/2018/texmf-dist/fonts/ty
 pe1/public/lm/lmsy10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public
 /lm/lmtt10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/lm/lmtt12
 .pfb>
-Output written on thesis.pdf (49 pages, 1026069 bytes).
+Output written on thesis.pdf (55 pages, 989092 bytes).
 PDF statistics:
- 1019 PDF objects out of 1200 (max. 8388607)
- 206 named destinations out of 1000 (max. 500000)
- 973 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1141 PDF objects out of 1200 (max. 8388607)
+ 236 named destinations out of 1000 (max. 500000)
+ 1066 words of extra memory for PDF output out of 10000 (max. 10000000)
 

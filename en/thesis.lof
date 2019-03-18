@@ -5,7 +5,16 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {5.1}{\ignorespaces Auth token scheme}}{24}{figure.5.1}
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Order planning situations}}{30}{figure.5.2}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Order planning scheme legend}}{30}{figure.5.2}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Scheduled order - naive arrive time calculating approach}}{31}{figure.5.3}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Normal order - counting arrive}}{32}{figure.5.4}
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Normal order - counting arrive}}{32}{figure.5.5}
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Scheduled order - counting arrive time}}{33}{figure.5.6}
+\contentsline {figure}{\numberline {5.7}{\ignorespaces Scheduled order - combined with other scheduled}}{34}{figure.5.7}
+\contentsline {figure}{\numberline {5.8}{\ignorespaces Scheduled order - combined with normal order}}{35}{figure.5.8}
+\contentsline {figure}{\numberline {5.9}{\ignorespaces Scheduled order - combined with normal order}}{35}{figure.5.9}
+\contentsline {figure}{\numberline {5.10}{\ignorespaces Scheduled order - combined with normal order}}{35}{figure.5.10}
+\contentsline {figure}{\numberline {5.11}{\ignorespaces Scheduled order - combined with normal order}}{36}{figure.5.11}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

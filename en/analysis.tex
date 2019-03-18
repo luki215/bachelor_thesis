@@ -126,10 +126,166 @@ In our research we haven't found any ready-made solution for this problem, so we
 
 
 \section {Orders}
+
+Order modification history
 Format of times
 Cost of api requets, Google API
-order planning system
+
+\subsection {Data representation}
+
+
+
+\section {Order scheduler}
+
+The goal of order scheduler is to split new orders between the drivers in application. Besides that the system accepts other actions which could be made with the order. These actions are then reflected into the corresponding driver queue and to all the orders affected by that action.
+
+First of all we have to deal with the distance calculation. All we know about the new order are just the coordinates of the pick-up and the drop-off location. We have to calculate the distance and the duration of the order. Each order consists of the two parts we have to calculate. First part is from pick-up location to drop-off. This part is constant for each order. Second part is the route between the driver and the pick-up location. This part differs for each of the drivers. For the distance and duration computation we decided to use the \textit{Google Maps Distance Matrix API} \footnote{\url{https://developers.google.com/maps/documentation/distance-matrix/intro}} which allows us to get the distances between all the drivers and the order pick-up location in a single request. Also thanks to using this API we could use the existing Ruby Gem \textit{googlemaps-services}\footnote{\url{https://github.com/amrfaissal/googlemaps-services}} which provides us the Ruby interface for communication with that API. This API can also calculate the distance and duration with respect to the current traffic. Downside of this API is that each route calculation is expensive.
+
+Second problem we are facing are the scheduled orders. Arriving at the pick-up location on time is the priority number one. Because of the business requirements scheduler does not assign these orders to a driver but the dispatchers do that manually. This implies that in our system could appear order collisions which must the system handle correctly. Also we have to take in to account high cost of each router calculation.
+
+Based on the specification we decided that order scheduler system accepts these actions:
+\begin{itemize}
+	\item Add
+	\item Change arrive time
+	\item Cancel
+	\item Change driver
+\end{itemize}
+
+
+In following subsections we analyse possible situations that can occur in each of these actions and how should the planning system handle them and respond to them. We display the situations using the diagrams described in the legend \ref{order-planning-legend}.
+
 \begin{figure}[h]\centering
-	\includegraphics[scale=0.2	]{orders/order_planning.png}
-	\caption{Order planning situations}\label{order-process-scheme}
+	\includegraphics[scale=0.7]{orders/legend.png}
+	\caption{Order planning scheme legend}\label{order-planning-legend}
 \end{figure} 
+
+
+
+\subsection{Add order}
+We distinguish two main categories of added orders - scheduled order and normal (not scheduled) order.
+
+As mentioned before, scheduler must ensure that if the scheduled order is assigned to the driver, it is able to get there right on the pick-up time. Here appears a problem we must solve - how to count the arrive time for a given driver to that pick-up location so we can let know the driver when to start processing the order?
+
+First naive solution lead us to count the arrive time in the moment of adding to queue. In this point we know the last order finish location, so we could count arrive time from that point. The problem is that the order we are adding can (and probably will) be week or two after the time of arrive to that location. In order to persist the calculated arrive time we have to options. First one is to forbid adding new orders before the scheduled order - that is obviously unacceptable. Second one is to during the insertion of some other order in between the last order in queue and our scheduled order count two arrive times - the newly inserted one and the scheduled one \ref{scheduled_naive_arrive_counting}. 
+
+\begin{figure}[h]\centering
+	\includegraphics[scale=0.7	]{orders/scheduled_naive_arrive_counting.png}
+	\caption{Scheduled order - naive arrive time calculating approach} 
+	\label{scheduled_naive_arrive_counting}
+\end{figure} 
+
+Each route calculation is expensive and this naive approach doubles the costs of each processed order by the driver who has some scheduled order in the queue. Because these orders with two weeks ahead pick-up time are the most common use case in our taxi company we want to avoid this extra cost. 
+
+We observed that there must be some point, when the arrive time of scheduled order must be calculated. If we calculate to early, we raise the costs per order. In the other case if we calculate to late the driver could not be able to get to the pick-up location on time. 
+
+Our solution combines these two cases. Based on that observation we define the critical time constant \textit{C}. Value of this constant is equal to the maximum arrive time to any location operated by the taxi company. 
+
+In our scheduling system then holds that each scheduled order in queue which has pick-up time less than \textit{C} from the order before it or the current time, has calculated arrive time which we update with each change. If the distance between two orders is larger than \textit{C} we do not count the arrive time.
+
+This led to split the problem of adding order into seven pieces:
+\begin{itemize}
+	\item Normal order - counting arrive time
+	\item Normal order - selecting driver
+	\item Scheduled order - counting arrive time
+	\item Scheduled order - combined with other scheduled
+	\item Scheduled order - combined with normal order
+	\item Normal order combined with scheduled
+	\item Scheduled order - scheduling on critical time callback 
+\end{itemize}
+
+	\subsubsection{Normal order - counting arrive time}
+	
+	First we focus on how to count the arrive time for the normal order. As we can see in \ref{order-process-normal-order-counting-arrive} there are three states in which can queue be.
+	
+	As in situation \textit{1a)} if the last order in queue is a normal order, calculate the arrive time as time between the finish location of that order and start of the new order.
+	
+	In case that the queue is empty as in \textit{1b)} calculate the arrive time as time between the last known location + time for response to the order for the driver.
+	
+	Third possible situation \textit{1c)} occurs when there is ongoing scheduled order. Then count arrive time as the time between finish location of that order and start of the new order.
+	
+	
+		\begin{figure}[h]\centering
+			\includegraphics[scale=0.7	]{orders/add-1.png}
+			\caption{Normal order - counting arrive} 
+			\label{order-process-normal-order-counting-arrive}
+		\end{figure} 
+	
+	\subsubsection{Normal order - selecting driver}
+	
+		As described in specification, normal order must be always assign to the driver who can pick up the customer first. This rule demonstrates the example  \ref{order-process-normal-order-selecting-driver}. The order will be assigned to the \textit{driver 1} even though the \textit{driver 2} is available first.
+			
+			\begin{figure}[h]\centering
+				\includegraphics[scale=0.7	]{orders/add-2.png}
+				\caption{Normal order - counting arrive} 
+				\label{order-process-normal-order-selecting-driver}
+			\end{figure} 
+		
+	\subsubsection{Scheduled order - counting arrive time}
+		If we add scheduled order to the driver's queue in which there is no other order within the critical time constant, we do not calculate the arrive time of that order\ref{order-process-scheduled-order-counting-arrive-time}. We are allowed to do so, because the critical time constant \textit{C} ensures, that if the queue stayed in the same state, the arrive time between the last location to the order start will be less than \textit{C}.
+		
+		\begin{figure}[h]\centering
+			\includegraphics[scale=0.7	]{orders/add-3.png}
+			\caption{Scheduled order - counting arrive time} 
+			\label{order-process-scheduled-order-counting-arrive-time}
+		\end{figure} 
+	
+	
+	\subsubsection{Scheduled order - combined with other scheduled}
+			In case that the scheduled order has other scheduled order within \textit{C} from the calculated pick-up and finish time, we have to calculate corresponding arrive times \ref{order-process-scheduled-order-combined-with-scheduled}. 
+			After the calculation we may encounter the orders collision. In such case the order can not be added to the queue and the order scheduler must throw an error. 
+			
+			\begin{figure}[h]\centering
+				\includegraphics[scale=0.6	]{orders/add-4.png}
+				\caption{Scheduled order - combined with other scheduled} 
+				\label{order-process-scheduled-order-combined-with-scheduled}
+			\end{figure} 
+		
+	\subsubsection{Scheduled order - combined with normal order}
+		When the expected finish time is within the \textit{C} from the inserted scheduled pick-up time, we must calculate the arrive time. In case that the the scheduled order is in collision with some normal order, scheduler must throw an error \ref{order-process-scheduled-order-combined-with-normal}.
+		 
+		\begin{figure}[h]\centering
+			\includegraphics[scale=0.6	]{orders/add-5.png}
+			\caption{Scheduled order - combined with normal order} 
+			\label{order-process-scheduled-order-combined-with-normal}
+		\end{figure} 
+	
+			
+	\subsubsection{Normal order - combined with scheduled}
+	Adding new normal order to queue could break the fact that each of the scheduled orders in our system has counted arrive time if the pick-up time is at least \textit{C} from the finish time of order before it.
+	
+	If this situation occurs, we must recalculate the arriving time of the scheduled order after it -  accordingly with respect to the new finish location. This change can lead to collision. In case we encounter the collision, we start the process of adding the order again. In this second try we consider as the previously picked queue's finish location the finish location of collided scheduled order. Also the arrive time of the colliding scheduled order must be set back to the original value. 
+	 \ref{order-process-normal-order-combined-with-scheduled}.
+	
+	\begin{figure}[h]\centering
+		\includegraphics[scale=0.5	]{orders/add-6.png}
+		\caption{Scheduled order - combined with normal order} 
+		\label{order-process-normal-order-combined-with-scheduled}
+	\end{figure} 
+
+	\subsubsection{Scheduled order - scheduling on critical time callback}
+	As we know scheduled orders have not calculated arriving time when their pick-up time is within \textit{C} from any other order finish in queue or the current time. In previous cases we described all the possible situations how can order be added before the scheduled order within the time constant. Last thing we have to cover is the situation when the current time exceeds a point from which is the the pick-up time of our order less than C.
+	
+	This situation we would cover with callback which is called exactly in that point. If the order does not have arrive time calculated in that point, we calculate it from the last known drivers location and the order start location. 
+	 \ref{order-process-normal-order-combined-with-scheduled}.
+
+	\begin{figure}[h]\centering
+		\includegraphics[scale=0.7]{orders/add-7.png}
+		\caption{Scheduled order - combined with normal order} 
+		\label{order-process-normal-order-combined-with-scheduled}
+	\end{figure} 
+
+\subsection{Change arrive time}
+	Estimated order times can be manually changed by driver during the order. Average expected time change in such cases is within a few minutes. We can divide the change of time into two groups. In the first one the order will take longer after the change, in the second one the order will be shorter.
+	
+	\subsection{Longer order}
+	When the order takes longer than it was expected to we just take all the normal orders after it until the first scheduled one and we move their start times accordingly\ref{order-process-change_longer}
+	\begin{figure}[h]\centering
+		\includegraphics[scale=0.7]{orders/changing_arrive_time_longer.png}
+		\caption{Scheduled order - combined with normal order} 
+		\label{order-process-change_longer}
+	\end{figure} 
+
+
+	
+	
+	\subsection{Shorder order}
