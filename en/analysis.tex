@@ -22,7 +22,7 @@ In Ruby on Rails there exists very good gem for authentication - \textit{devise\
 
 First reason for not using the gem was, that it uses email as main default authentication field. For customers we wanted to use the telephone number as the main identifier - including the SMS confirmation and password recovery (explained later), which would led us to rewrite the most of the gem's controllers and models anyway and as bonus we would have to integrate it with the existing parts of gem.
 
-Second reason was the complexity of the whole authentication process. This gem would bring to our project more secure but also much more complex way of authenticating. Once client gets the token from the login endpoint, the token is generated and returned with each following request. Using this approach we have to solve the batch request problem. Imagine that client sends for example three requests at once to the server. Of course all the three requests must have same authentication token - because client doesn't have the new token until the response comes. Thus server must accept all those three requests as authenticated, but also they must agree with the front-end which response has the correct new auth token - responses don't have to come in order in which they were sent. This complicated process was implemented in the back-end gem and couldn't be changed. The front-end library was supposed to implement that, but after the three weeks of trying and founding several bugs in the library - even without successful login they gave up using it.
+Second reason was the complexity of the whole authentication process. This gem would bring more secure but also much more complex way of authenticating to our project. Once the client gets the token from the login endpoint, a new token is generated and returned with each following request. Using this approach we also have to solve the batch request problem. Imagine that the client sends three requests to the server at once. Of course all of the three requests must have the same authentication token - because the client doesn't have the new token until the response arrives. Thus the server must accept all of those three requests as authenticated. Besides that they also must agree which response has the correct new auth token - responses don't have to come in order in which they were sent. This complicated process was implemented in the back-end gem and couldn't be easily changed. The front-end part of the library seemed to be implemented, but after the three weeks of trying and founding several bugs in the library - even without successful login - we gave up using it.
 
 In conclusion if we had wanted to use the gem on backend we would have to understand the whole gem auth process in detail and specify it for the front-end. Front-end would then have to write the whole complicated solution on their own. 
 
@@ -137,7 +137,7 @@ Cost of api requets, Google API
 
 \section {Order scheduler}
 
-The goal of order scheduler is to split new orders between the drivers in application. Besides that the system accepts other actions which could be made with the order. These actions are then reflected into the corresponding driver queue and to all the orders affected by that action.
+The goal of order scheduler is to split new orders between the drivers in application. Besides that the system accepts other actions for manipulation with the order. These actions are then reflected to the corresponding driver queue and to all the orders affected by such actions.
 
 First of all we have to deal with the distance calculation. All we know about the new order are just the coordinates of the pick-up and the drop-off location. We have to calculate the distance and the duration of the order. Each order consists of the two parts we have to calculate. First part is from pick-up location to drop-off. This part is constant for each order. Second part is the route between the driver and the pick-up location. This part differs for each of the drivers. For the distance and duration computation we decided to use the \textit{Google Maps Distance Matrix API} \footnote{\url{https://developers.google.com/maps/documentation/distance-matrix/intro}} which allows us to get the distances between all the drivers and the order pick-up location in a single request. Also thanks to using this API we could use the existing Ruby Gem \textit{googlemaps-services}\footnote{\url{https://github.com/amrfaissal/googlemaps-services}} which provides us the Ruby interface for communication with that API. This API can also calculate the distance and duration with respect to the current traffic. Downside of this API is that each route calculation is expensive.
 
@@ -162,7 +162,9 @@ In following subsections we analyse possible situations that can occur in each o
 
 
 \subsection{Add order}
-We distinguish two main categories of added orders - scheduled order and normal (not scheduled) order.
+We distinguish two main categories of added orders - scheduled order and normal (not scheduled) order. At first we have to define who can be assigned the order, and then we have to define how to do it.
+
+Order can be assigned to either all of the available drivers or to the one specific driver. By available driver we mean the driver who is on shift and is not in pause status. Then from this set of drivers we choose the driver whom the order will be assigned to.
 
 As mentioned before, scheduler must ensure that if the scheduled order is assigned to the driver, it is able to get there right on the pick-up time. Here appears a problem we must solve - how to count the arrive time for a given driver to that pick-up location so we can let know the driver when to start processing the order?
 
@@ -182,7 +184,7 @@ Our solution combines these two cases. Based on that observation we define the c
 
 In our scheduling system then holds that each scheduled order in queue which has pick-up time less than \textit{C} from the order before it or the current time, has calculated arrive time which we update with each change. If the distance between two orders is larger than \textit{C} we do not count the arrive time.
 
-This led to split the problem of adding order into seven pieces:
+This led to split the problem of adding order into seven parts:
 \begin{itemize}
 	\item Normal order - counting arrive time
 	\item Normal order - selecting driver
@@ -258,7 +260,7 @@ This led to split the problem of adding order into seven pieces:
 	
 	\begin{figure}[h]\centering
 		\includegraphics[scale=0.5	]{orders/add-6.png}
-		\caption{Scheduled order - combined with normal order} 
+		\caption{Normal order - combined with scheduled order} 
 		\label{order-process-normal-order-combined-with-scheduled}
 	\end{figure} 
 
@@ -266,26 +268,62 @@ This led to split the problem of adding order into seven pieces:
 	As we know scheduled orders have not calculated arriving time when their pick-up time is within \textit{C} from any other order finish in queue or the current time. In previous cases we described all the possible situations how can order be added before the scheduled order within the time constant. Last thing we have to cover is the situation when the current time exceeds a point from which is the the pick-up time of our order less than C.
 	
 	This situation we would cover with callback which is called exactly in that point. If the order does not have arrive time calculated in that point, we calculate it from the last known drivers location and the order start location. 
-	 \ref{order-process-normal-order-combined-with-scheduled}.
+	 \ref{order-process-scheduled-critical-time}.
 
 	\begin{figure}[h]\centering
 		\includegraphics[scale=0.7]{orders/add-7.png}
-		\caption{Scheduled order - combined with normal order} 
-		\label{order-process-normal-order-combined-with-scheduled}
+		\caption{Scheduled order - critical time callback} 
+		\label{order-process-scheduled-critical-time}
 	\end{figure} 
 
 \subsection{Change arrive time}
 	Estimated order times can be manually changed by driver during the order. Average expected time change in such cases is within a few minutes. We can divide the change of time into two groups. In the first one the order will take longer after the change, in the second one the order will be shorter.
 	
-	\subsection{Longer order}
-	When the order takes longer than it was expected to we just take all the normal orders after it until the first scheduled one and we move their start times accordingly\ref{order-process-change_longer}
+	\subsubsection{Longer order}
+	When the order takes longer than it was expected to we just take all the normal orders after it until the first scheduled one and we move their start times accordingly\ref{order-process-change_longer}.
 	\begin{figure}[h]\centering
 		\includegraphics[scale=0.7]{orders/changing_arrive_time_longer.png}
-		\caption{Scheduled order - combined with normal order} 
+		\caption{Change arrive time - longer order} 
 		\label{order-process-change_longer}
 	\end{figure} 
 
+	During this change there can occur collision with some scheduled order in queue. If the colliding order is normal order, we reschedule it the same way as we were adding it \ref{order-process-change_collision_normal}. 
+	
+	\begin{figure}[h]\centering
+		\includegraphics[scale=0.65]{orders/changing_arrive_time_longer_normal_collision.png}
+		\caption{Change arrive time - longer order - collision of normal and scheduled order} 
+		\label{order-process-change_collision_normal}
+	\end{figure} 
 
+	If the collision is between scheduled or ongoing order, we must shift the start of the following scheduled order \ref{order-process-change_collision_scheduled}.
+	
+	\begin{figure}[h]\centering
+		\includegraphics[scale=0.7]{orders/changing_arrive_time_longer_scheduled_collision.png}
+		\caption{Change arrive time - longer order - collision of two scheduled orders} 
+		\label{order-process-change_collision_scheduled}
+	\end{figure} 
 	
 	
-	\subsection{Shorder order}
+	\subsubsection{Shorter order}
+		When the time change makes the order shorter, we just simply change the starting time estimation accordingly for all of the normal orders after it until the first scheduled one
+		\ref{order-process-change-shorter}.
+		
+		\begin{figure}[h]\centering
+			\includegraphics[scale=0.7]{orders/Shorter_order.png}
+			\caption{Change arrive time - shorter order} 
+			\label{order-process-change-shorter}
+		\end{figure} 
+	
+\subsection{Cancel}
+	When the order is cancelled, we must remove it from the driver's queue and reschedule each order after the cancelled order - except the scheduled one. By rescheduling we mean sequence of two actions - cancel and add \ref{order-process-cancel}.
+	
+	\begin{figure}[h]\centering
+		\includegraphics[scale=0.7]{orders/cancel.png}
+		\caption{Cancel the order} 
+		\label{order-process-cancel}
+	\end{figure} 
+	We suppose that the order cancel is rarely called, so we do not pressure on the route calculation optimization as much.
+
+\subsection{Change driver}
+Changing the driver should happen even less than cancelling the order. In such case it is sufficient just to call the \textit{cancel} action and \textit{add} action with the specified selected driver.
+	 
