@@ -29,15 +29,17 @@ In conclusion if we had wanted to use the gem on backend we would have to unders
 We came to conclusion that the complexity, that would bring this library to our application is not worth the better security and stability we would gain from this. Using HTTPS on both server and client makes the token theft little bit harder - so lack of this generation process with each request is not a big deal. Also the only really sensitive accounts for identity theft are the employees one's and we are in personal contact with them, so we would know about misuse or potential hack and we could provide the safer solution later.
 
 \subsubsection{Basic security}
-As we mentioned in last paragraphs, our token solution is not perfect from the security perspective. Besides the token (which could be easily rewritten more securely in the future ) we tried not to take the security of our application lightly.
+	As we mentioned in last paragraphs, our token solution is not perfect from the security perspective. Besides the token (which could be easily rewritten more securely in the future ) we tried not to take the security of our application lightly.
+	
+	First of all, we don't store passwords in plaintext. We use Rails integrated feature \textit{has\_secure\_password}\footnote{\url{https://api.rubyonrails.org/classes/ActiveModel/SecurePassword/ClassMethods.html}}, which uses BCrypt hash function.
+	
+	Thanks to the Ruby on Rails framework we also excerpt passwords from the logs and we are not vulnerable to SQL Injection\footnote{\url{https://en.wikipedia.org/wiki/SQL\_injection}}.
 
-First of all, we don't store passwords in plaintext. We use Rails integrated feature \textit{has\_secure\_password}\footnote{\url{https://api.rubyonrails.org/classes/ActiveModel/SecurePassword/ClassMethods.html}}, which uses BCrypt hash function.
+\subsubsection{Verification tokens sending process}
+	We send the verification tokens via emails and SMS during the whole authentication process. These actions are not instant (API request, SMTP request) and in Rails we can easily create asynchronous workers. We decided to have these functions handled as Sidekiq workers. In exchange for some time spent on configuration we don't block webserver threads during account creation/recovery and also we have ability to automatically resend the message in case of the third party or network failure.
 
-Thanks to the Ruby on Rails framework we also excerpt passwords from the logs and we are not vulnerable to SQL Injection\footnote{\url{https://en.wikipedia.org/wiki/SQL\_injection}}.
 \subsection{Secrets}
-suernames, api keys etc...
-\subsubsection{Sending verifying tokens}
-We must send tokens via emails and SMS during the whole authentication process. Because these are actions that are not instant (API request, SMTP request) and because in Rails we can easily create asynchronous workers, we decided to have these functions handled as Sidekiq workers. In exchange for some time spent on configuration we have instant response without blocking webserver threads during account creation/recovery and have ability to automatically resend the message in case of the third party or network failure.
+	In our application we have to keep several API tokens, database passwords and other sensitive information. We store those secrets in files which are not tracked in version control. Those files are then loaded by the Docker, which set them as environment variables. In the whole application we read these sensitive information from them.  
 
 \subsection{Authorization}
 Almost every endpoint has it's own rules of who and in what circumstances can do such action. There are two main groups of users - employees and customers. Employees are then divided into three groups - administrators, drivers and dispatchers. There are just two types of customers - registered and unregistered. Each visitor is one of these types.
@@ -49,19 +51,14 @@ We want to avoid reinventing the wheel so we have chosen to use for such purpose
 Another option we looked into was \textit{Cancancan} \footnote{\url{https://github.com/CanCanCommunity/cancancan}} gem. They both have long maintenance history, are actively developed in the time of writing and satisfies all of our conditions for the authorization. Cancancan is better suited for applications with complicated views, because it provides more helpers for checking authorization in them. Also its architecture is more general thus it is better optimized for more complicated permission management. That results in slightly more complex permission definitions. On the other side pundit is more light-weight solution with very simple architecture and permissions definition files. Because our permissions are not complicated very much and we wanted to have them written as simply as possible, this was the main reason why we chose Pundit over Cancancan.
 
  \subsection{Pagination}
- paginating lists - why, where
-\subsection{Request parameters security}
-Permiting
+ With growing data some of the requests (e.g. order index) could return thousands of items. This would be huge waste of resources, so we have to limit the count of returned items per request and enable pagination. For that purpose there exists gem \textit{Kaminari}\footnote{\url{https://github.com/kaminari/kaminari}} which adds to our models methods for quick filtering and retrieving data. We just define pagination request parameters and pass them to this library. Also thanks to the global configuration we can limit the maximum number of results per page.
 
 \subsection{Rendering views}
-	Even though whole view layer is just about displaying simple JSON objects, we use whole separated view layer of the Ruby on Rails framework with the help of the Jbuilder gem\footnote{\url{https://github.com/rails/jbuilder}}.
+	Even though whole view layer is just about displaying simple JSON objects, we use whole separated view layer of the Ruby on Rails framework with the help of the \textit{Jbuilder} gem\footnote{\url{https://github.com/rails/jbuilder}}.
 	
 	In the beginning of the implementation we thought that we don't have to have the view part separated from the controller. For the simple entities such as vehicles it was sufficient. When we started to have more complicated requirements for the views - such as displaying different attributes for different user roles, most of the controller's code was the view logic which mystified the controllers.
 	
 	Jbuilder allows us to have view code separated from the controllers and provides us simple syntax to extract desired fields and parts from our variables to JSON.
-\subsection{Localization}
-- more languages - errors
- - we translate on our side, frontend on its => bad pattern
 \subsection{Images}
 	Our employees and vehicles have assigned images. We had to figure out, how to get the image from the client application via the REST to our application. 
 	
@@ -107,7 +104,7 @@ We decided to use verification via SMS code.
  	\item false = we want recommendations for drop-off locations and the provided location are pick-up coordinates
  \end{itemize}
  
- Our first problem to solve was how to handle locations from the request. We suppose that the location which goes to our API is directly from the customer's telephone sensors, thus there's nothing like Example's restaurant official coordinates, which would client sent to us whenever he wants taxi from that restaurant. On the other hand, we would like to group all these locations near the Example restaurant into one place, so we can recommend it just once and there was enough space for other interesting places. We thought about using some kind of modified clustering algorithm but we ended up with conclusion that this would be in our case overkill. We came to conclusion that for our use case is enough to have defined distance constant and all the places around this place within the constant distance are considered as one place. We set this constant to 50 meters, because it seems like good compromise between inaccurate low-end phones GPS precision and the distance between two different places. Of course that we must be able to change this constant in the future if we discover, that it is too small or big.
+ Our first problem to solve is how to handle the locations from the request. We suppose that the location which goes to our API is directly from the customer's telephone sensors, thus there's nothing like Example's restaurant official coordinates, which would client sent to us whenever he wants taxi from that restaurant. On the other hand, we would like to group all these locations near the Example restaurant into one place, so we can recommend it just once and there was enough space for other interesting places. We thought about using some kind of modified clustering algorithm but we ended up with conclusion that this would be in our case overkill. We came to conclusion that for our use case is enough to have defined distance constant and all the places around this place within the constant distance are considered as one place. We set this constant to 50 meters, because it seems like good compromise between inaccurate low-end phones GPS precision and the distance between two different places. Of course that we must be able to change this constant in the future if we discover, that it is too small or big.
  
  Second problem was how to filter and return the list of places fast. For each user we have index of visited places with information on which we base our recommending algorithm. In this index we have following information about each place:
  \begin{itemize}
@@ -123,17 +120,6 @@ We decided to use verification via SMS code.
 For the given parameters in request, we go in index place by place and count the weight of it from the occurrences weights multiplied by constant if start/finish fits the desired direction. Index is also prepared for recommending places based on the order time (e.g. in the evening we go to pub, in the morning to work). We decided to limit the recommendation index for last 1000 orders for each user.
 
 In our research we haven't found any ready-made solution for this problem, so we decided to come up with our own solution. Of course it could be more effective and recommendation could be done even smarter. During the development we came to this algorithm which satisfies all our specified metrics and thus we were satisfied with the application of it in the real world.
-
-
-\section {Orders}
-
-Order modification history
-Format of times
-Cost of api requets, Google API
-
-\subsection {Data representation}
-
-
 
 \section {Order scheduler}
 
@@ -327,3 +313,11 @@ This led to split the problem of adding order into seven parts:
 \subsection{Change driver}
 Changing the driver should happen even less than cancelling the order. In such case it is sufficient just to call the \textit{cancel} action and \textit{add} action with the specified selected driver.
 	 
+	 
+	 
+\section {Orders}
+
+	For our application is critical to keep track of the order modification history. In case of unsuccessfully handled order we must be able to tell whether it was the scheduler failure or the mistake was caused by an employee or a customer. Also having the order time estimations history may help us in the future during the improvements of the scheduling system. We have found the \textit{paper\_trail} gem\footnote{\url{https://github.com/paper-trail-gem/paper_trail}} which fulfils our needs and is easy to use and setup.
+	
+	
+	For the each order we have to keep track of the several time fields. In one half of the application we have to know and modify durations (arrive, waiting) and in the other half we have to know exact times (start, arrive to customer, finish). We have two options how to save such times. We can preserve timestamps for each event and the durations compute on demand. We decided for the second option - save the order start timestamp and duration in seconds for the rest. Thanks to this approach we can easily manipulate with the orders in the scheduler.  Downside of this approach is that we can not easily filter and sort the orders via those calculated times.   

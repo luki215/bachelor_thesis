@@ -1,24 +1,24 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Order process scheme}}{14}{figure.3.1}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Order process scheme}}{15}{figure.3.1}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Auth token scheme}}{24}{figure.5.1}
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Order planning scheme legend}}{30}{figure.5.2}
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Scheduled order - naive arrive time calculating approach}}{31}{figure.5.3}
-\contentsline {figure}{\numberline {5.4}{\ignorespaces Normal order - counting arrive}}{32}{figure.5.4}
-\contentsline {figure}{\numberline {5.5}{\ignorespaces Normal order - counting arrive}}{32}{figure.5.5}
-\contentsline {figure}{\numberline {5.6}{\ignorespaces Scheduled order - counting arrive time}}{33}{figure.5.6}
-\contentsline {figure}{\numberline {5.7}{\ignorespaces Scheduled order - combined with other scheduled}}{33}{figure.5.7}
-\contentsline {figure}{\numberline {5.8}{\ignorespaces Scheduled order - combined with normal order}}{34}{figure.5.8}
-\contentsline {figure}{\numberline {5.9}{\ignorespaces Normal order - combined with scheduled order}}{35}{figure.5.9}
-\contentsline {figure}{\numberline {5.10}{\ignorespaces Scheduled order - critical time callback}}{35}{figure.5.10}
-\contentsline {figure}{\numberline {5.11}{\ignorespaces Change arrive time - longer order}}{35}{figure.5.11}
-\contentsline {figure}{\numberline {5.12}{\ignorespaces Change arrive time - longer order - collision of normal and scheduled order}}{36}{figure.5.12}
-\contentsline {figure}{\numberline {5.13}{\ignorespaces Change arrive time - longer order - collision of two scheduled orders}}{36}{figure.5.13}
-\contentsline {figure}{\numberline {5.14}{\ignorespaces Change arrive time - shorter order}}{36}{figure.5.14}
-\contentsline {figure}{\numberline {5.15}{\ignorespaces Cancel the order}}{37}{figure.5.15}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Auth token scheme}}{25}{figure.5.1}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Order planning scheme legend}}{31}{figure.5.2}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Scheduled order - naive arrive time calculating approach}}{32}{figure.5.3}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Normal order - counting arrive}}{33}{figure.5.4}
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Normal order - counting arrive}}{33}{figure.5.5}
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Scheduled order - counting arrive time}}{34}{figure.5.6}
+\contentsline {figure}{\numberline {5.7}{\ignorespaces Scheduled order - combined with other scheduled}}{35}{figure.5.7}
+\contentsline {figure}{\numberline {5.8}{\ignorespaces Scheduled order - combined with normal order}}{36}{figure.5.8}
+\contentsline {figure}{\numberline {5.9}{\ignorespaces Normal order - combined with scheduled order}}{37}{figure.5.9}
+\contentsline {figure}{\numberline {5.10}{\ignorespaces Scheduled order - critical time callback}}{37}{figure.5.10}
+\contentsline {figure}{\numberline {5.11}{\ignorespaces Change arrive time - longer order}}{37}{figure.5.11}
+\contentsline {figure}{\numberline {5.12}{\ignorespaces Change arrive time - longer order - collision of normal and scheduled order}}{37}{figure.5.12}
+\contentsline {figure}{\numberline {5.13}{\ignorespaces Change arrive time - longer order - collision of two scheduled orders}}{38}{figure.5.13}
+\contentsline {figure}{\numberline {5.14}{\ignorespaces Change arrive time - shorter order}}{38}{figure.5.14}
+\contentsline {figure}{\numberline {5.15}{\ignorespaces Cancel the order}}{38}{figure.5.15}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

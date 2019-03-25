@@ -1,26 +1,24 @@
 \chapter{Introduction}
 
-\todo{Do propper introduction, mention somewhere that below:}
-We have implemented first version of application in Individual Software Project which is up and running since July 2017. When I refer to the first version of application I mean this.
-\section{Goals}
-This theses has three main goals \info[]{maybe specify more?}
-\begin{itemize}
-	\item Create application covering order management with respect to existing taxi company processes
-	\item Provide API for front-end(s) which is
-	\begin{itemize}
-		\item secure,
-		\item well documented,
-		\item easy to use,
-		\item general enough for later extension to other front-end services
-	\end{itemize}
-	\item Put together stack of tools which allows:
-	\begin{itemize}
-		\item easy deployment with minimal down time,
-		\item quick installation,
-		\item operation system independence,
-		\item developer-friendly errors \& system monitoring,
-		\item back-ups
-	\end{itemize}
-\end{itemize}
+The field of personal transportation has been revolutionized in a past few years. People in the metropolises got used to order the taxi via phone application. Nowadays it is almost standard to have all the information about the driver, vehicle, estimated time of arrival and price before making the the order. Also the service during the order process has evolved a lot. People are used to see the arriving driver's location in real time and also the estimated time of arrival to their drop off location during the whole order process. 
+
+However in the smaller cities is situation very different. None of the big companies operates in the smaller cities so there is usually no other way how to order the taxi than via phone. Phone lines are often overloaded during the peaks and customers are unsatisfied. Providing this new way of ordering would have massive impact on the company competitiveness.
+
+In this thesis we created the back-end part of the application for order management and processing. We focused on the taxi companies from the smaller towns. We cooperated with the company from Mladá Boleslav, which provided us the insights from their business and described their work-flow. Keeping this know-how in mind we created the system.
+
+\section{Motivation}
+
+Besides the customer comfort increase in smaller cities this application reduces the operating costs of the company. Being dispatcher at taxi company is very stressful and low paid job. The main working hours are at night. These conditions lead to high staff fluctuation. Dispatcher is responsible for distributing the orders between the drivers and estimating the arrival times. When the dispatchers are changed often, they have no experience with the estimations which leads to fatal failures and highly unsatisfied customers. Having the algorithm for distributing orders between drivers and estimating the arrival times leads to stable more stable estimations which can be improved during the time. This reduces the skills the dispatcher needs to have for the job - now its job is just to communicate with the customer and insert the orders into the system.
+
+Second advantage of having such system in the company is that they can process more orders with the same amount of dispatchers. Each order phone call takes two minutes on average. If they want to process more than thirty orders per hour they have to hire the second dispatcher.
+
+
+\section{Existing solutions}
+As we mentioned before, there are already existing solutions for this problem. From the most known companies operating in Czech Republic are Uber, Taxify and Liftago. They all provide the same feature - allowing the user to order the taxi via the application - but with a different idea in mind. The difference is that their customers can not order their services via a phone call. 
+
+This approach is not suitable for our case, because the company depends on the users who order the taxi exclusively via phone call. Also our company has most of the profit from the scheduled large distance orders. These orders they want to manually split between their loyal drivers. 
+
 
 \section{Outline}
+
+\todo{Dopsat}
