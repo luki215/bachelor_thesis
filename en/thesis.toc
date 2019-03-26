@@ -1,130 +1,132 @@
 \contentsline {chapter}{\numberline {1}Introduction}{4}{chapter.1}
 \contentsline {section}{\numberline {1.1}Motivation}{4}{section.1.1}
 \contentsline {section}{\numberline {1.2}Existing solutions}{4}{section.1.2}
-\contentsline {section}{\numberline {1.3}Outline}{5}{section.1.3}
+\contentsline {section}{\numberline {1.3}Goals}{5}{section.1.3}
+\contentsline {section}{\numberline {1.4}Outline}{5}{section.1.4}
 \contentsline {chapter}{\numberline {2}Requirements}{6}{chapter.2}
 \contentsline {section}{\numberline {2.1}Business requirements}{6}{section.2.1}
 \contentsline {section}{\numberline {2.2}Technical requirements}{6}{section.2.2}
-\contentsline {chapter}{\numberline {3}Specification}{8}{chapter.3}
-\contentsline {section}{\numberline {3.1}Customers}{8}{section.3.1}
-\contentsline {subsection}{\numberline {3.1.1}Operation create and confirm}{8}{subsection.3.1.1}
-\contentsline {subsection}{\numberline {3.1.2}Operation update}{9}{subsection.3.1.2}
-\contentsline {subsection}{\numberline {3.1.3}Operation destroy}{9}{subsection.3.1.3}
-\contentsline {subsection}{\numberline {3.1.4}Operation password recovery}{9}{subsection.3.1.4}
-\contentsline {subsection}{\numberline {3.1.5}Operation login and logout}{9}{subsection.3.1.5}
-\contentsline {subsection}{\numberline {3.1.6}Operation list favourite locations}{9}{subsection.3.1.6}
-\contentsline {subsection}{\numberline {3.1.7}Operation list all customers and show specific customer}{10}{subsection.3.1.7}
-\contentsline {section}{\numberline {3.2}Employees}{10}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}Shifts}{10}{subsection.3.2.1}
-\contentsline {subsection}{\numberline {3.2.2}Driver locations}{11}{subsection.3.2.2}
-\contentsline {subsection}{\numberline {3.2.3}Driver order queues}{11}{subsection.3.2.3}
-\contentsline {subsection}{\numberline {3.2.4}Operation create and confirm}{11}{subsection.3.2.4}
-\contentsline {subsection}{\numberline {3.2.5}Operation update}{11}{subsection.3.2.5}
-\contentsline {subsection}{\numberline {3.2.6}Operation destroy}{11}{subsection.3.2.6}
-\contentsline {subsection}{\numberline {3.2.7}Operation recover password}{11}{subsection.3.2.7}
-\contentsline {subsection}{\numberline {3.2.8}Operation login and logout}{12}{subsection.3.2.8}
-\contentsline {subsection}{\numberline {3.2.9}Operation list all employees and show specific employee}{12}{subsection.3.2.9}
-\contentsline {section}{\numberline {3.3}Vehicles}{12}{section.3.3}
-\contentsline {subsection}{\numberline {3.3.1}Operation create, update and destroy}{12}{subsection.3.3.1}
-\contentsline {subsection}{\numberline {3.3.2}Operation show all and specific vehicle}{13}{subsection.3.3.2}
-\contentsline {section}{\numberline {3.4}Orders}{13}{section.3.4}
-\contentsline {subsection}{\numberline {3.4.1}show all / specific order}{15}{subsection.3.4.1}
-\contentsline {subsection}{\numberline {3.4.2}List driver arrivals}{16}{subsection.3.4.2}
-\contentsline {subsection}{\numberline {3.4.3}Create order}{16}{subsection.3.4.3}
-\contentsline {subsection}{\numberline {3.4.4}Defraud and process}{16}{subsection.3.4.4}
-\contentsline {subsection}{\numberline {3.4.5}Confirm by driver}{17}{subsection.3.4.5}
-\contentsline {subsection}{\numberline {3.4.6}Refuse by driver}{17}{subsection.3.4.6}
-\contentsline {subsection}{\numberline {3.4.7}Arriving}{17}{subsection.3.4.7}
-\contentsline {subsection}{\numberline {3.4.8}Change arrive time}{17}{subsection.3.4.8}
-\contentsline {subsection}{\numberline {3.4.9}Arrived}{17}{subsection.3.4.9}
-\contentsline {subsection}{\numberline {3.4.10}Customer not on its place}{18}{subsection.3.4.10}
-\contentsline {subsection}{\numberline {3.4.11}Picked up}{18}{subsection.3.4.11}
-\contentsline {subsection}{\numberline {3.4.12}Change drop off time or location}{18}{subsection.3.4.12}
-\contentsline {subsection}{\numberline {3.4.13}Finished}{18}{subsection.3.4.13}
-\contentsline {subsection}{\numberline {3.4.14}Fraud}{18}{subsection.3.4.14}
-\contentsline {subsection}{\numberline {3.4.15}Cancel}{18}{subsection.3.4.15}
-\contentsline {subsection}{\numberline {3.4.16}My orders for dispatcher}{18}{subsection.3.4.16}
-\contentsline {section}{\numberline {3.5}Notifications}{19}{section.3.5}
-\contentsline {subsection}{\numberline {3.5.1}Operation list notifications}{19}{subsection.3.5.1}
-\contentsline {subsection}{\numberline {3.5.2}Operation mark as resolved}{19}{subsection.3.5.2}
-\contentsline {chapter}{\numberline {4}Technical Analysis}{20}{chapter.4}
-\contentsline {section}{\numberline {4.1}Back-end application software stack}{20}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}Ruby on Rails}{20}{subsection.4.1.1}
-\contentsline {subsection}{\numberline {4.1.2}PosrtgreSQL}{21}{subsection.4.1.2}
-\contentsline {subsection}{\numberline {4.1.3}Sidekiq}{21}{subsection.4.1.3}
-\contentsline {section}{\numberline {4.2}Tools stack}{21}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Apiary}{21}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}Docker and Docker-compose}{22}{subsection.4.2.2}
-\contentsline {section}{\numberline {4.3}Docker proxy \& ngnix}{22}{section.4.3}
-\contentsline {section}{\numberline {4.4}Errbit}{22}{section.4.4}
-\contentsline {section}{\numberline {4.5}Monitoring}{23}{section.4.5}
-\contentsline {chapter}{\numberline {5}Analysis}{24}{chapter.5}
-\contentsline {section}{\numberline {5.1}General problems}{24}{section.5.1}
-\contentsline {subsection}{\numberline {5.1.1}Authentication}{24}{subsection.5.1.1}
-\contentsline {subsubsection}{Token authentication details}{24}{section*.7}
-\contentsline {subsubsection}{Basic security}{26}{section*.8}
-\contentsline {subsubsection}{Verification tokens sending process}{26}{section*.9}
-\contentsline {subsection}{\numberline {5.1.2}Secrets}{26}{subsection.5.1.2}
-\contentsline {subsection}{\numberline {5.1.3}Authorization}{26}{subsection.5.1.3}
-\contentsline {subsection}{\numberline {5.1.4}Pagination}{27}{subsection.5.1.4}
-\contentsline {subsection}{\numberline {5.1.5}Rendering views}{27}{subsection.5.1.5}
-\contentsline {subsection}{\numberline {5.1.6}Images}{27}{subsection.5.1.6}
-\contentsline {section}{\numberline {5.2}Customers}{28}{section.5.2}
-\contentsline {subsection}{\numberline {5.2.1}Create and confirm}{28}{subsection.5.2.1}
-\contentsline {subsection}{\numberline {5.2.2}Password recovery}{28}{subsection.5.2.2}
-\contentsline {subsection}{\numberline {5.2.3}Favourite places}{29}{subsection.5.2.3}
-\contentsline {section}{\numberline {5.3}Order scheduler}{30}{section.5.3}
-\contentsline {subsection}{\numberline {5.3.1}Add order}{31}{subsection.5.3.1}
-\contentsline {subsubsection}{Normal order - counting arrive time}{32}{section*.12}
-\contentsline {subsubsection}{Normal order - selecting driver}{33}{section*.13}
-\contentsline {subsubsection}{Scheduled order - counting arrive time}{33}{section*.14}
-\contentsline {subsubsection}{Scheduled order - combined with other scheduled}{33}{section*.15}
-\contentsline {subsubsection}{Scheduled order - combined with normal order}{34}{section*.16}
-\contentsline {subsubsection}{Normal order - combined with scheduled}{34}{section*.17}
-\contentsline {subsubsection}{Scheduled order - scheduling on critical time callback}{34}{section*.18}
-\contentsline {subsection}{\numberline {5.3.2}Change arrive time}{35}{subsection.5.3.2}
-\contentsline {subsubsection}{Longer order}{35}{section*.19}
-\contentsline {subsubsection}{Shorter order}{35}{section*.20}
-\contentsline {subsection}{\numberline {5.3.3}Cancel}{36}{subsection.5.3.3}
-\contentsline {subsection}{\numberline {5.3.4}Change driver}{36}{subsection.5.3.4}
-\contentsline {section}{\numberline {5.4}Orders}{36}{section.5.4}
-\contentsline {chapter}{\numberline {6}Implementation}{39}{chapter.6}
-\contentsline {section}{\numberline {6.1}Project architecture}{39}{section.6.1}
-\contentsline {section}{\numberline {6.2}Application file structure}{39}{section.6.2}
-\contentsline {subsection}{\numberline {6.2.1}app/controllers}{40}{subsection.6.2.1}
-\contentsline {subsection}{\numberline {6.2.2}app/helpers}{41}{subsection.6.2.2}
-\contentsline {subsection}{\numberline {6.2.3}app/lib}{41}{subsection.6.2.3}
-\contentsline {subsection}{\numberline {6.2.4}app/mailers}{41}{subsection.6.2.4}
-\contentsline {subsection}{\numberline {6.2.5}app/models}{41}{subsection.6.2.5}
-\contentsline {subsection}{\numberline {6.2.6}app/policies}{42}{subsection.6.2.6}
-\contentsline {subsection}{\numberline {6.2.7}app/uploaders}{42}{subsection.6.2.7}
-\contentsline {subsection}{\numberline {6.2.8}app/validators}{42}{subsection.6.2.8}
-\contentsline {subsection}{\numberline {6.2.9}app/views}{42}{subsection.6.2.9}
-\contentsline {subsection}{\numberline {6.2.10}app/workers}{42}{subsection.6.2.10}
-\contentsline {subsection}{\numberline {6.2.11}config/environments}{42}{subsection.6.2.11}
-\contentsline {subsection}{\numberline {6.2.12}config/initializers}{42}{subsection.6.2.12}
-\contentsline {subsection}{\numberline {6.2.13}config/locales}{42}{subsection.6.2.13}
-\contentsline {subsection}{\numberline {6.2.14}config/database.yml}{43}{subsection.6.2.14}
-\contentsline {subsection}{\numberline {6.2.15}config/routes.rb}{43}{subsection.6.2.15}
-\contentsline {subsection}{\numberline {6.2.16}config/sidekiq.yml}{43}{subsection.6.2.16}
-\contentsline {subsection}{\numberline {6.2.17}db/migrate}{43}{subsection.6.2.17}
-\contentsline {subsection}{\numberline {6.2.18}db/seeds.rb}{43}{subsection.6.2.18}
-\contentsline {subsection}{\numberline {6.2.19}db/schema.rb}{43}{subsection.6.2.19}
-\contentsline {subsection}{\numberline {6.2.20}lib}{43}{subsection.6.2.20}
-\contentsline {subsection}{\numberline {6.2.21}public}{43}{subsection.6.2.21}
-\contentsline {subsection}{\numberline {6.2.22}spec/factories}{44}{subsection.6.2.22}
-\contentsline {subsection}{\numberline {6.2.23}spec/requests}{44}{subsection.6.2.23}
-\contentsline {subsection}{\numberline {6.2.24}Gemfile}{44}{subsection.6.2.24}
-\contentsline {section}{\numberline {6.3}Specific implementation details}{44}{section.6.3}
-\contentsline {subsection}{\numberline {6.3.1}Authentication}{44}{subsection.6.3.1}
-\contentsline {subsection}{\numberline {6.3.2}Authorization}{44}{subsection.6.3.2}
-\contentsline {chapter}{\numberline {7}Testing}{46}{chapter.7}
-\contentsline {subsection}{\numberline {7.0.1}Technologies used for testing}{46}{subsection.7.0.1}
-\contentsline {chapter}{\numberline {8}Evaluation}{47}{chapter.8}
-\contentsline {chapter}{Conclusion}{48}{chapter*.24}
-\contentsline {chapter}{Bibliography}{49}{chapter*.25}
-\contentsline {chapter}{List of Figures}{50}{chapter*.26}
-\contentsline {chapter}{List of Tables}{51}{chapter*.27}
-\contentsline {chapter}{List of Abbreviations}{52}{chapter*.28}
-\contentsline {chapter}{\numberline {A}Attachments}{53}{appendix.A}
-\contentsline {section}{\numberline {A.1}First Attachment}{53}{section.A.1}
+\contentsline {chapter}{\numberline {3}Analysis}{7}{chapter.3}
+\contentsline {section}{\numberline {3.1}Customers}{7}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}Operation create and confirm}{7}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.2}Operation update}{8}{subsection.3.1.2}
+\contentsline {subsection}{\numberline {3.1.3}Operation destroy}{8}{subsection.3.1.3}
+\contentsline {subsection}{\numberline {3.1.4}Operation password recovery}{8}{subsection.3.1.4}
+\contentsline {subsection}{\numberline {3.1.5}Operation login and logout}{8}{subsection.3.1.5}
+\contentsline {subsection}{\numberline {3.1.6}Operation list favourite locations}{8}{subsection.3.1.6}
+\contentsline {subsection}{\numberline {3.1.7}Operation list all customers and show specific customer}{9}{subsection.3.1.7}
+\contentsline {section}{\numberline {3.2}Employees}{9}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Shifts}{9}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Driver locations}{10}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.3}Driver order queues}{10}{subsection.3.2.3}
+\contentsline {subsection}{\numberline {3.2.4}Operation create and confirm}{10}{subsection.3.2.4}
+\contentsline {subsection}{\numberline {3.2.5}Operation update}{10}{subsection.3.2.5}
+\contentsline {subsection}{\numberline {3.2.6}Operation destroy}{10}{subsection.3.2.6}
+\contentsline {subsection}{\numberline {3.2.7}Operation recover password}{10}{subsection.3.2.7}
+\contentsline {subsection}{\numberline {3.2.8}Operation login and logout}{11}{subsection.3.2.8}
+\contentsline {subsection}{\numberline {3.2.9}Operation list all employees and show specific employee}{11}{subsection.3.2.9}
+\contentsline {section}{\numberline {3.3}Vehicles}{11}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Operation create, update and destroy}{11}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}Operation show all and specific vehicle}{12}{subsection.3.3.2}
+\contentsline {section}{\numberline {3.4}Orders}{12}{section.3.4}
+\contentsline {subsection}{\numberline {3.4.1}show all / specific order}{14}{subsection.3.4.1}
+\contentsline {subsection}{\numberline {3.4.2}List driver arrivals}{15}{subsection.3.4.2}
+\contentsline {subsection}{\numberline {3.4.3}Create order}{15}{subsection.3.4.3}
+\contentsline {subsection}{\numberline {3.4.4}Defraud and process}{15}{subsection.3.4.4}
+\contentsline {subsection}{\numberline {3.4.5}Confirm by driver}{16}{subsection.3.4.5}
+\contentsline {subsection}{\numberline {3.4.6}Refuse by driver}{16}{subsection.3.4.6}
+\contentsline {subsection}{\numberline {3.4.7}Arriving}{16}{subsection.3.4.7}
+\contentsline {subsection}{\numberline {3.4.8}Change arrive time}{16}{subsection.3.4.8}
+\contentsline {subsection}{\numberline {3.4.9}Arrived}{16}{subsection.3.4.9}
+\contentsline {subsection}{\numberline {3.4.10}Customer not on its place}{17}{subsection.3.4.10}
+\contentsline {subsection}{\numberline {3.4.11}Picked up}{17}{subsection.3.4.11}
+\contentsline {subsection}{\numberline {3.4.12}Change drop off time or location}{17}{subsection.3.4.12}
+\contentsline {subsection}{\numberline {3.4.13}Finished}{17}{subsection.3.4.13}
+\contentsline {subsection}{\numberline {3.4.14}Fraud}{17}{subsection.3.4.14}
+\contentsline {subsection}{\numberline {3.4.15}Cancel}{17}{subsection.3.4.15}
+\contentsline {subsection}{\numberline {3.4.16}My orders for dispatcher}{17}{subsection.3.4.16}
+\contentsline {section}{\numberline {3.5}Notifications}{18}{section.3.5}
+\contentsline {subsection}{\numberline {3.5.1}Operation list notifications}{18}{subsection.3.5.1}
+\contentsline {subsection}{\numberline {3.5.2}Operation mark as resolved}{18}{subsection.3.5.2}
+\contentsline {chapter}{\numberline {4}Technical Analysis}{19}{chapter.4}
+\contentsline {section}{\numberline {4.1}Back-end application software stack}{19}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Ruby on Rails}{19}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}PosrtgreSQL}{20}{subsection.4.1.2}
+\contentsline {subsection}{\numberline {4.1.3}Sidekiq}{20}{subsection.4.1.3}
+\contentsline {section}{\numberline {4.2}Tools stack}{20}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Apiary}{20}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Docker and Docker-compose}{21}{subsection.4.2.2}
+\contentsline {section}{\numberline {4.3}Docker proxy \& ngnix}{21}{section.4.3}
+\contentsline {section}{\numberline {4.4}Errbit}{21}{section.4.4}
+\contentsline {section}{\numberline {4.5}Monitoring}{22}{section.4.5}
+\contentsline {chapter}{\numberline {5}Solution design}{23}{chapter.5}
+\contentsline {section}{\numberline {5.1}General problems}{23}{section.5.1}
+\contentsline {subsection}{\numberline {5.1.1}Authentication}{23}{subsection.5.1.1}
+\contentsline {subsubsection}{Token authentication details}{23}{section*.11}
+\contentsline {subsubsection}{Basic security}{25}{section*.12}
+\contentsline {subsubsection}{Verification tokens sending process}{25}{section*.13}
+\contentsline {subsection}{\numberline {5.1.2}Secrets}{25}{subsection.5.1.2}
+\contentsline {subsection}{\numberline {5.1.3}Authorization}{25}{subsection.5.1.3}
+\contentsline {subsection}{\numberline {5.1.4}Pagination}{26}{subsection.5.1.4}
+\contentsline {subsection}{\numberline {5.1.5}Rendering views}{26}{subsection.5.1.5}
+\contentsline {subsection}{\numberline {5.1.6}Images}{26}{subsection.5.1.6}
+\contentsline {section}{\numberline {5.2}Customers}{27}{section.5.2}
+\contentsline {subsection}{\numberline {5.2.1}Create and confirm}{27}{subsection.5.2.1}
+\contentsline {subsection}{\numberline {5.2.2}Password recovery}{27}{subsection.5.2.2}
+\contentsline {subsection}{\numberline {5.2.3}Favourite places}{28}{subsection.5.2.3}
+\contentsline {section}{\numberline {5.3}Order scheduler}{29}{section.5.3}
+\contentsline {subsection}{\numberline {5.3.1}Add order}{30}{subsection.5.3.1}
+\contentsline {subsubsection}{Normal order - counting arrive time}{31}{section*.16}
+\contentsline {subsubsection}{Normal order - selecting driver}{32}{section*.17}
+\contentsline {subsubsection}{Scheduled order - counting arrive time}{32}{section*.18}
+\contentsline {subsubsection}{Scheduled order - combined with other scheduled}{32}{section*.19}
+\contentsline {subsubsection}{Scheduled order - combined with normal order}{33}{section*.20}
+\contentsline {subsubsection}{Normal order - combined with scheduled}{33}{section*.21}
+\contentsline {subsubsection}{Scheduled order - scheduling on critical time callback}{33}{section*.22}
+\contentsline {subsection}{\numberline {5.3.2}Change arrive time}{34}{subsection.5.3.2}
+\contentsline {subsubsection}{Longer order}{34}{section*.23}
+\contentsline {subsubsection}{Shorter order}{34}{section*.24}
+\contentsline {subsection}{\numberline {5.3.3}Cancel}{35}{subsection.5.3.3}
+\contentsline {subsection}{\numberline {5.3.4}Change driver}{35}{subsection.5.3.4}
+\contentsline {section}{\numberline {5.4}Orders}{35}{section.5.4}
+\contentsline {chapter}{\numberline {6}Implementation structure}{38}{chapter.6}
+\contentsline {section}{\numberline {6.1}Project architecture}{38}{section.6.1}
+\contentsline {section}{\numberline {6.2}Application file structure}{38}{section.6.2}
+\contentsline {subsection}{\numberline {6.2.1}app/controllers}{39}{subsection.6.2.1}
+\contentsline {subsection}{\numberline {6.2.2}app/helpers}{40}{subsection.6.2.2}
+\contentsline {subsection}{\numberline {6.2.3}app/lib}{40}{subsection.6.2.3}
+\contentsline {subsection}{\numberline {6.2.4}app/mailers}{40}{subsection.6.2.4}
+\contentsline {subsection}{\numberline {6.2.5}app/models}{40}{subsection.6.2.5}
+\contentsline {subsection}{\numberline {6.2.6}app/policies}{41}{subsection.6.2.6}
+\contentsline {subsection}{\numberline {6.2.7}app/uploaders}{41}{subsection.6.2.7}
+\contentsline {subsection}{\numberline {6.2.8}app/validators}{41}{subsection.6.2.8}
+\contentsline {subsection}{\numberline {6.2.9}app/views}{41}{subsection.6.2.9}
+\contentsline {subsection}{\numberline {6.2.10}app/workers}{41}{subsection.6.2.10}
+\contentsline {subsection}{\numberline {6.2.11}config/environments}{41}{subsection.6.2.11}
+\contentsline {subsection}{\numberline {6.2.12}config/initializers}{41}{subsection.6.2.12}
+\contentsline {subsection}{\numberline {6.2.13}config/locales}{41}{subsection.6.2.13}
+\contentsline {subsection}{\numberline {6.2.14}config/database.yml}{42}{subsection.6.2.14}
+\contentsline {subsection}{\numberline {6.2.15}config/routes.rb}{42}{subsection.6.2.15}
+\contentsline {subsection}{\numberline {6.2.16}config/sidekiq.yml}{42}{subsection.6.2.16}
+\contentsline {subsection}{\numberline {6.2.17}db/migrate}{42}{subsection.6.2.17}
+\contentsline {subsection}{\numberline {6.2.18}db/seeds.rb}{42}{subsection.6.2.18}
+\contentsline {subsection}{\numberline {6.2.19}db/schema.rb}{42}{subsection.6.2.19}
+\contentsline {subsection}{\numberline {6.2.20}lib}{42}{subsection.6.2.20}
+\contentsline {subsection}{\numberline {6.2.21}public}{42}{subsection.6.2.21}
+\contentsline {subsection}{\numberline {6.2.22}spec/factories}{43}{subsection.6.2.22}
+\contentsline {subsection}{\numberline {6.2.23}spec/requests}{43}{subsection.6.2.23}
+\contentsline {subsection}{\numberline {6.2.24}Gemfile}{43}{subsection.6.2.24}
+\contentsline {section}{\numberline {6.3}Specific implementation details}{43}{section.6.3}
+\contentsline {subsection}{\numberline {6.3.1}Authentication}{43}{subsection.6.3.1}
+\contentsline {subsection}{\numberline {6.3.2}Authorization}{43}{subsection.6.3.2}
+\contentsline {chapter}{\numberline {7}Testing}{45}{chapter.7}
+\contentsline {section}{\numberline {7.1}Technologies used for testing}{45}{section.7.1}
+\contentsline {chapter}{\numberline {8}Evaluation}{46}{chapter.8}
+\contentsline {chapter}{Conclusion}{47}{chapter*.28}
+\contentsline {section}{\numberline {8.1}Future improvements}{47}{section.8.1}
+\contentsline {chapter}{Bibliography}{48}{chapter*.29}
+\contentsline {chapter}{List of Figures}{49}{chapter*.30}
+\contentsline {chapter}{List of Tables}{50}{chapter*.31}
+\contentsline {chapter}{List of Abbreviations}{51}{chapter*.32}
+\contentsline {chapter}{\numberline {A}Attachments}{52}{appendix.A}
+\contentsline {section}{\numberline {A.1}First Attachment}{52}{section.A.1}

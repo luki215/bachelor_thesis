@@ -8,7 +8,7 @@ In the following chapter we describe process of testing the application. Each fe
  The reason why we decided to cover the scheduler system was different. First of all we started by analysis of the possible situations. During the development we discovered more and more edge-cases and by fixing them we started to breaking other parts. Also reproduce all the edge cases took a lot of time. Also for the route calculation we use the Google Maps API, which even for the same two points gives different time estimations based on current traffic. In the end we decided to mock the API and write set of tests covering all of the possible situations and desired outputs. Based on these tests we started to implement the scheduler. 
  
 
-\subsection{Technologies used for testing}
+\section{Technologies used for testing}
 
 Ruby on Rails has rich support libraries which make the testing easy. As the testing library core we decided to use the \textit{RSpec}\footnote{\url{http://rspec.info/}}. This library has intuitive interface, helpful features and is kind of standard in the Ruby on Rails world.
 
