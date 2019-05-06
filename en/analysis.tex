@@ -1,324 +1,308 @@
-\chapter{Solution design}
-\todo{ analýza => návrh řešení }
-In this chapter we would like to explain the thinking process before and during the implementation of the back-end application. We are going through individual parts from the back-end application requirements, explaining problems associated with them and revealing what possibilities we had to solve them and how we decided in the end.
+\chapter{Analysis}
+    After several consultations with the taxi company from the Mladá Boleslav we found out that in order to create such ordering system, our application must provide an interface to work with these five entities: Customers, Employees, Vehicles, Orders, and Notifications. 
 
-\section{General problems}
-\subsection{Authentication}
-In our application we had to deal with authentication for customers and employees. There are many ways how users can be authenticated in API. We ended up with token authentication - in each request clients must set the Authorization header with the token. Client can get the token in exchange for correct credentials.
-
-Another part of the authentication we consider in the analysis is at least the basic security during the manipulation with auth data and flawless verifying token sending.
-
-\subsubsection{Token authentication details}
-
-We decided to implement it on our own, using only Rails helpers for generating and verifying secure tokens. As you can see in \ref{auth-token-scheme}, token is generated during the login action and then returned in body of the response. All the following requests must have this token in it's header to be authenticated.
-
-\begin{figure}[h]\centering
-\includegraphics[width=\textwidth]{auth/Auth.png} 
-\caption{Auth token scheme}\label{auth-token-scheme}
-\end{figure}
-
-Our application store just one token per user. That implies the user can be logged in from one device at time only. Having more valid token for users would let into several problems with invalidating them in case of log out and also this approach has one advantage. If someone reveals user credentials and log in with them - user will know that in the moment it tries to use the app, because all it's requests would be unauthenticated.
-
-In Ruby on Rails there exists very good gem for authentication - \textit{devise\_token\_auth} \footnote{\url{https://github.com/lynndylanhurley/devise\_token\_auth}} which we half-implemented at first. However we decided to not use it in the end. Main reason for not using it was - at the time of writing the authentication part - very unstable and badly documented front-end library part. More details about problems we came across during the analysis/implementation in the next paragraph.
-
-First reason for not using the gem was, that it uses email as main default authentication field. For customers we wanted to use the telephone number as the main identifier - including the SMS confirmation and password recovery (explained later), which would led us to rewrite the most of the gem's controllers and models anyway and as bonus we would have to integrate it with the existing parts of gem.
-
-Second reason was the complexity of the whole authentication process. This gem would bring more secure but also much more complex way of authenticating to our project. Once the client gets the token from the login endpoint, a new token is generated and returned with each following request. Using this approach we also have to solve the batch request problem. Imagine that the client sends three requests to the server at once. Of course all of the three requests must have the same authentication token - because the client doesn't have the new token until the response arrives. Thus the server must accept all of those three requests as authenticated. Besides that they also must agree which response has the correct new auth token - responses don't have to come in order in which they were sent. This complicated process was implemented in the back-end gem and couldn't be easily changed. The front-end part of the library seemed to be implemented, but after the three weeks of trying and founding several bugs in the library - even without successful login - we gave up using it.
-
-In conclusion if we had wanted to use the gem on backend we would have to understand the whole gem auth process in detail and specify it for the front-end. Front-end would then have to write the whole complicated solution on their own. 
-
-We came to conclusion that the complexity, that would bring this library to our application is not worth the better security and stability we would gain from this. Using HTTPS on both server and client makes the token theft little bit harder - so lack of this generation process with each request is not a big deal. Also the only really sensitive accounts for identity theft are the employees one's and we are in personal contact with them, so we would know about misuse or potential hack and we could provide the safer solution later.
-
-\subsubsection{Basic security}
-	As we mentioned in last paragraphs, our token solution is not perfect from the security perspective. Besides the token (which could be easily rewritten more securely in the future ) we tried not to take the security of our application lightly.
-	
-	First of all, we don't store passwords in plaintext. We use Rails integrated feature \textit{has\_secure\_password}\footnote{\url{https://api.rubyonrails.org/classes/ActiveModel/SecurePassword/ClassMethods.html}}, which uses BCrypt hash function.
-	
-	Thanks to the Ruby on Rails framework we also excerpt passwords from the logs and we are not vulnerable to SQL Injection\footnote{\url{https://en.wikipedia.org/wiki/SQL\_injection}}.
-
-\subsubsection{Verification tokens sending process}
-	We send the verification tokens via emails and SMS during the whole authentication process. These actions are not instant (API request, SMTP request) and in Rails we can easily create asynchronous workers. We decided to have these functions handled as Sidekiq workers. In exchange for some time spent on configuration we don't block webserver threads during account creation/recovery and also we have ability to automatically resend the message in case of the third party or network failure.
-
-\subsection{Secrets}
-	In our application we have to keep several API tokens, database passwords and other sensitive information. We store those secrets in files which are not tracked in version control. Those files are then loaded by the Docker, which set them as environment variables. In the whole application we read these sensitive information from them.  
-
-\subsection{Authorization}
-Almost every endpoint has it's own rules of who and in what circumstances can do such action. There are two main groups of users - employees and customers. Employees are then divided into three groups - administrators, drivers and dispatchers. There are just two types of customers - registered and unregistered. Each visitor is one of these types.
-
-In each request we have to solve specific condition whether current user is able to do this action or not. Having the all these conditions directly in controllers would make the controllers difficult to read. Also these conditions could change in the future and have changed during the development several times. This led us to have the authorization conditions separated in the different part of the application.
-
-We want to avoid reinventing the wheel so we have chosen to use for such purpose \textit{Pundit} \footnote{\url{https://github.com/varvet/pundit}} gem. 
-
-Another option we looked into was \textit{Cancancan} \footnote{\url{https://github.com/CanCanCommunity/cancancan}} gem. They both have long maintenance history, are actively developed in the time of writing and satisfies all of our conditions for the authorization. Cancancan is better suited for applications with complicated views, because it provides more helpers for checking authorization in them. Also its architecture is more general thus it is better optimized for more complicated permission management. That results in slightly more complex permission definitions. On the other side pundit is more light-weight solution with very simple architecture and permissions definition files. Because our permissions are not complicated very much and we wanted to have them written as simply as possible, this was the main reason why we chose Pundit over Cancancan.
-
- \subsection{Pagination}
- With growing data some of the requests (e.g. order index) could return thousands of items. This would be huge waste of resources, so we have to limit the count of returned items per request and enable pagination. For that purpose there exists gem \textit{Kaminari}\footnote{\url{https://github.com/kaminari/kaminari}} which adds to our models methods for quick filtering and retrieving data. We just define pagination request parameters and pass them to this library. Also thanks to the global configuration we can limit the maximum number of results per page.
-
-\subsection{Rendering views}
-	Even though whole view layer is just about displaying simple JSON objects, we use whole separated view layer of the Ruby on Rails framework with the help of the \textit{Jbuilder} gem\footnote{\url{https://github.com/rails/jbuilder}}.
-	
-	In the beginning of the implementation we thought that we don't have to have the view part separated from the controller. For the simple entities such as vehicles it was sufficient. When we started to have more complicated requirements for the views - such as displaying different attributes for different user roles, most of the controller's code was the view logic which mystified the controllers.
-	
-	Jbuilder allows us to have view code separated from the controllers and provides us simple syntax to extract desired fields and parts from our variables to JSON.
-\subsection{Images}
-	Our employees and vehicles have assigned images. We had to figure out, how to get the image from the client application via the REST to our application. 
-	
-	During the analysis we ended up with two options how to implement it. First is the multipart html requests. \todo{citace https://tools.ietf.org/html/rfc7578}. Second option is to encode the image into Base64 on front-end and then send it in a request body as JSON field. This field is then decoded on the server side and saved.
-	
-	In the end we decided to go with the second option. On both front-end and back-end we have the libraries for processing images this way so the implementation was easier on both sides. Downside of this solution is that we can not transfer much data this way. However we have only one image for each employee and vehicle, this solution is sufficient.
-
-	For the back-end side we decided to use \textit{Carrierwave::Base64} \footnote{\url{https://github.com/y9v/carrierwave-base64}} gem. Besides the out-of-the-box Base64 encoding of specified attribute  which we need, it provide us simple API for the storage settings such as file names. Also when we would like to later switch our storage to use some cloud storage provider as for example S3 by Amazon\footnote{\url{https://aws.amazon.com/s3/}} it would be just the matter of changing few lines in configuration. 
-
-\section{Customers}
-Use email as main distinguishing field is kind of standard in web authentication. We came to the conclusion that we should use as our identifier telephone number. Despite the standard and the the consequence of this decision - lack of any easy to use library for authentication in Rails. Reasons which led us to this decision:
-\begin{itemize}
-	\item During the order process we must be able to contact customer immediately in case of emergency, so we need the customer's phone anyway.
-	\item Customers are going to register mostly from their phones. That phone can receive SMS for sure - not everyone has direct access to his mail from phone. 
-\end{itemize}
-\subsection{Create and confirm}
-Besides the authentication and params problems \todo{give links} described in general problems section we also have to to deal with the telephone verification.
-
-We decided to use verification via SMS code.
-
- Registered telephone number must be verified.  Before the customers can do so, they must go through telephone number confirmation process as follows: Customers receive SMS with registration token. This token is valid for 5 minutes and customer can ask for resend.  Resend will invalidate last token, generate new and send it. Confirm is made with provided token and telephone number.
- 
- Based on requirements we decided to split these functions into three API endpoints - \textit{create}, \textit{confirm} and \textit{resend\_confirmation}.
- 
- \subsection{Password recovery}
- Whole password recovery procedure is similar to the create account one.
- Based on specification we split the password recovery feature into two API endpoints - \textit{password\_recovery} and \textit{reset\_password\_by\_token}. 
- 
- Calling first endpoint - password recovery - sends in exchange for the telephone number SMS to that telephone number with password recovery token. Then the customer can send request with this token, his telephone number and a new password - which if all the conditions are satisfied - will be set. 
- 
- The token consists of 4 numbers and is valid for 5 minutes. This parameters we just picked as similar to the others services on the internet and of course we must be able to change them later if we discover that it's not good.
- 
- During the analysis we have noticed, that the first endpoint must except the bad request format always return success status. Especially, we can not let the client know whether the account with such telephone number was not found and neither that the SMS was not sent successfully. If we would return error code in such situation, someone could potentially get the telephone numbers for all of our customers.
- 
- Also we are aware that the SMS may not be the most secure way of verifying users\footnote{\url{https://www.cnet.com/how-to/why-you-are-at-risk-if-you-use-sms-for-two-step-verification/}} but we think that at our scale, potential losses for stolen customer's account wouldn't be crucial - there is no credit system or something valuable on the account. The worst case is that the attacker orders a taxi on victims name and thus that order will be fraud - which happens few times a week now anyway.
- 
- \subsection{Favourite places}
- We decided to have an endpoint with four parameters, which will return the list of N recommended places ordered from the most to the least appropriate.
- 
- First is parameter is the maximum number of places we would like to receive, second is customer id for whom we want to have recommendations for, third is the location and the last - 'start' - parameter  says one of the following:
- \begin{itemize}
- 	\item true = we want recommendations for pick-up places and the provided location are customer's current coordinates
- 	\item false = we want recommendations for drop-off locations and the provided location are pick-up coordinates
- \end{itemize}
- 
- Our first problem to solve is how to handle the locations from the request. We suppose that the location which goes to our API is directly from the customer's telephone sensors, thus there's nothing like Example's restaurant official coordinates, which would client sent to us whenever he wants taxi from that restaurant. On the other hand, we would like to group all these locations near the Example restaurant into one place, so we can recommend it just once and there was enough space for other interesting places. We thought about using some kind of modified clustering algorithm but we ended up with conclusion that this would be in our case overkill. We came to conclusion that for our use case is enough to have defined distance constant and all the places around this place within the constant distance are considered as one place. We set this constant to 50 meters, because it seems like good compromise between inaccurate low-end phones GPS precision and the distance between two different places. Of course that we must be able to change this constant in the future if we discover, that it is too small or big.
- 
- Second problem was how to filter and return the list of places fast. For each user we have index of visited places with information on which we base our recommending algorithm. In this index we have following information about each place:
- \begin{itemize}
- 	\item coordinates
- 	\item list of items containing for each place occurrence in orders:
- 	\begin{itemize}
- 		\item decimal number from 0 to 1 which says, how long ago was order with this place placed. 1 has user's last order and 0 has user's furthermost order .
- 		\item time-stamp when was the order created
- 		\item start = whether was the place in the order used as a start or finish
- 	\end{itemize}
- 	\item list of corresponding places (drop-off for pick-up and vice versa).
- \end{itemize}
-For the given parameters in request, we go in index place by place and count the weight of it from the occurrences weights multiplied by constant if start/finish fits the desired direction. Index is also prepared for recommending places based on the order time (e.g. in the evening we go to pub, in the morning to work). We decided to limit the recommendation index for last 1000 orders for each user.
-
-In our research we haven't found any ready-made solution for this problem, so we decided to come up with our own solution. Of course it could be more effective and recommendation could be done even smarter. During the development we came to this algorithm which satisfies all our specified metrics and thus we were satisfied with the application of it in the real world.
-
-\section {Order scheduler}
-
-The goal of order scheduler is to split new orders between the drivers in application. Besides that the system accepts other actions for manipulation with the order. These actions are then reflected to the corresponding driver queue and to all the orders affected by such actions.
-
-First of all we have to deal with the distance calculation. All we know about the new order are just the coordinates of the pick-up and the drop-off location. We have to calculate the distance and the duration of the order. Each order consists of the two parts we have to calculate. First part is from pick-up location to drop-off. This part is constant for each order. Second part is the route between the driver and the pick-up location. This part differs for each of the drivers. For the distance and duration computation we decided to use the \textit{Google Maps Distance Matrix API} \footnote{\url{https://developers.google.com/maps/documentation/distance-matrix/intro}} which allows us to get the distances between all the drivers and the order pick-up location in a single request. Also thanks to using this API we could use the existing Ruby Gem \textit{googlemaps-services}\footnote{\url{https://github.com/amrfaissal/googlemaps-services}} which provides us the Ruby interface for communication with that API. This API can also calculate the distance and duration with respect to the current traffic. Downside of this API is that each route calculation is expensive.
-
-Second problem we are facing are the scheduled orders. Arriving at the pick-up location on time is the priority number one. Because of the business requirements scheduler does not assign these orders to a driver but the dispatchers do that manually. This implies that in our system could appear order collisions which must the system handle correctly. Also we have to take in to account high cost of each router calculation.
-
-Based on the specification we decided that order scheduler system accepts these actions:
-\begin{itemize}
-	\item Add
-	\item Change arrive time
-	\item Cancel
-	\item Change driver
-\end{itemize}
-
-
-In following subsections we analyse possible situations that can occur in each of these actions and how should the planning system handle them and respond to them. We display the situations using the diagrams described in the legend \ref{order-planning-legend}.
-
-\begin{figure}[h]\centering
-	\includegraphics[scale=0.7]{orders/legend.png}
-	\caption{Order planning scheme legend}\label{order-planning-legend}
-\end{figure} 
-
-
-
-\subsection{Add order}
-We distinguish two main categories of added orders - scheduled order and normal (not scheduled) order. At first we have to define who can be assigned the order, and then we have to define how to do it.
-
-Order can be assigned to either all of the available drivers or to the one specific driver. By available driver we mean the driver who is on shift and is not in pause status. Then from this set of drivers we choose the driver whom the order will be assigned to.
-
-As mentioned before, scheduler must ensure that if the scheduled order is assigned to the driver, it is able to get there right on the pick-up time. Here appears a problem we must solve - how to count the arrive time for a given driver to that pick-up location so we can let know the driver when to start processing the order?
-
-First naive solution lead us to count the arrive time in the moment of adding to queue. In this point we know the last order finish location, so we could count arrive time from that point. The problem is that the order we are adding can (and probably will) be week or two after the time of arrive to that location. In order to persist the calculated arrive time we have to options. First one is to forbid adding new orders before the scheduled order - that is obviously unacceptable. Second one is to during the insertion of some other order in between the last order in queue and our scheduled order count two arrive times - the newly inserted one and the scheduled one \ref{scheduled_naive_arrive_counting}. 
-
-\begin{figure}[h]\centering
-	\includegraphics[scale=0.7	]{orders/scheduled_naive_arrive_counting.png}
-	\caption{Scheduled order - naive arrive time calculating approach} 
-	\label{scheduled_naive_arrive_counting}
-\end{figure} 
-
-Each route calculation is expensive and this naive approach doubles the costs of each processed order by the driver who has some scheduled order in the queue. Because these orders with two weeks ahead pick-up time are the most common use case in our taxi company we want to avoid this extra cost. 
-
-We observed that there must be some point, when the arrive time of scheduled order must be calculated. If we calculate to early, we raise the costs per order. In the other case if we calculate to late the driver could not be able to get to the pick-up location on time. 
-
-Our solution combines these two cases. Based on that observation we define the critical time constant \textit{C}. Value of this constant is equal to the maximum arrive time to any location operated by the taxi company. 
-
-In our scheduling system then holds that each scheduled order in queue which has pick-up time less than \textit{C} from the order before it or the current time, has calculated arrive time which we update with each change. If the distance between two orders is larger than \textit{C} we do not count the arrive time.
-
-This led to split the problem of adding order into seven parts:
-\begin{itemize}
-	\item Normal order - counting arrive time
-	\item Normal order - selecting driver
-	\item Scheduled order - counting arrive time
-	\item Scheduled order - combined with other scheduled
-	\item Scheduled order - combined with normal order
-	\item Normal order combined with scheduled
-	\item Scheduled order - scheduling on critical time callback 
-\end{itemize}
-
-	\subsubsection{Normal order - counting arrive time}
-	
-	First we focus on how to count the arrive time for the normal order. As we can see in \ref{order-process-normal-order-counting-arrive} there are three states in which can queue be.
-	
-	As in situation \textit{1a)} if the last order in queue is a normal order, calculate the arrive time as time between the finish location of that order and start of the new order.
-	
-	In case that the queue is empty as in \textit{1b)} calculate the arrive time as time between the last known location + time for response to the order for the driver.
-	
-	Third possible situation \textit{1c)} occurs when there is ongoing scheduled order. Then count arrive time as the time between finish location of that order and start of the new order.
+In this chapter, we define each of these entities. We describe the data we want to store about them, the actions that can be performed with them and who is authorized to perform each of these actions. The overall goal of this chapter is to formalize the taxi company ordering process.
 	
 	
-		\begin{figure}[h]\centering
-			\includegraphics[scale=0.7	]{orders/add-1.png}
-			\caption{Normal order - counting arrive} 
-			\label{order-process-normal-order-counting-arrive}
-		\end{figure} 
+	\section{Customers}
+		Customers are uniquely identified by telephone number. We also want to store about each of them this information:
+		\begin{itemize}
+			\item ID
+			\item Name
+			\item Note
+			\item Fraud status
+		\end{itemize}
 	
-	\subsubsection{Normal order - selecting driver}
-	
-		As described in specification, normal order must be always assign to the driver who can pick up the customer first. This rule demonstrates the example  \ref{order-process-normal-order-selecting-driver}. The order will be assigned to the \textit{driver 1} even though the \textit{driver 2} is available first.
+		With Customer entity we are able to do these operations:
+		\begin{itemize}
+			\item Create and confirm
+			\item Update
+			\item Destroy
+			\item Recover password
+			\item Login and logout
+			\item List favourite locations
+			\item List all customers and show a specific customer
+		\end{itemize}
+		\subsection{Operation create and confirm}
+			There are two ways of how the customer can be created. It is either directly through registration or indirectly by creating a new order.
 			
-			\begin{figure}[h]\centering
-				\includegraphics[scale=0.7	]{orders/add-2.png}
-				\caption{Normal order - counting arrive} 
-				\label{order-process-normal-order-selecting-driver}
-			\end{figure} 
-		
-	\subsubsection{Scheduled order - counting arrive time}
-		If we add scheduled order to the driver's queue in which there is no other order within the critical time constant, we do not calculate the arrive time of that order\ref{order-process-scheduled-order-counting-arrive-time}. We are allowed to do so, because the critical time constant \textit{C} ensures, that if the queue stayed in the same state, the arrive time between the last location to the order start will be less than \textit{C}.
-		
-		\begin{figure}[h]\centering
-			\includegraphics[scale=0.7	]{orders/add-3.png}
-			\caption{Scheduled order - counting arrive time} 
-			\label{order-process-scheduled-order-counting-arrive-time}
-		\end{figure} 
-	
-	
-	\subsubsection{Scheduled order - combined with other scheduled}
-			In case that the scheduled order has other scheduled order within \textit{C} from the calculated pick-up and finish time, we have to calculate corresponding arrive times \ref{order-process-scheduled-order-combined-with-scheduled}. 
-			After the calculation we may encounter the orders collision. In such case the order can not be added to the queue and the order scheduler must throw an error. 
+			Directly registered customers are created in exchange for telephone number, password, and optional name. With this type of account customer can later login with a provided password. The application must verify the given telephone number.
 			
-			\begin{figure}[h]\centering
-				\includegraphics[scale=0.6	]{orders/add-4.png}
-				\caption{Scheduled order - combined with other scheduled} 
-				\label{order-process-scheduled-order-combined-with-scheduled}
-			\end{figure} 
+			An indirectly registered user is created during the creation of a new order using a telephone number, which doesn't belong to any existing customer. This customer type is just an envelope with the purpose of information tracking and statistics - mostly for better customer support. This account type cannot be used for authentication. Indirectly registered user can be later registered directly with no difference to the normal direct registration.
 		
-	\subsubsection{Scheduled order - combined with normal order}
-		When the expected finish time is within the \textit{C} from the inserted scheduled pick-up time, we must calculate the arrive time. In case that the the scheduled order is in collision with some normal order, scheduler must throw an error \ref{order-process-scheduled-order-combined-with-normal}.
+		
+		\subsection{Operation update}
+			Customer can update only it's own name and password. Employees are able to change any customer's name, note, and fraud status.
+		\subsection{Operation destroy}
+            Destroying the customer can be invoked either by the customer itself or via the administrator. Orders made by that customer are not deleted - we just remove the information about the customer from the order.
+		\subsection{Operation password recovery}
+			In case of the lost password is a customer able to recover it. At first, the customer asks for the recovery with its telephone number. In return, it receives a recovery token via SMS. This token is valid for 5 minutes. In exchange for this token and the telephone number, the new password can be set. Customer is able to ask for the token resend. This will invalidate the last token, generate a new one and sends it via SMS.
+		\subsection{Operation login and logout}
+			With the login operation we receive login token in exchange for the telephone number and password. We send this token with each request to be authenticated.
+			Customer can log in if and only if it is directly registered and confirmed.
+			Logout just invalidates the session - customer must log in again to be authenticated.
+		\subsection{Operation list favourite locations}
+		    Our application must provide a list of customer favourite places. In the front-end applications is this operation called when the customer chooses its pick-up and drop-off location. 
+		
+		These places should be ordered with respect to the given location (current customer location or the selected pick-up location when choosing drop-off ). It should also take into account whether the customer chooses the pick-up or drop-off location. These recommendations should be based on the customer's order history and respect the start-finish relation of the orders. The most important are the first five places returned, so the place that the customer is most likely to choose based on current conditions should be amongst them. 
+		
+		Let's imagine a customer that has two routes - it often goes from pub to its home and sometimes goes from its home to the gym. In case of looking for the drop-off recommendation from unknown pick-up place, the application should return its home as the first item. When the user is asking for drop-off recommendation with pick-up at home, the application should return the gym as the first item, even though the pub is much more frequent place in its history.
+		
+		Only the user itself or the employees are able to see the favourite locations list.
 		 
-		\begin{figure}[h]\centering
-			\includegraphics[scale=0.6	]{orders/add-5.png}
-			\caption{Scheduled order - combined with normal order} 
-			\label{order-process-scheduled-order-combined-with-normal}
-		\end{figure} 
-	
+		\subsection{Operation list all customers and show specific customer}
+            Our API must provide information about the customers created in our application.
+			Show specific customer's data is available only for the customer itself or any employee. 
 			
-	\subsubsection{Normal order - combined with scheduled}
-	Adding new normal order to queue could break the fact that each of the scheduled orders in our system has counted arrive time if the pick-up time is at least \textit{C} from the finish time of order before it.
-	
-	If this situation occurs, we must recalculate the arriving time of the scheduled order after it -  accordingly with respect to the new finish location. This change can lead to collision. In case we encounter the collision, we start the process of adding the order again. In this second try we consider as the previously picked queue's finish location the finish location of collided scheduled order. Also the arrive time of the colliding scheduled order must be set back to the original value. 
-	 \ref{order-process-normal-order-combined-with-scheduled}.
-	
-	\begin{figure}[h]\centering
-		\includegraphics[scale=0.5	]{orders/add-6.png}
-		\caption{Normal order - combined with scheduled order} 
-		\label{order-process-normal-order-combined-with-scheduled}
-	\end{figure} 
-
-	\subsubsection{Scheduled order - scheduling on critical time callback}
-	As we know scheduled orders have not calculated arriving time when their pick-up time is within \textit{C} from any other order finish in queue or the current time. In previous cases we described all the possible situations how can order be added before the scheduled order within the time constant. Last thing we have to cover is the situation when the current time exceeds a point from which is the the pick-up time of our order less than C.
-	
-	This situation we would cover with callback which is called exactly in that point. If the order does not have arrive time calculated in that point, we calculate it from the last known drivers location and the order start location. 
-	 \ref{order-process-scheduled-critical-time}.
-
-	\begin{figure}[h]\centering
-		\includegraphics[scale=0.7]{orders/add-7.png}
-		\caption{Scheduled order - critical time callback} 
-		\label{order-process-scheduled-critical-time}
-	\end{figure} 
-
-\subsection{Change arrive time}
-	Estimated order times can be manually changed by driver during the order. Average expected time change in such cases is within a few minutes. We can divide the change of time into two groups. In the first one the order will take longer after the change, in the second one the order will be shorter.
-	
-	\subsubsection{Longer order}
-	When the order takes longer than it was expected to we just take all the normal orders after it until the first scheduled one and we move their start times accordingly\ref{order-process-change_longer}.
-	\begin{figure}[h]\centering
-		\includegraphics[scale=0.7]{orders/changing_arrive_time_longer.png}
-		\caption{Change arrive time - longer order} 
-		\label{order-process-change_longer}
-	\end{figure} 
-
-	During this change there can occur collision with some scheduled order in queue. If the colliding order is normal order, we reschedule it the same way as we were adding it \ref{order-process-change_collision_normal}. 
-	
-	\begin{figure}[h]\centering
-		\includegraphics[scale=0.65]{orders/changing_arrive_time_longer_normal_collision.png}
-		\caption{Change arrive time - longer order - collision of normal and scheduled order} 
-		\label{order-process-change_collision_normal}
-	\end{figure} 
-
-	If the collision is between scheduled or ongoing order, we must shift the start of the following scheduled order \ref{order-process-change_collision_scheduled}.
-	
-	\begin{figure}[h]\centering
-		\includegraphics[scale=0.7]{orders/changing_arrive_time_longer_scheduled_collision.png}
-		\caption{Change arrive time - longer order - collision of two scheduled orders} 
-		\label{order-process-change_collision_scheduled}
-	\end{figure} 
-	
-	
-	\subsubsection{Shorter order}
-		When the time change makes the order shorter, we just simply change the starting time estimation accordingly for all of the normal orders after it until the first scheduled one
-		\ref{order-process-change-shorter}.
+			List all the customers is available for the administrator only. The list of the customers is one of the most valuable taxi company's assets so we don't want to provide it for the staff. Of course that the employee could get all the customers by going one by one via operation show, but it takes more time so this is for our purpose enough.
 		
-		\begin{figure}[h]\centering
-			\includegraphics[scale=0.7]{orders/Shorter_order.png}
-			\caption{Change arrive time - shorter order} 
-			\label{order-process-change-shorter}
-		\end{figure} 
-	
-\subsection{Cancel}
-	When the order is cancelled, we must remove it from the driver's queue and reschedule each order after the cancelled order - except the scheduled one. By rescheduling we mean sequence of two actions - cancel and add \ref{order-process-cancel}.
-	
-	\begin{figure}[h]\centering
-		\includegraphics[scale=0.7]{orders/cancel.png}
-		\caption{Cancel the order} 
-		\label{order-process-cancel}
-	\end{figure} 
-	We suppose that the order cancel is rarely called, so we do not pressure on the route calculation optimization as much.
+	\section{Employees}
+        There three types of employees - administrators, dispatchers and drivers. Employees, unlike customers, are identified via email. We store this information about each of them:
+		\begin{itemize}
+			\item Email
+			\item Name
+			\item Photograph
+		\end{itemize}
+		
+		In our application, we have also the information about the employees' shifts - whether they are at work or not. For the drivers we also process current locations and their order queues. 
+		
+		Operations on employees are almost the same as operations on customers. Operations differ mainly in permissions. 
+		\begin{itemize}
+			\item Create and confirm
+			\item Update
+			\item Destroy
+			\item Recover password
+			\item Login and logout
+			\item List all employees and show specific employee
+		\end{itemize}
+			\subsection{Operation create and confirm}
+		An employee can be created by an administrator only. In exchange for the email, optional name, and image, the confirmation email is sent to the employee. Then the employee is redirected by clicking the link in email to the front-end page, where it sets its password. The link contains confirmation token which will the front-end application together with the optional name and image send to our application.
+		
+		\subsection{Operation update}		
+		An employee can update its password, name and image. Besides these fields, an administrator can change the employee roles also.
+		\subsection{Operation destroy}
+		Only an administrator can remove an employee from the application. When the employee is removed, all the shifts and the driver queue is removed too. Orders associated with the employee remains in system but the corresponding employee field is removed.
+		\subsection{Operation recover password}
+        Recovering the forgotten password is exactly the same as in the customers' case - except the reset password token is hidden in a link sent via email.
+		\subsection{Operation login and logout}
+		The only difference between the employees and customers in these operations is that the employees log in with email instead of the telephone number. Everything else is the same.
+		\subsection{Operation list all employees and show specific employee}
+        Show all the employees or specific employee can only administrators and dispatchers. The rest (drivers, customers, anonymous users) can see only drivers who are on shift.
 
-\subsection{Change driver}
-Changing the driver should happen even less than cancelling the order. In such case it is sufficient just to call the \textit{cancel} action and \textit{add} action with the specified selected driver.
-	 
-	 
-	 
-\section {Orders}
+		There are also different attributes which are shown for different roles. Public attributes that anyone can see are id, name and image of the employee. Email, roles, and other attributes like creation and update timestamps are available to employee itself only, the dispatchers or the administrators.
 
-	For our application is critical to keep track of the order modification history. In case of unsuccessfully handled order we must be able to tell whether it was the scheduler failure or the mistake was caused by an employee or a customer. Also having the order time estimations history may help us in the future during the improvements of the scheduling system. We have found the \textit{paper\_trail} gem\footnote{\url{https://github.com/paper-trail-gem/paper_trail}} which fulfils our needs and is easy to use and setup.
+		\subsection{Shifts}
+			 Employees could be in three states: 
+				\begin{itemize}
+					\item available
+					\item unavailable
+					\item pause
+				\end{itemize}
+				Available means that the employee is on site and can handle orders. Unavailable is when it is not at work. Pause status is there for the situations when the employee knows that it won't be available for a while but wants to finish its orders.
+				
+				Switching directly from available to unavailable should be only in cases of emergency, e.g. driver has a flat tire and cannot continue. Employees will be instructed not to do so for better customer experience. 
+				
+				An employee is available to list the history of its shifts and administrator is available to list shifts for all the employees. Changing the shifts (available statuses) are employees allowed only for themselves.
+		
+		\subsection{Driver locations}
+            Each driver sends since the shift start until the shift end its location in regular intervals. Driver's current location can be set only by the driver itself. See the driver's last available location can anyone, so the front-end can display the current location of arriving driver even for an anonymous customer. 
+		
+		\subsection{Driver order queues}
+            Each driver has a queue of orders that are assigned to it. An administrator can see all the queues, a driver can see only its own queue.
 	
+	\section{Vehicles}
+		Taxi company has the vehicle fleet we want to have in our system too. Each driver's shift starts with selecting the vehicle driver will ride in, so the customer can see and choose the car that fit its needs.
+		
+		 For each vehicle we have this information:
+		\begin{itemize}
+			\item name
+			\item internal taxi company vehicle number used for communication
+			\item plate
+			\item image
+			\item how many customers can fit in - required
+			\item whether the vehicle is available for driving or not (e.g. is temporarily in the car repair shop)
+		\end{itemize}
+		These operations with vehicles our application supports:
+		\begin{itemize}
+			\item Create and update
+			\item Show all and specific
+			\item Destroy
+		\end{itemize}
+		\subsection{Operation create, update and destroy}
+			Only administrators can create, update and destroy the company's vehicles. They can manipulate all the specified information. When the car is deleted, all the corresponding shifts or orders will have the vehicle value set to null.
+		\subsection{Operation show all and specific vehicle}
+			Administrators can see all the vehicles, others can see only the active ones. 
+			Operations reveal all the attributes besides the internal vehicle number and the availability to anyone. Employees can see all of the attributes.
+	\section{Orders}
+	 	Order is a key entity in this application. Each order must go through the whole process from creation to successful finish or cancellation.
+	 	
+	 	There are two types of orders. The first one we call scheduled - a customer wants the taxi to arrive at the pick-up location at a specific date and time. In this type of order arriving at the specified time is crucial. The other type is when a customer just needs a taxi and sooner it arrives the better.
+	 	
+	 	Order is created from two sources - dispatchers and by customers directly.
+	 	
+	 	About each order we would like to keep this information:
+		
+		\begin{itemize}
+			\item id
+			\item status 
+			\item driver who takes care of it
+			\item vehicle by which it is processed with
+			\item pick-up and drop-off location coordinates and addresses
+			\item passenger count
+			\item note
+			\item contact telephone in case the customer is ordering for someone else
+			\item estimated price
+			\item whether the assigned driver cannot be changed (is explicitly chosen)
+			\item VIP (just internal flag for the taxi company)
+			\item flight number - in case the order is to/from the airport
+			\item customer
+			\item assigned dispatcher
+			\item date and time the customer wants the taxi to arrive at the pick-up location (scheduled pick-up)
+			\item source - whether it was created by dispatcher or directly by customer via front-end application
+		\end{itemize}
+		Also with the order we want to track these time parameters. In parenthesis is described how the time fields will be referenced in the whole thesis and the application:
+		\begin{itemize}
+			\item created time
+			\item application estimate when the driver departs for a customer (start est.)
+			\item when the driver started arriving to customer (start)
+			\item estimation when will the driver arrive to the customer (arrived time est.)
+			\item actual time when driver arrived to the customer - (arrived time)
+			\item estimation and actual time when the driver has picked up  customer and starts driving to the drop-off destination (picked-up time est., picked-up time)
+			\item finish time estimation and actual finished time(finish time, finish time est.)
+		\end{itemize}
 	
-	For the each order we have to keep track of the several time fields. In one half of the application we have to know and modify durations (arrive, waiting) and in the other half we have to know exact times (start, arrive to customer, finish). We have two options how to save such times. We can preserve timestamps for each event and the durations compute on demand. We decided for the second option - save the order start timestamp and duration in seconds for the rest. Thanks to this approach we can easily manipulate with the orders in the scheduler.  Downside of this approach is that we can not easily filter and sort the orders via those calculated times.   
+		Our goal is to have as much data about the order as possible, so we can later make statistics and analysis based on them. 
+		
+		These actions are needed for the orders module:
+		\begin{itemize}
+			\item show all / specific order
+			\item list driver arrivals
+			\item create order
+			\item defraud and process
+			\item confirm by driver
+			\item refuse by driver
+			\item arriving
+			\item change arrive time
+			\item arrived
+			\item customer not on its place
+			\item picked up
+			\item change drop off time or location
+			\item finished
+			\item fraud
+			\item my orders for dispatcher
+			\item cancel
+		\end{itemize}
+		
+		Because the order process is complex, we decided to sum it up in one illustration. This scheme displays all the order states (green), actions that can be done with the order and this application implements them (violet), time parameters we track (blue) and notifications which are sent in these actions (blue).
+		
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=\textwidth]{orders/order_process_scheme.png}
+			\caption{Order process scheme}\label{order-process-scheme}
+		\end{figure}
+	
+			In the next subsections, we describe in detail all the actions, their prerequisites, conditions, and outputs.
+		
+		\subsection{show all / specific order}
+			Employees can see all the orders, customers can see only orders which they have made (even via dispatcher).
+			
+			We show specific attributes to the specific user types. Anyone (e.g. anonymous customers) can see order status, created time, arrived time est., finish time est.,  driver, and vehicle assigned to it. 
+			
+			A customer whose order it is can also see the coordinates and the addresses of start and finish, passenger count, note, contact telephone, estimated price, whether the assigned driver is selected explicitly, VIP flag, flight number, arrived time, scheduled pick up and source.
+			
+			Employees can besides all of the attributes above see the assigned dispatcher and all the tracked times, estimations and original estimations.
+			
+			Orders support basic filtering. We can get orders which are created since and until a specified time passed as parameter. We can retrieve also only scheduled orders. Orders can be filtered based on their status - we can set multiple statuses in which all the returned orders are.
+			
+			Orders are paginated - we can set via parameters which page to show and how much orders per page we retrieve.
+			
+			In a request for showing all the orders, we show the total order count for the specified query.
+			
+		\subsection{List driver arrivals}
+		This action must return for the start and finish location list of the available drivers with their cars including the estimated arriving times for that location. This information then dispatcher tells the customer in case the order is via dispatching. In the other case, the customer can see it directly in the front-end application.
+		
+		This estimation doesn't have to be as precise as the estimation after the order is created.
+		
+		Same as in order creation it takes the driver parameter for the case that the customer wants the specific driver.
+		
+		This list is provided for anyone - even anonymous users.
+		
+		In case there is no driver available for such conditions it should return no available drivers result.
+		\subsection{Create order}
+			Order can be created in two ways. Either it is via dispatcher - customer calls the taxi company and the dispatcher will make the order or directly by customer via an app. 
+			
+			If the customer was marked as a fraud before, a new order is automatically marked as fraud one, thus it does not continue in the process and the creator is informed about that. If the fraud orders count in customer's history is less than three, one of the dispatchers on shift gets the notification whether this customer should be forgiven and the order can be processed. If the user has more than three fraud orders, dispatchers won't even get the notification about defrauding.
+			
+			Both the customer and dispatcher can explicitly choose a driver who takes care of the order. 
+			
+			Order will be assigned to the driver who can be at the pick-up location earliest. There is an exception for the scheduled orders - they are assigned to drivers exclusively by the dispatchers.
+			
+			If no driver is available for the specified parameters, it must return an error.
+			
+			After this action, order status is \textit{created}.
+		\subsection{Defraud and process}
+			This action is called by a dispatcher as a response to defraud notification - when it wants to forgive the customer frauds in history and wants to process the created order.
+			
+			If the customer is forgiven, it is marked as non-fraud and the order is processed as usual. From that moment on the customer is considered as a standard non-fraud user, so it can create subsequent orders without limitation. The forgiveness is though not definite - possible next fraud order will renew the original customer's fraud order count and increases the fraud count by one.
+		\subsection{Confirm by driver}
+			When an order is assigned to a driver, the driver confirms via this action the fact that it knows about it and is able to take it. Until this moment the arrive time estimation is very rough. This action can be performed only by the order's assigned driver and only if the order status is \textit{created}.
+			
+			This action changes the order status to \textit{driver\_confirmed}
+		\subsection{Refuse by driver}
+			A driver can also refuse an assigned order. We suppose that this will happen only in emergency cases. If the driver refuses the order, it is removed from its queue and passed on to the next available driver. If there's no one available the order is marked as cancelled.
+			
+			To refuse the order, its status must be \textit{created} and it can be done by the driver assigned to the order only.
+		\subsection{Arriving}
+			A driver can have more confirmed orders in its queue. When it starts to go to the customer, it calls the \textit{arriving} endpoint. This change the order status to \textit{driver\_arriving} and recalculate the time of arrival to the pick-up location. At this moment it should very precise estimation - the driver should be slowed down by the traffic only which is included in the Google Maps API. Thus at this moment, we send the SMS to the customer with the estimated time arrival.
+			
+			In order to call this action the order status must be \textit{driver\_confirmed} and it can be called by the driver assigned to order only. 
+		\subsection{Change arrive time}
+			A driver can correct the estimated arrival time based on its experience or unexpected complications during the journey.
+			
+			Correct the arrive time can the driver for his own orders only which are in the \textit{arriving} state.
+		\subsection{Arrived}
+			This request is sent when a driver arrives at the pick-up place. This changes the order status to \textit{arrived} and updates following times estimations because at this moment we know the real time of arrival.
+			
+			It can be set by the assigned driver only and only when the order status is \textit{arriving}.
+		\subsection{Customer not on its place}
+			In case the driver is at the pick-up location and cannot get in touch with the customer, this action is called. It sends the notification to the dispatching which takes care of the situation and communicates the problem between the driver and the customer. This situation can be resolved in two ways only. Either the customer is found and picked up, or it is not and the order is marked as fraud. 
+			
+			This action can be called when the order status is \textit{arrived} and by the driver assigned to the order only.
+		\subsection{Picked up}
+            In a point when the driver picks up the customer and is ready to ride to drop-off location this request is sent. Because now we know the picking up time precisely, drop off estimations can be recalculated. Also, this action changes the order status to \textit{customer\_picked\_up}.
+
+			This action can be called only when order status is \textit{arrived} and only by driver whose the order is.
+		\subsection{Change drop off time or location}
+			Customers often don't know what they want, so in our application driver assigned to the order can change in this point the drop off time and also the location. This change leads to the recalculation of the estimated times. 
+		\subsection{Finished}
+		Order is marked by a driver as finished when he successfully handled whole order and is ready to serve another customer.
+		\subsection{Fraud}
+			Order can be marked as fraud from the \textit{driver\_arrived} and \textit{cancelled} order statuses. Mark order as fraud can the driver assigned to the order only. Marking the order as fraud resets the customer's fraud counter back to overall fraud orders count increased by one.
+		\subsection{Cancel}
+			Order can be cancelled by the driver assigned to order, dispatcher, or the customer whose order it is. In case the customer is anonymous it can be cancelled by anyone - because we cannot distinguish separate anonymous users.
+			
+			The only valid order statuses from which the order can be cancelled are \textit{'created'}, \textit{'driver\_confirmed'}, \textit{'driver\_arriving'} and \textit{'driver\_arrived'}.
+			
+		\subsection{My orders for dispatcher}
+			Each order is assigned to a dispatcher. This dispatcher then takes care of the customers and in case of a problem must be able to react and handle it with the customer. For such purpose, there is this endpoint. A dispatcher can see all its orders with all important details such as the current time estimations, original estimations, customer number, assigned driver and so on.
+			
+			This endpoint shows only orders which are not finished, cancelled, or fraud, and the results are paginated.    
+	
+	\section{Notifications}
+        Our system must have a way how to send messages to the users on specific actions. As described in the orders section, there are three types of notifications:
+		\begin{itemize}
+			\item driver has a new order
+			\item customer is not at pick-up location
+			\item new order from fraud customer
+		\end{itemize}
+		
+		Each type contains specific data. \textit{Driver has new order} contains the order id. \textit{Customer not at pick-up location} contains driver id and name, customer id with telephone number. \textit{New order from fraud customer} contains order and customer id.
+		
+		
+		Notification system is passive = front-end applications call our \textit{list notifications} action in regular intervals. User can mark the notification as resolved.
+		
+		
+		\subsection{Operation list notifications}
+			This operation returns all the notifications for the current user. The list is paginated via \textit{page} and \textit{per\_page} parameters. It also supports filtering only the unresolved notifications.
+		\subsection{Operation mark as resolved}
+			Notification can be marked as resolved only by the person to whom it belongs. 

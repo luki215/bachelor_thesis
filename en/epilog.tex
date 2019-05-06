@@ -1,10 +1,14 @@
 \chapter*{Conclusion}
 \addcontentsline{toc}{chapter}{Conclusion}
-In our thesis we have successfully managed to create the back-end part of the application for the taxi companies. We analysed, specified and implemented the whole process of ordering and distributing the orders to the drivers. 
+In our thesis we have successfully managed to create the back-end part of the application for taxi companies. We analysed, specified and implemented the whole process of ordering and distributing the orders to drivers. 
 
-Besides the application itself we put together the stack of technologies which allows us to run, distribute and monitor the application.
+Besides the application itself we have put together a stack of technologies which allows us to run, distribute and monitor the application.
 
-From the technological point of view our application is ready to be used by the taxi companies in production and improve the services they provide. Unfortunately the pricing change in the API used for the route calculation made the costs per one processed order too high.
+From the technological point of view our application is ready to be used by taxi companies in production and improve the services they provide. Unfortunately the recent pricing change in the Google Maps API used for the route calculation made the costs per one processed order too high.
 
 \section{Future improvements}
-To make the project sustainable from the business point of view we would have to switch from the Google API to other route calculation API. Other possible improvements would be in the order scheduler. First of all we should separate the split the algorithm into the service workers so we would be able to scale the number of processed orders at once easily. Secondly after the few months of operation we could measure the estimated and final durations of the individual order parts and improve the estimations.
+To make the project sustainable from the business point of view we would have to switch from the Google API to other route calculation API. 
+
+It would be useful to upgrade the authentication system so the users are able to log in on more devices simultaneously. Also implementing the automatic authentication token expiration and renewal on both front-end and back-end side would increase the overall application security.
+
+Other possible improvements would be in the order scheduler. First of all we could separate the algorithm to service workers so we would be able to scale the number of orders processed at once easily. Secondly after the few months of operation we could measure the estimated and final durations of the individual order parts and improve the estimations.

@@ -1,28 +1,51 @@
 \chapter{Introduction}
 
-The field of personal transportation has been revolutionized in a past few years. People in the metropolises got used to order the taxi via phone application. Nowadays it is almost standard to have all the information about the driver, vehicle, estimated time of arrival and price before making the the order. Also the service during the order process has evolved a lot. People are used to see the arriving driver's location in real time and also the estimated time of arrival to their drop off location during the whole order process. 
+The field of personal transportation has been revolutionized in the past few years. People in metropolises got used to ordering the taxi via a phone application. Nowadays it is almost standard to have all the information about the driver, vehicle, estimated time of arrival and price before making the order. Also, the service during the order process has evolved a lot. People are used to seeing the arriving driver's location in real time and also the estimated time of arrival to their drop off location during the whole order process. 
 
-However in the smaller cities is situation very different. None of the big companies operates in the smaller cities so there is usually no other way how to order the taxi than via phone. Phone lines are often overloaded during the peaks and customers are unsatisfied. Providing this new way of ordering would have massive impact on the company competitiveness.
+However, the situation in smaller cities is very different. None of the big companies operates in smaller cities so there is usually no other way how to order the taxi than via phone. Phone lines are often overloaded during the peaks and customers are dissatisfied. Providing this new way of ordering would have a massive impact on the company's competitiveness.
 
-In this thesis we created the back-end part of the application for order management and processing. We focused on the taxi companies from the smaller towns. We cooperated with the company from Mladá Boleslav, which provided us the insights from their business and described their work-flow. Keeping this know-how in mind we created the system.
+In this thesis, we created the back-end part of the application for order management and processing. We focused on the taxi companies from smaller towns. We cooperated with the company from Mladá Boleslav, which provided us with insights from their business and described their work-flow. Keeping this know-how in mind we created the system.
 
 \section{Motivation}
 
-Besides the customer comfort increase in smaller cities this application reduces the operating costs of the company. Being dispatcher at taxi company is very stressful and low paid job. The main working hours are at night. These conditions lead to high staff fluctuation. Dispatcher is responsible for distributing the orders between the drivers and estimating the arrival times. When the dispatchers are changed often, they have no experience with the estimations which leads to fatal failures and highly unsatisfied customers. Having the algorithm for distributing orders between drivers and estimating the arrival times leads to stable more stable estimations which can be improved during the time. This reduces the skills the dispatcher needs to have for the job - now its job is just to communicate with the customer and insert the orders into the system.
+Besides the customer comfort increase in smaller cities, this application reduces the operating costs of the company. Being dispatcher at a taxi company is very stressful and low paid job. The main working hours are at night. These conditions lead to high staff fluctuation. A dispatcher is responsible for distributing orders between drivers and estimating arrival times. When the dispatchers are changed so often, their estimations tend to be highly inaccurate which leads to fatal failures and very unsatisfied customers. Having the algorithm for distributing orders between drivers and estimating arrival times leads to more stable estimations which can be further improved using the gathered data in the future. This reduces the skills the dispatcher needs to have for the job - now its job is just to communicate with the customer and enter the orders into the system.
 
-Second advantage of having such system in the company is that they can process more orders with the same amount of dispatchers. Each order phone call takes two minutes on average. If they want to process more than thirty orders per hour they have to hire the second dispatcher.
+The second advantage of having such a system in the company is that they can process more orders with the same amount of dispatchers. Each order phone call takes two minutes on average. If they want to process more than thirty orders per hour they have to hire a second dispatcher.
 
 
 \section{Existing solutions}
-As we mentioned before, there are already existing solutions for this problem. From the most known companies operating in Czech Republic are Uber, Taxify and Liftago. They all provide the same feature - allowing the user to order the taxi via the application - but with a different idea in mind. The difference is that their customers can not order their services via a phone call. 
+As we mentioned before, there are already existing solutions to this problem. The most known companies operating in the Czech Republic are Uber, Taxify, and Liftago. They all provide the same feature - allowing the user to order the taxi via application - but with a different idea in mind. The difference is that their customers can not order their services via a phone call. 
 
-This approach is not suitable for our case, because the company depends on the users who order the taxi exclusively via phone call. Also our company has most of the profit from the scheduled large distance orders. These orders they want to manually split between their loyal drivers. 
+This approach is not suitable for our case because the company depends on the users who order the taxi exclusively via phone call. Also, our company has most of the profit from the scheduled large distance orders. They prefer to give these orders to their most experienced and loyal drivers. 
 
 \section{Goals}
-\todo{poznámky}
-co práce bude obsahovat a co ne - na vyšší úrovni. Bude obsahovat api, které bude přístupné nějakým způsobem, z objednávek bude řešit obecně to a to... řešit objednávky od zákazíníků, dispečerů, algoritmus pro přiřazování objednávke. Součástí práce není frontend - dělaný jiným člověkem. 
+
+Our goal is to create an application which will automate the ordering system for the taxi company.
+
+The application will contain an authentication system using which the drivers, dispatchers, customers, and administrators can log in and be identified. The application will also contain basic authorization system so that for each action (e.g. creating driver) we specify authorized entities (e.g. administrators) who are allowed to perform it.
+
+The ordering system allows dispatchers and customers to create the order. It connects the customer with driver and leads them both through the whole process of order. From the order creation to the desired destination arrival. 
+
+We design the scheduling system which distributes the orders between the drivers automatically. The main goal for the scheduler is to provide the customer with detailed information during the order process and minimize the waiting time for the taxi. After the first estimation, the system should change it as little as possible. The scheduler must support processing the orders with a specified time of pick-up. The most important is to assure that the driver arrives precisely on time in this case.
+
+We design the REST API through which the front-end applications will communicate with our application. The front-end applications are not part of this thesis. They have been implemented by Patrícia Březinová in her bachelor thesis.
 
 
 \section{Outline}
+In the beginning we introduce the problem that the thesis is dealing with and set the goals we want to achieve. We describe the current situation in the taxi services field and uncovered our motivation to build the application. 
 
-\todo{Dopsat}
+In Chapter 2 we formalize the whole ordering process in the company. We specify all the entities and actions that our application uses and provides.
+
+Chapter 3 describes the tools using which we decided to build our application with and why.
+
+In Chapter 4 we describe the problems that we deal with in the application. We describe in detail how we solve them and why we have chosen to solve them that way.  
+
+Chapter 5 reveals the application implementation details. We explain the application architecture and insights the reader into the project structure.
+
+In chapter 6 we describe how to get access the REST API documentation we provide.
+
+Chapter 7 describes how we tested the whole application and which technologies we used for the testing.
+
+In chapter 8 we evaluate the goals we set in the introduction and summarize what we have accomplished.
+
+In conclusion we evaluate the project as a whole and suggest a direction the project could be improved in the future. 

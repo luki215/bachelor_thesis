@@ -93,12 +93,12 @@ Dedication.
 
 % Abstract (recommended length around 80-200 words; this is not a copy of your thesis assignment!)
 \def\Abstract{%
-	Nowadays services like Uber start to surpass taxi companies in comfort of transport. The goal of this thesis is to create a back-end part of the application, which will increase the taxi services efficiency and give the users new and more comfortable ways to use them. 
+    Nowadays services like Uber start to surpass taxi companies in comfort of transport. In this thesis, we create a back-end part of an application for taxi companies in smaller towns. This application provides an interface for creating and managing orders, employees, customers, and vehicles. As part of the system, we constructed order scheduler which calculates the order duration, estimated time of arrival and distributes the order between available drivers automatically. Overall the application increases the taxi company's efficiency and offers users a more comfortable experience. 
 }
 
 % 3 to 5 keywords (recommended), each enclosed in curly braces
 \def\Keywords{%
-{Taxi} {Ruby on Rails}
+{Taxi} {Ruby on Rails} {Web application}
 }
 
 %% The hyperref package for clickable links in PDF and also for storing
@@ -124,11 +124,11 @@ Dedication.
 
 %%% Each chapter is kept in a separate file
 \include{preface}
-\include{requirements}
-\include{specification}
-\include{technical_analysis}
 \include{analysis}
+\include{technical_analysis}
+\include{solution_design}
 \include{implementation}
+\include{user_documentation}
 \include{testing}
 \include{evaluation}
 
@@ -139,14 +139,6 @@ Dedication.
 
 %%% Figures used in the thesis (consider if this is needed)
 \listoffigures
-
-%%% Tables used in the thesis (consider if this is needed)
-%%% In mathematical theses, it could be better to move the list of tables to the beginning of the thesis.
-\listoftables
-
-%%% Abbreviations used in the thesis, if any, including their explanation
-%%% In mathematical theses, it could be better to move the list of abbreviations to the beginning of the thesis.
-\chapwithtoc{List of Abbreviations}
 
 %%% Attachments to the bachelor thesis, if any. Each attachment must be
 %%% referred to at least once from the text of the thesis. Attachments
@@ -163,6 +155,10 @@ Dedication.
 \chapter{Attachments}
 
 \section{First Attachment}
+
+
+\chapter{Installation}
+
 
 \openright
 \end{document}

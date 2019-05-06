@@ -1,62 +1,64 @@
 
 \chapter{Technical Analysis}
-In this chapter we want to take a look on specific frameworks and tools that we have used for the whole solution and what led us to decide that way. In the first part of the analysis we describe things related to our back-end application software stack - for example what frameworks and tools we use and why we have made such decision. In the second part we focus on the whole server stack and how we manage to run all the services on it.
+In this chapter, we want to take a look at specific frameworks and tools that we have used for the whole solution and what led us to decide that way. In the first part of the analysis, we describe things related to our back-end application software stack. Primarily what frameworks and tools we use and why we have made such a decision. In the second part, we focus on the whole server stack and how we manage to run all the services on it. 
+
 \section{Back-end application software stack}
 For our application we decided to use Ruby on Rails\footnote{ Ruby on Rails framework main page \url{https://rubyonrails.org/}} framework written in Ruby\footnote{ Ruby language main page \url{https://www.ruby-lang.org/}}. 
 Our asynchronous jobs are handled via Sidekiq\footnote{ Sidekiq wiki page \url{https://github.com/mperham/sidekiq/wiki}}. We decided to use PosgreSQL\footnote{ PostgreSQL database main page \url{https://www.postgresql.org/}} as our main database engine. We also run Redis\footnote{ Redis database main page \url{https://redis.io/}} as it is required database for Sidekiq.
 \subsection{Ruby on Rails}
-There are many frameworks in which could be this type of application written equally well - for example ASP.NET(C\#), Spring(Java), Laravel(PHP), Django(Python), ExpressJS(JavaScript).
+There are many frameworks which could be this type of application written in equally well. For example the ASP.NET(C\#), Spring(Java), Laravel(PHP), Django(Python), ExpressJS(JavaScript).
 
 Here are some advantages and disadvantages of Ruby on Rails which has led us to choose it.
-
 Advantages:
 \begin{itemize}
 	\item Simplicity and expressibility of Ruby - optional parenthesis, return keyword, no semicolons, combination with functional programming 
-	\item Strong Convention over Configuration influence - you have strictly given where to place models, controllers, how to name classes, database tables etc. and you are forced to do it that way. It may seem limiting at first but it brings to project clarity and most of the times it gives you good way to solve your problem without reinventing wheel
+	\item Strong Convention over Configuration influence - you have strictly given where to place models, controllers, how to name classes, database tables etc. and you are forced to do it that way. It may seem limiting at first but it brings the clarity to project and most of the times it gives you a good way to solve your problem without reinventing the wheel
 	\item plenty of tools built in - from the routing and security through development-testing-production configurations to the highly sophisticated ORM
 	\item global repository of libraries (Ruby Gems) - most of them in very good quality with clear documentation and test covered
-	\item We are using it for 3 years, so we know proven libraries and ecosystem
+	\item We are using it for 3 years, so we know proven libraries and the ecosystem
 \end{itemize} 
 Disadvantages:
 \begin{itemize}
 	\item it is more difficult to set it up than PHP
 	\item impossible to use standard web hosting
 	\item small base of programmers knowing Ruby
-	\item efficiency compared to some framework \todo[]{Add citation}
+	\item efficiency compared to some framework
 \end{itemize}
   
 \subsection{PosrtgreSQL}
-We decided to use PostgreSQL, because it is open source and unlike MySQL it supports natively storing JSON, arrays and it has many plugins - for example for storing geo data. None of these features we use in our application now but why not to have this possibility when we would like to optimize something or extend it. Since we use Rails ORM (ActiveRecord), choice of the database is not so critical - we can migrate later to other database.
+We decided to use PostgreSQL because it is open source, and unlike MySQL, it supports natively storing JSON, arrays and it has many plugins (e.g. plugin for storing geodata). None of these features we use in our application now but why not to have this possibility when we would like to optimize something or extend it. Since we use Rails ORM (ActiveRecord), the choice of the database is not so critical - we can later migrate to the other database engine easily.
 \subsection{Sidekiq}
-We need job processor to handle sending emails, SMS, and calculating favorite places for customers. 
-There are many job processors for Ruby\footnote{ Job processors comparasion \url{http://api.rubyonrails.org/classes/ActiveJob/QueueAdapters.html}}. We decided to use Sidekiq, because it is long-standing project focused on efficiency and we have used it before. However for project with requirements like these, any of the processors would handle it equally well. 
+We need a job processor to handle sending emails, SMS, and calculating favourite places for customers. 
+There are many job processors for Ruby\footnote{ Job processors comparison \url{http://api.rubyonrails.org/classes/ActiveJob/QueueAdapters.html}}. We decided to use Sidekiq because it is a long-standing project focused on efficiency and we have used it before. However, for a project with requirements like these, any of the processors could handle it equally well. 
 \section{Tools stack}
-For documenting our API for all the front-end applications we use Apiary.
-The tool which features we decided to use for installation and deployment all of our services is Docker with Docker-compose. As our reverse-proxy and HTTPS certificates manager we decided to use jwilder's ngnix-proxy image set. As error catcher and alerter for all of our running apps we decided to use Errbit. For the server monitoring and future alerting we decided to use uschtwill's docker\_monitoring\_logging\_alerting image set. \todo{Include links to all libraries}
- \todo{Our whole server stack looks like this: graph of all the services}
+As our REST API documentation tool we use Apiary.
+The tools we decided to use for easier installation and deployment is Docker with Docker-compose. As our reverse-proxy and HTTPS certificates manager we decided to use \textit{jwilder's ngnix-proxy}\footnote{\url{https://github.com/jwilder/nginx-proxy}} image set. As an error catcher and alerter for all of our running apps, we decided to use \textit{Errbit}\footnote{\url{https://github.com/errbit/errbit}}. For the server monitoring and alerting in the future we decided to use \textit{uschtwill's docker\_monitoring\_logging\_alerting}\footnote{\url{https://github.com/uschtwill/docker_monitoring_logging_alerting}} image set.
+
+
+We are aware that the server stack we ended up with is a little bit overkilled for our use case. In our defence, we learned a lot during these services set up. These services also provide lots of handy features.
 \subsection{Apiary}
-We needed tool, where could be all the possible requests to API with proper responses well-documented for front-end developers. We decided to use Apiary mainly because it was tool designed and developed in Czech republic, thus I knew it before and knew that it fullfills all of our requirements. Even it allowed us to make API mocks running on their server for free, so frontend developers could design and set up their interfaces while we could still work on our implementation details.
+We needed a tool, where could be all the possible requests to API with proper responses well-documented for front-end developers. We decided to use Apiary mainly because it was tool designed and developed in the Czech Republic, thus we knew it before and knew that it fulfils all of our requirements. It even allows to make API mocks running on their server for free, so frontend developers could design and set up their interfaces while we could still work on our implementation details.
 \subsection{Docker and Docker-compose}
-Our goal was that each frontend developer would have its own local version of backend on which them could develop. To achieve it, we had created tutorial how to install Ruby, Rails, PostgreSQL and all the SW stack described before. This was not a good approach at all. Despite the problems with installation (different versions of Ruby, Rails) it took almost 3 hours to set up one machine. Also we were not able to make stack work on Windows which was a big issue for our Android developer. With such experience we decided to use Docker and Docker-Compose to handle the stack.
+Our goal was that each frontend developer would have its own local backend application instance against which they could develop. To achieve it, we had created a tutorial on how to install Ruby, Rails, PostgreSQL and all the software stack described before. This was not a good approach at all. Despite the problems with installation (different versions of Ruby, Rails) it took almost 3 hours to set up one machine. Also, we were not able to make the stack working on Windows which was a critical issue for our Android developer. With such experience, we decided to use Docker and Docker-Compose to handle the stack.
 
 Docker is a platform for developers and sysadmins to develop, deploy, and run applications with containers. A container is launched by running an image. An image is an executable package that includes everything needed to run an application--the code, a runtime, libraries, environment variables, and configuration files. A container is a runtime instance of an image--what the image becomes in memory when executed (that is, an image with state, or a user process).\cite{docker_def}
 
 Compose is a tool for defining and running multi-container Docker applications. With Compose, you use a YAML file to configure your application’s services. Then, with a single command, you create and start all the services from your configuration.\cite{docker_compose_def}
 
-Using this tools allows us to set up container for each service (application, sidekiq, database, etc. ) and run smoothly on any operation system using only one command - \textit{docker-compose up} with insignifficant performance change\footnote{from our observations during development}.
+Using this tools allowed us to set up a container for each service (application, sidekiq, database, etc. ) and run them smoothly on any operating system using only one command - \textit{docker-compose up} - without any significant performance decrease\footnote{from our observations during development}.
 
 \section{Docker proxy \& ngnix}
-Because we want to run multiple websites on our server (back-end \& front-end applications, monitoring \& error sites), we have to deal with reverse proxy. During research we have found out, that for that purpose was made set of Docker images - jwilder's ngnix-proxy, which does exactly what we needed - including automated management of HTTPS certificates. 
+Because we want to run multiple websites on our server (back-end \& front-end applications, monitoring \& error sites), we have to deal with reverse proxy. During the research we have found out, that for that purpose was made set of Docker images - jwilder's ngnix-proxy, which does exactly what we needed - including automated management of HTTPS certificates. 
 
-That is another reason why use docker. Propper set up of reverse proxy with HTTPS on production is now matter of few hours without previous experience with ngnix nor Let's Encrypt and adding other site is just the matter of starting new container with three environment variables.
+That is another reason why use docker. Propper set up of reverse proxy with HTTPS on production is now matter of few hours without previous experience with ngnix nor Let's Encrypt. Also adding a new site is just the matter of starting a new container with three environment variables.
 
 \section{Errbit}
-Our goal was to have service where we could see unexpected failiures of all our apps. This service should notify us whenever this failiure occures. We should be also able to get at least basic info when, where and on what environment that failiure occured.
+Our goal was to have a service where we could see all of our apps' unexpected failures. This service should notify us whenever this failure occurs. We should be also able to get at least basic info when, where and on what environment that failure occurred.
 
-All these requirements fulfills Errbit, which is open-source alternative for more known Airbrake. Errbit is also written in Rails, so it is close to our stack. Also it has standalone ready-to-use docker image. 
+All of these requirements fulfils Errbit, which is an open-source alternative for more known Airbrake. Errbit is also written in Rails, so it is close to our stack. Also, it has a standalone ready-to-use docker image. 
 
 \section{Monitoring}
-Because our server stack is composed of more than ten services, we want to have the logs from all of our services merged to one place, where we could analyse them. Also we want to see current system status and health from web browser. During the research we have found stack of docker images for logging and monitoring by uschtwill. 
+Because our server stack is composed of more services we want to have the logs from all of our services merged to one place, where we could analyse them. Also, we want to see the current system status and health from a web browser. During the research, we have found a stack of Docker images for logging and monitoring by uschtwill. 
 
 The logging stack that we use consists of 
 \begin{itemize}
@@ -65,6 +67,6 @@ The logging stack that we use consists of
 	\item Kibana - frontend for exploring ElasticSearch database, predefined dashboards, searches etc...
 \end{itemize}
 
-Choice of this stack for such task was confirmed by Peter Havelka on Hradec Kralove barcamp, who said, that they are using exactly same stack for 16M rows of logs per day with no problems and that it helped them a lot with analysis and general overview over their services. \cite{docker_elk_useability}
+Choice of this stack for such task was inspired by Peter Havelka on Hradec Kralove Barcamp, who said, that they are using the exact same stack for 16M rows of logs per day with no problems and that it helped them a lot with analysis and general overview over their services. \cite{docker_elk_useability}
 
 

@@ -1,12 +1,14 @@
 \chapter{Evaluation}
+In this chapter we go through the goals we set and evaluate how they have been fulfilled.
+
+We have successfully created an application which can be used by the taxi company to handle their orders. We analysed the whole order process, specified parts involved in the process, their competencies and implemented the application which fulfils all the company's requirements. 
+
+The authentication system in our application is working as expected with all three front-end applications. In analysis we listed all the possible actions and specified the persons authorized to perform them. This was then successfully implemented and tested by the front-end. Our application doesn't send SMS messages because this service is not for free. It is fully prepared to do so, but instead of sending, it prints the tokens to the logs. When we will be ready to launch we are going to use for example the \textit{GoSMS}\footnote{\url{https://www.gosms.cz/}} service, which sends the SMS just by calling their REST API endpoint.
 
 
+Ordering system we created is used and tested by all front-end applications. It satisfies all front-end requirements for comfortable and smooth order processing. Besides, the system gives us detailed information about the orders. This can be later used to analyse and improve the whole ordering process.
+
+Thanks to our order scheduler the orders are automatically assigned to currently available drivers. By using the Google Maps API for the route calculation we gained precise order duration estimations. Drivers can modify these estimations during the order process. The corrections are immediately reflected to all the affected orders. We designed the solution with emphasis on keeping the arrival time precise, especially for the orders with specified pick-up time. The whole implementation of order scheduler is covered by the unit tests which are yet another layer ensuring the orders are and will be handled and assigned correctly.
 
 
-No time to do better orders assignment, custom locations
-
-Things to improve:
-\begin{itemize}
-	\item login on more devices at time
-	\item generate login token with each request 
-\end{itemize}
+The REST API we designed was successfully used to create three front-end applications. Using the Apiary as our documentation tool was one of the best choices we have made in this project. Many times during the implementation front-end required some features that we did not have and we could not deliver at the time. In such case we just defined the interface and front-end got the mock endpoint returning the required data. 

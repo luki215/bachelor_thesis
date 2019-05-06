@@ -1,4 +1,23 @@
 \chapter{Requirements}
+
+
+
+
+\begin{itemize}
+	\item formalize company structure
+	\item formalize the process of order and design the application architecture based on it
+	\item authorization
+	\item We will provide the REST API using which the front-end applications will communicate. We focus on unifying individual company entities under one endpoint.
+	\todo{dopsat?}
+	on clear and uniform naming conventions 
+	\item effective scheduler
+	\item bug reporting, back-up, monitoring, deploy process
+\end{itemize}
+
+
+
+
+
 In the first part of the chapter we focus on the requirements for the wholesome application solution and related business requirements. In the second part we specify the technical point of view.
 
 \section{Business requirements}
@@ -7,9 +26,7 @@ Začít s nějakou vizí, jakým způsobem jsme se k těm informacím dostal, ž
 
 
 
-Our goal is to define and formalize the process of ordering the taxi in the company. Based on the results we create the API which allows the clients go through this process. 
 
-Second goal is to design the scheduling system which distribute the orders between the drivers automatically. The main goal for the scheduler is to provide the customer detailed information during the order process and minimize the waiting time for the taxi. After the first estimation system should change the estimations as little as possible. Scheduler must support processing the orders with specified time of pick-up. The most important is to assure that the driver arrives precisely on time in this case.
 
 \section{Technical requirements}
 	Our first requirement is to have the back-end and front-end strictly separated. This allows us in the future having more different clients\todo{špatné pojmenování - client používán jako zákazník všude jinde} which can be connected to our logic. With this architecture we can easily integrate ordering system into common applications like Facebook Messenger or Slack and do not relay on custom application only.
