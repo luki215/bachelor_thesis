@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.10.24)  6 MAY 2019 08:47
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.10.24)  7 MAY 2019 10:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -854,7 +854,7 @@ Package hyperref Info: Option `pageanchor' set `false' on input line 6.
 
 pdfTeX warning: /Library/TeX/texbin/pdflatex (file ../img/logo-en.pdf): PDF inc
 lusion: found PDF version <1.5>, but at most version <1.4> allowed
-<../img/logo-en.pdf, id=489, 506.4591pt x 156.49065pt>
+<../img/logo-en.pdf, id=481, 506.4591pt x 156.49065pt>
 File: ../img/logo-en.pdf Graphic file (type pdf)
 <use ../img/logo-en.pdf>
 Package pdftex.def Info: ../img/logo-en.pdf  used on input line 9.
@@ -936,7 +936,7 @@ LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <12> not available
 
 ] [8] [9]
 [10] [11] [12]
-<./images/orders/order_process_scheme.png, id=694, 1047.915pt x 1159.33125pt>
+<./images/orders/order_process_scheme.png, id=684, 1047.915pt x 1159.33125pt>
 File: ./images/orders/order_process_scheme.png Graphic file (type png)
 <use ./images/orders/order_process_scheme.png>
 Package pdftex.def Info: ./images/orders/order_process_scheme.png  used on inpu
@@ -980,7 +980,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 32--32
 Chapter 4.
 Package hyperref Info: bookmark level for unknown todo defaults to 0 on input l
 ine 2.
-<./images/auth/Auth.png, id=786, 633.36626pt x 422.57875pt>
+<./images/auth/Auth.png, id=776, 633.36626pt x 422.57875pt>
 File: ./images/auth/Auth.png Graphic file (type png)
 <use ./images/auth/Auth.png>
 Package pdftex.def Info: ./images/auth/Auth.png  used on input line 15.
@@ -1018,7 +1018,7 @@ Overfull \hbox (79.18372pt too wide) in paragraph at lines 98--98
  []
 
 [28] [29]
-<./images/orders/legend.png, id=864, 232.87pt x 295.1025pt>
+<./images/orders/legend.png, id=854, 232.87pt x 295.1025pt>
 File: ./images/orders/legend.png Graphic file (type png)
 <use ./images/orders/legend.png>
 Package pdftex.def Info: ./images/orders/legend.png  used on input line 146.
@@ -1031,7 +1031,7 @@ Package pdftex.def Info: ./images/orders/legend.png  used on input line 146.
 l.157 A
        s mentioned before, the scheduler must ensure that if the scheduled o...
  <./images/orders/legend.png>]
-<./images/orders/scheduled_naive_arrive_counting.png, id=872, 515.9275pt x 102.
+<./images/orders/scheduled_naive_arrive_counting.png, id=862, 515.9275pt x 102.
 3825pt>
 File: ./images/orders/scheduled_naive_arrive_counting.png Graphic file (type pn
 g)
@@ -1047,12 +1047,12 @@ sed on input line 162.
 l.181 	\item S
               cheduled order - combined with normal order <./images/orders/sche
 duled_naive_arrive_counting.png>]
-<./images/orders/add-1.png, id=880, 273.02pt x 148.555pt>
+<./images/orders/add-1.png, id=870, 273.02pt x 148.555pt>
 File: ./images/orders/add-1.png Graphic file (type png)
 <use ./images/orders/add-1.png>
 Package pdftex.def Info: ./images/orders/add-1.png  used on input line 198.
 (pdftex.def)             Requested size: 191.11269pt x 103.98778pt.
-<./images/orders/add-2.png, id=882, 393.47pt x 112.42pt>
+<./images/orders/add-2.png, id=872, 393.47pt x 112.42pt>
 File: ./images/orders/add-2.png Graphic file (type png)
 <use ./images/orders/add-2.png>
 Package pdftex.def Info: ./images/orders/add-2.png  used on input line 208.
@@ -1070,12 +1070,12 @@ e.4.5}) has been already used, duplicate ignored
                                                   \fi \fi 
 l.215 		
          <./images/orders/add-1.png> <./images/orders/add-2.png>]
-<./images/orders/add-3.png, id=894, 555.07375pt x 254.9525pt>
+<./images/orders/add-3.png, id=884, 555.07375pt x 254.9525pt>
 File: ./images/orders/add-3.png Graphic file (type png)
 <use ./images/orders/add-3.png>
 Package pdftex.def Info: ./images/orders/add-3.png  used on input line 217.
 (pdftex.def)             Requested size: 388.54897pt x 178.46552pt.
-<./images/orders/add-4.png, id=896, 684.5575pt x 461.725pt>
+<./images/orders/add-4.png, id=886, 684.5575pt x 461.725pt>
 File: ./images/orders/add-4.png Graphic file (type png)
 <use ./images/orders/add-4.png>
 Package pdftex.def Info: ./images/orders/add-4.png  used on input line 228.
@@ -1084,7 +1084,7 @@ Package pdftex.def Info: ./images/orders/add-4.png  used on input line 228.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<./images/orders/add-5.png, id=898, 615.29875pt x 315.1775pt>
+<./images/orders/add-5.png, id=888, 615.29875pt x 315.1775pt>
 File: ./images/orders/add-5.png Graphic file (type png)
 <use ./images/orders/add-5.png>
 Package pdftex.def Info: ./images/orders/add-5.png  used on input line 237.
@@ -1092,7 +1092,7 @@ Package pdftex.def Info: ./images/orders/add-5.png  used on input line 237.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<./images/orders/add-6.png, id=900, 813.0375pt x 477.785pt>
+<./images/orders/add-6.png, id=890, 813.0375pt x 477.785pt>
 File: ./images/orders/add-6.png Graphic file (type png)
 <use ./images/orders/add-6.png>
 Package pdftex.def Info: ./images/orders/add-6.png  used on input line 250.
@@ -1107,7 +1107,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
                                                   \fi \fi 
 l.257 	
         <./images/orders/add-3.png>]
-<./images/orders/add-7.png, id=916, 473.77pt x 113.42375pt>
+<./images/orders/add-7.png, id=906, 473.77pt x 113.42375pt>
 File: ./images/orders/add-7.png Graphic file (type png)
 <use ./images/orders/add-7.png>
 Package pdftex.def Info: ./images/orders/add-7.png  used on input line 262.
@@ -1116,7 +1116,7 @@ Package pdftex.def Info: ./images/orders/add-7.png  used on input line 262.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<./images/orders/changing_arrive_time_longer.png, id=918, 554.07pt x 113.42375p
+<./images/orders/changing_arrive_time_longer.png, id=908, 554.07pt x 113.42375p
 t>
 File: ./images/orders/changing_arrive_time_longer.png Graphic file (type png)
 <use ./images/orders/changing_arrive_time_longer.png>
@@ -1126,7 +1126,7 @@ on input line 273.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<./images/orders/changing_arrive_time_longer_normal_collision.png, id=920, 614.
+<./images/orders/changing_arrive_time_longer_normal_collision.png, id=910, 614.
 295pt x 112.42pt>
 File: ./images/orders/changing_arrive_time_longer_normal_collision.png Graphic 
 file (type png)
@@ -1144,7 +1144,7 @@ l.284 	\end{figure}
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<./images/orders/changing_arrive_time_longer_scheduled_collision.png, id=931, 2
+<./images/orders/changing_arrive_time_longer_scheduled_collision.png, id=921, 2
 02.7575pt x 112.42pt>
 File: ./images/orders/changing_arrive_time_longer_scheduled_collision.png Graph
 ic file (type png)
@@ -1155,7 +1155,7 @@ collision.png  used on input line 289.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<./images/orders/Shorter_order.png, id=933, 554.07pt x 112.42pt>
+<./images/orders/Shorter_order.png, id=923, 554.07pt x 112.42pt>
 File: ./images/orders/Shorter_order.png Graphic file (type png)
 <use ./images/orders/Shorter_order.png>
 Package pdftex.def Info: ./images/orders/Shorter_order.png  used on input line 
@@ -1164,7 +1164,7 @@ Package pdftex.def Info: ./images/orders/Shorter_order.png  used on input line
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<./images/orders/cancel.png, id=935, 554.07pt x 112.42pt>
+<./images/orders/cancel.png, id=925, 554.07pt x 112.42pt>
 File: ./images/orders/cancel.png Graphic file (type png)
 <use ./images/orders/cancel.png>
 Package pdftex.def Info: ./images/orders/cancel.png  used on input line 309.
@@ -1230,7 +1230,7 @@ horter_order.png> <./images/orders/cancel.png>]
 
  (./implementation.tex
 Chapter 5.
-<./images/db_schema.png, id=964, 770.88pt x 771.88374pt>
+<./images/db_schema.png, id=954, 770.88pt x 771.88374pt>
 File: ./images/db_schema.png Graphic file (type png)
 <use ./images/db_schema.png>
 Package pdftex.def Info: ./images/db_schema.png  used on input line 11.
@@ -1313,27 +1313,23 @@ Appendix A.
 [52
 
 ]
-Appendix B.
-[53
-
-]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 164.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 164.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 160.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 160.
  (./thesis.aux (./title.aux) (./preface.aux) (./analysis.aux)
 (./technical_analysis.aux) (./solution_design.aux) (./implementation.aux)
 (./user_documentation.aux) (./testing.aux) (./evaluation.aux) (./epilog.aux)
 (./bibliography.aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 164.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 164.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 160.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 160.
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 7594DBAD6BFF2214FAA8F02D90C8C51A;16980.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 164.
+(rerunfilecheck)             Checksum: CF2B433B23BCCC7AC90661385D2DB9E1;16739.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 160.
  ) 
 Here is how much of TeX's memory you used:
- 24690 strings out of 492649
- 421654 string characters out of 6129621
- 465958 words of memory out of 5000000
- 27795 multiletter control sequences out of 15000+600000
+ 24685 strings out of 492649
+ 421601 string characters out of 6129621
+ 465955 words of memory out of 5000000
+ 27793 multiletter control sequences out of 15000+600000
  78280 words of font info for 75 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  62i,9n,78p,1294b,1942s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1350,9 +1346,9 @@ t/fonts/type1/public/lm/lmri12.pfb></usr/local/texlive/2018/texmf-dist/fonts/ty
 pe1/public/lm/lmsy10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public
 /lm/lmtt10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/lm/lmtt12
 .pfb>
-Output written on thesis.pdf (57 pages, 1317225 bytes).
+Output written on thesis.pdf (56 pages, 1315171 bytes).
 PDF statistics:
- 1202 PDF objects out of 1440 (max. 8388607)
- 249 named destinations out of 1000 (max. 500000)
- 1075 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1187 PDF objects out of 1200 (max. 8388607)
+ 246 named destinations out of 1000 (max. 500000)
+ 1059 words of extra memory for PDF output out of 10000 (max. 10000000)
 

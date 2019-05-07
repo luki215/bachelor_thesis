@@ -26,7 +26,7 @@
 \contentsline {subsection}{\numberline {2.3.1}Operation create, update and destroy}{11}{subsection.2.3.1}
 \contentsline {subsection}{\numberline {2.3.2}Operation show all and specific vehicle}{12}{subsection.2.3.2}
 \contentsline {section}{\numberline {2.4}Orders}{12}{section.2.4}
-\contentsline {subsection}{\numberline {2.4.1}show all / specific order}{14}{subsection.2.4.1}
+\contentsline {subsection}{\numberline {2.4.1}Show all / specific order}{14}{subsection.2.4.1}
 \contentsline {subsection}{\numberline {2.4.2}List driver arrivals}{15}{subsection.2.4.2}
 \contentsline {subsection}{\numberline {2.4.3}Create order}{15}{subsection.2.4.3}
 \contentsline {subsection}{\numberline {2.4.4}Defraud and process}{16}{subsection.2.4.4}
@@ -127,6 +127,4 @@
 \contentsline {section}{\numberline {8.1}Future improvements}{49}{section.8.1}
 \contentsline {chapter}{Bibliography}{50}{chapter*.20}
 \contentsline {chapter}{List of Figures}{51}{chapter*.21}
-\contentsline {chapter}{\numberline {A}Attachments}{52}{appendix.A}
-\contentsline {section}{\numberline {A.1}First Attachment}{52}{section.A.1}
-\contentsline {chapter}{\numberline {B}Installation}{53}{appendix.B}
+\contentsline {chapter}{\numberline {A}Installation}{52}{appendix.A}
