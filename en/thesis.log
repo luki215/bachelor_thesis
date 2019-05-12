@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.10.24)  7 MAY 2019 10:36
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.10.24)  13 MAY 2019 00:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -854,7 +854,7 @@ Package hyperref Info: Option `pageanchor' set `false' on input line 6.
 
 pdfTeX warning: /Library/TeX/texbin/pdflatex (file ../img/logo-en.pdf): PDF inc
 lusion: found PDF version <1.5>, but at most version <1.4> allowed
-<../img/logo-en.pdf, id=481, 506.4591pt x 156.49065pt>
+<../img/logo-en.pdf, id=425, 506.4591pt x 156.49065pt>
 File: ../img/logo-en.pdf Graphic file (type pdf)
 <use ../img/logo-en.pdf>
 Package pdftex.def Info: ../img/logo-en.pdf  used on input line 9.
@@ -936,7 +936,7 @@ LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <12> not available
 
 ] [8] [9]
 [10] [11] [12]
-<./images/orders/order_process_scheme.png, id=684, 1047.915pt x 1159.33125pt>
+<./images/orders/order_process_scheme.png, id=614, 1047.915pt x 1159.33125pt>
 File: ./images/orders/order_process_scheme.png Graphic file (type png)
 <use ./images/orders/order_process_scheme.png>
 Package pdftex.def Info: ./images/orders/order_process_scheme.png  used on inpu
@@ -968,7 +968,7 @@ File: ot1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 32--32
+Underfull \hbox (badness 10000) in paragraph at lines 33--33
 [][][] \OT1/lmr/m/n/10 Job pro-ces-sors com-par-i-son []$\OT1/lmtt/m/n/10 http 
 : / / api . rubyonrails . org / classes / ActiveJob /
  []
@@ -978,196 +978,187 @@ Underfull \hbox (badness 10000) in paragraph at lines 32--32
 
  (./solution_design.tex
 Chapter 4.
-Package hyperref Info: bookmark level for unknown todo defaults to 0 on input l
-ine 2.
-<./images/auth/Auth.png, id=776, 633.36626pt x 422.57875pt>
+<./images/auth/Auth.png, id=706, 633.36626pt x 422.57875pt>
 File: ./images/auth/Auth.png Graphic file (type png)
 <use ./images/auth/Auth.png>
-Package pdftex.def Info: ./images/auth/Auth.png  used on input line 15.
+Package pdftex.def Info: ./images/auth/Auth.png  used on input line 14.
 (pdftex.def)             Requested size: 412.56496pt x 275.26614pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-Overfull \hbox (23.96606pt too wide) in paragraph at lines 21--22
-[]\OT1/lmr/m/n/12 In Ruby on Rails there ex-ists a very good gem for au-then-ti
--ca-tion - \OT1/lmr/m/it/12 de-vise[]token[]auth|
- []
 
 [23
 
 
 
-] [24pdfTeX warning (ext4): destination with the same identifier (name{figure.4
-.1}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.33 	
-       <./images/auth/Auth.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 34--34
+]
+Underfull \hbox (badness 10000) in paragraph at lines 33--33
 [][][][]$\OT1/lmtt/m/n/10 https : / / api . rubyonrails . org / classes / Activ
 eModel / SecurePassword /
  []
 
-[25] [26] [27]
-Overfull \hbox (79.18372pt too wide) in paragraph at lines 98--98
+[24pdfTeX warning (ext4): destination with the same identifier (name{figure.4.1
+}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.35 	A
+       s a result of using the Ruby on Rails tools correctly we also excerpt...
+ <./images/auth/Auth.png>] [25] [26] [27]
+Overfull \hbox (73.93373pt too wide) in paragraph at lines 97--97
 [][][][]$\OT1/lmtt/m/n/10 https : / / www . cnet . com / how-[]to / why-[]you-[
-]are-[]at-[]risk-[]if-[]you-[]use-[]sms-[]for-[]two-[]step-[]verification/$[]| 
-|
+]are-[]at-[]risk-[]if-[]you-[]use-[]sms-[]for-[]two-[]step-[]verification$[]| |
+
  []
 
 [28] [29]
-<./images/orders/legend.png, id=854, 232.87pt x 295.1025pt>
+<./images/orders/legend.png, id=782, 232.87pt x 295.1025pt>
 File: ./images/orders/legend.png Graphic file (type png)
 <use ./images/orders/legend.png>
-Package pdftex.def Info: ./images/orders/legend.png  used on input line 146.
+Package pdftex.def Info: ./images/orders/legend.png  used on input line 145.
 (pdftex.def)             Requested size: 163.00787pt x 206.57033pt.
  [30pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
 2}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.157 A
-       s mentioned before, the scheduler must ensure that if the scheduled o...
- <./images/orders/legend.png>]
-<./images/orders/scheduled_naive_arrive_counting.png, id=862, 515.9275pt x 102.
+l.157 
+       <./images/orders/legend.png>]
+<./images/orders/scheduled_naive_arrive_counting.png, id=790, 515.9275pt x 102.
 3825pt>
 File: ./images/orders/scheduled_naive_arrive_counting.png Graphic file (type pn
 g)
 <use ./images/orders/scheduled_naive_arrive_counting.png>
 Package pdftex.def Info: ./images/orders/scheduled_naive_arrive_counting.png  u
-sed on input line 162.
+sed on input line 161.
 (pdftex.def)             Requested size: 361.14679pt x 71.66725pt.
  [31pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
 3}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.181 	\item S
-              cheduled order - combined with normal order <./images/orders/sche
-duled_naive_arrive_counting.png>]
-<./images/orders/add-1.png, id=870, 273.02pt x 148.555pt>
+l.181 	\item N
+              ormal order combined with scheduled order <./images/orders/schedu
+led_naive_arrive_counting.png>]
+<./images/orders/add-1.png, id=798, 273.02pt x 148.555pt>
 File: ./images/orders/add-1.png Graphic file (type png)
 <use ./images/orders/add-1.png>
-Package pdftex.def Info: ./images/orders/add-1.png  used on input line 198.
+Package pdftex.def Info: ./images/orders/add-1.png  used on input line 197.
 (pdftex.def)             Requested size: 191.11269pt x 103.98778pt.
-<./images/orders/add-2.png, id=872, 393.47pt x 112.42pt>
+<./images/orders/add-2.png, id=800, 393.47pt x 112.42pt>
 File: ./images/orders/add-2.png Graphic file (type png)
 <use ./images/orders/add-2.png>
-Package pdftex.def Info: ./images/orders/add-2.png  used on input line 208.
+Package pdftex.def Info: ./images/orders/add-2.png  used on input line 207.
 (pdftex.def)             Requested size: 275.42711pt x 78.69345pt.
  [32pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
 4}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.215 		
+l.214 		
         pdfTeX warning (ext4): destination with the same identifier (name{figur
 e.4.5}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.215 		
+l.214 		
          <./images/orders/add-1.png> <./images/orders/add-2.png>]
-<./images/orders/add-3.png, id=884, 555.07375pt x 254.9525pt>
+<./images/orders/add-3.png, id=812, 555.07375pt x 254.9525pt>
 File: ./images/orders/add-3.png Graphic file (type png)
 <use ./images/orders/add-3.png>
-Package pdftex.def Info: ./images/orders/add-3.png  used on input line 217.
+Package pdftex.def Info: ./images/orders/add-3.png  used on input line 216.
 (pdftex.def)             Requested size: 388.54897pt x 178.46552pt.
-<./images/orders/add-4.png, id=886, 684.5575pt x 461.725pt>
+<./images/orders/add-4.png, id=814, 684.5575pt x 461.725pt>
 File: ./images/orders/add-4.png Graphic file (type png)
 <use ./images/orders/add-4.png>
-Package pdftex.def Info: ./images/orders/add-4.png  used on input line 228.
+Package pdftex.def Info: ./images/orders/add-4.png  used on input line 227.
 (pdftex.def)             Requested size: 410.73766pt x 277.03714pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<./images/orders/add-5.png, id=888, 615.29875pt x 315.1775pt>
+<./images/orders/add-5.png, id=816, 615.29875pt x 315.1775pt>
 File: ./images/orders/add-5.png Graphic file (type png)
 <use ./images/orders/add-5.png>
-Package pdftex.def Info: ./images/orders/add-5.png  used on input line 237.
+Package pdftex.def Info: ./images/orders/add-5.png  used on input line 236.
 (pdftex.def)             Requested size: 369.1821pt x 189.10796pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<./images/orders/add-6.png, id=890, 813.0375pt x 477.785pt>
+<./images/orders/add-6.png, id=818, 813.0375pt x 477.785pt>
 File: ./images/orders/add-6.png Graphic file (type png)
 <use ./images/orders/add-6.png>
-Package pdftex.def Info: ./images/orders/add-6.png  used on input line 250.
+Package pdftex.def Info: ./images/orders/add-6.png  used on input line 249.
 (pdftex.def)             Requested size: 406.51776pt x 238.8919pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
 [33pdfTeX warning (ext4): destination with the same identifier (name{figure.4.6
 }) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.257 	
-        <./images/orders/add-3.png>]
-<./images/orders/add-7.png, id=906, 473.77pt x 113.42375pt>
-File: ./images/orders/add-7.png Graphic file (type png)
-<use ./images/orders/add-7.png>
-Package pdftex.def Info: ./images/orders/add-7.png  used on input line 262.
-(pdftex.def)             Requested size: 331.63673pt x 79.39607pt.
-
+l.252 	\end{figure}
+                    <./images/orders/add-3.png>]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<./images/orders/changing_arrive_time_longer.png, id=908, 554.07pt x 113.42375p
+<./images/orders/add-7.png, id=833, 473.77pt x 113.42375pt>
+File: ./images/orders/add-7.png Graphic file (type png)
+<use ./images/orders/add-7.png>
+Package pdftex.def Info: ./images/orders/add-7.png  used on input line 261.
+(pdftex.def)             Requested size: 331.63673pt x 79.39607pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<./images/orders/changing_arrive_time_longer.png, id=835, 554.07pt x 113.42375p
 t>
 File: ./images/orders/changing_arrive_time_longer.png Graphic file (type png)
 <use ./images/orders/changing_arrive_time_longer.png>
 Package pdftex.def Info: ./images/orders/changing_arrive_time_longer.png  used 
-on input line 273.
+on input line 272.
 (pdftex.def)             Requested size: 387.84636pt x 79.39607pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<./images/orders/changing_arrive_time_longer_normal_collision.png, id=910, 614.
-295pt x 112.42pt>
-File: ./images/orders/changing_arrive_time_longer_normal_collision.png Graphic 
-file (type png)
-<use ./images/orders/changing_arrive_time_longer_normal_collision.png>
-Package pdftex.def Info: ./images/orders/changing_arrive_time_longer_normal_col
-lision.png  used on input line 281.
-(pdftex.def)             Requested size: 399.287pt x 73.07213pt.
 [34pdfTeX warning (ext4): destination with the same identifier (name{figure.4.7
 }) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.284 	\end{figure}
-                    <./images/orders/add-4.png>]
+l.276 
+       <./images/orders/add-4.png>]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<./images/orders/changing_arrive_time_longer_scheduled_collision.png, id=921, 2
+<./images/orders/changing_arrive_time_longer_normal_collision.png, id=845, 614.
+295pt x 112.42pt>
+File: ./images/orders/changing_arrive_time_longer_normal_collision.png Graphic 
+file (type png)
+<use ./images/orders/changing_arrive_time_longer_normal_collision.png>
+Package pdftex.def Info: ./images/orders/changing_arrive_time_longer_normal_col
+lision.png  used on input line 280.
+(pdftex.def)             Requested size: 399.287pt x 73.07213pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<./images/orders/changing_arrive_time_longer_scheduled_collision.png, id=847, 2
 02.7575pt x 112.42pt>
 File: ./images/orders/changing_arrive_time_longer_scheduled_collision.png Graph
 ic file (type png)
 <use ./images/orders/changing_arrive_time_longer_scheduled_collision.png>
 Package pdftex.def Info: ./images/orders/changing_arrive_time_longer_scheduled_
-collision.png  used on input line 289.
+collision.png  used on input line 288.
 (pdftex.def)             Requested size: 141.92928pt x 78.69345pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<./images/orders/Shorter_order.png, id=923, 554.07pt x 112.42pt>
+<./images/orders/Shorter_order.png, id=849, 554.07pt x 112.42pt>
 File: ./images/orders/Shorter_order.png Graphic file (type png)
 <use ./images/orders/Shorter_order.png>
 Package pdftex.def Info: ./images/orders/Shorter_order.png  used on input line 
-300.
+299.
 (pdftex.def)             Requested size: 387.84636pt x 78.69345pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<./images/orders/cancel.png, id=925, 554.07pt x 112.42pt>
+<./images/orders/cancel.png, id=851, 554.07pt x 112.42pt>
 File: ./images/orders/cancel.png Graphic file (type png)
 <use ./images/orders/cancel.png>
-Package pdftex.def Info: ./images/orders/cancel.png  used on input line 309.
+Package pdftex.def Info: ./images/orders/cancel.png  used on input line 308.
 (pdftex.def)             Requested size: 387.84636pt x 78.69345pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
@@ -1177,10 +1168,10 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.325 	F
-        or the each order we have to keep track of the several time fields. ...
- <./images/orders/add-5.png>]) [36pdfTeX warning (ext4): destination with the s
-ame identifier (name{figure.4.9}) has been already used, duplicate ignored
+l.322 	
+        <./images/orders/add-5.png>]) [36pdfTeX warning (ext4): destination wit
+h the same identifier (name{figure.4.9}) has been already used, duplicate ignor
+ed
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
@@ -1230,11 +1221,24 @@ horter_order.png> <./images/orders/cancel.png>]
 
  (./implementation.tex
 Chapter 5.
-<./images/db_schema.png, id=954, 770.88pt x 771.88374pt>
-File: ./images/db_schema.png Graphic file (type png)
-<use ./images/db_schema.png>
-Package pdftex.def Info: ./images/db_schema.png  used on input line 11.
-(pdftex.def)             Requested size: 408.56445pt x 409.09644pt.
+<./images/architecture/services_architecture.png, id=883, 519.9425pt x 352.3162
+5pt>
+File: ./images/architecture/services_architecture.png Graphic file (type png)
+<use ./images/architecture/services_architecture.png>
+Package pdftex.def Info: ./images/architecture/services_architecture.png  used 
+on input line 11.
+(pdftex.def)             Requested size: 363.95728pt x 246.61969pt.
+<./images/architecture/services_technologies_scheme.png, id=885, 556.0775pt x 4
+42.65375pt>
+File: ./images/architecture/services_technologies_scheme.png Graphic file (type
+ png)
+<use ./images/architecture/services_technologies_scheme.png>
+Package pdftex.def Info: ./images/architecture/services_technologies_scheme.png
+  used on input line 19.
+(pdftex.def)             Requested size: 389.25159pt x 309.8555pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
 [38
 
 
@@ -1244,22 +1248,46 @@ has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.20 	R
-       uby on Rails framework is tightly connected with the Convention over ...
- <./images/db_schema.png>] [39] [40]
-Overfull \hbox (123.16539pt too wide) in paragraph at lines 90--91
-[]\OT1/lmr/m/n/12 The mail tem-plate which will be used for the email is spec-i
--fied in the \OT1/lmr/m/it/12 views/entity[]mailer/action[]mail.*\OT1/lmr/m/n/1
-2 . |
+l.30 
+      <./images/architecture/services_architecture.png>] [39pdfTeX warning (ext
+4): destination with the same identifier (name{figure.5.2}) has been already us
+ed, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.41 		
+        <./images/architecture/services_technologies_scheme.png>] [40]
+<./images/db_schema.png, id=913, 770.88pt x 771.88374pt>
+File: ./images/db_schema.png Graphic file (type png)
+<use ./images/db_schema.png>
+Package pdftex.def Info: ./images/db_schema.png  used on input line 74.
+(pdftex.def)             Requested size: 408.56445pt x 409.09644pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[41] [42pdfTeX warning (ext4): destination with the same identifier (name{figur
+e.5.3}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.106 		
+         <./images/db_schema.png>]
+Overfull \hbox (7.63483pt too wide) in paragraph at lines 128--129
+\OT1/lmr/m/n/12 used across the ap-pli-ca-tion. Rails ex-e-cute all the code in
+ the $\OT1/lmtt/m/n/12 config / initializers$|
  []
 
-[41] [42] [43]
-Underfull \hbox (badness 10000) in paragraph at lines 145--145
+[43]
+Underfull \hbox (badness 10000) in paragraph at lines 146--146
 [][][][]$\OT1/lmtt/m/n/10 https : / / api . rubyonrails . org / classes / Activ
 eRecord / SecureToken / ClassMethods .
  []
 
-[44]) [45]
+[44]
+Package hyperref Info: bookmark level for unknown todo defaults to 0 on input l
+ine 166.
+) [45]
 \openout2 = `user_documentation.aux'.
 
  (./user_documentation.tex
@@ -1322,19 +1350,19 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 160.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 160.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 160.
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: CF2B433B23BCCC7AC90661385D2DB9E1;16739.
+(rerunfilecheck)             Checksum: 9A784D6DD15ABC337FFEC1AA1A27AE52;14688.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 160.
  ) 
 Here is how much of TeX's memory you used:
- 24685 strings out of 492649
- 421601 string characters out of 6129621
- 465955 words of memory out of 5000000
- 27793 multiletter control sequences out of 15000+600000
+ 24655 strings out of 492649
+ 421159 string characters out of 6129621
+ 457955 words of memory out of 5000000
+ 27765 multiletter control sequences out of 15000+600000
  78280 words of font info for 75 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 62i,9n,78p,1294b,1942s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/lm/lm-rmtt.enc}{/usr/loca
-l/texlive/2018/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2018
+ 62i,9n,78p,1224b,1942s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/
+texlive/2018/texmf-dist/fonts/enc/dvips/lm/lm-rmtt.enc}{/usr/local/texlive/2018
 /texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}</usr/local/texlive/2018/texmf-dis
 t/fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/2018/texmf-dist/fonts/ty
 pe1/public/lm/lmr10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/
@@ -1346,9 +1374,9 @@ t/fonts/type1/public/lm/lmri12.pfb></usr/local/texlive/2018/texmf-dist/fonts/ty
 pe1/public/lm/lmsy10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public
 /lm/lmtt10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/lm/lmtt12
 .pfb>
-Output written on thesis.pdf (56 pages, 1315171 bytes).
+Output written on thesis.pdf (56 pages, 1354857 bytes).
 PDF statistics:
- 1187 PDF objects out of 1200 (max. 8388607)
- 246 named destinations out of 1000 (max. 500000)
- 1059 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1131 PDF objects out of 1200 (max. 8388607)
+ 240 named destinations out of 1000 (max. 500000)
+ 957 words of extra memory for PDF output out of 10000 (max. 10000000)
 

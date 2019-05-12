@@ -12,7 +12,7 @@ Here are some advantages and disadvantages of Ruby on Rails which has led us to 
 Advantages:
 \begin{itemize}
 	\item Simplicity and expressibility of Ruby - optional parenthesis, return keyword, no semicolons, combination with functional programming 
-	\item Strong Convention over Configuration influence - you have strictly given where to place models, controllers, how to name classes, database tables etc. and you are forced to do it that way. It may seem limiting at first but it brings the clarity to project and most of the times it gives you a good way to solve your problem without reinventing the wheel
+	\item Strong Convention over Configuration influence - you have strictly given where to place models, controllers, how to name classes, database tables etc. and you are forced to do it that way. It may seem limiting at first but it brings the clarity to project and most of the times it gives you a good way to solve your problem without reinventing the wheel. The biggest advantage of using this approach is that a new programmer understands the project architecture quickly because all the Rails application share the same architecture skeleton.
 	\item plenty of tools built in - from the routing and security through development-testing-production configurations to the highly sophisticated ORM
 	\item global repository of libraries (Ruby Gems) - most of them in very good quality with clear documentation and test covered
 	\item We are using it for 3 years, so we know proven libraries and the ecosystem
@@ -22,11 +22,12 @@ Disadvantages:
 	\item it is more difficult to set it up than PHP
 	\item impossible to use standard web hosting
 	\item small base of programmers knowing Ruby
-	\item efficiency compared to some framework
 \end{itemize}
-  
-\subsection{PosrtgreSQL}
-We decided to use PostgreSQL because it is open source, and unlike MySQL, it supports natively storing JSON, arrays and it has many plugins (e.g. plugin for storing geodata). None of these features we use in our application now but why not to have this possibility when we would like to optimize something or extend it. Since we use Rails ORM (ActiveRecord), the choice of the database is not so critical - we can later migrate to the other database engine easily.
+
+We tried to low the disadvantages as possible. We reduced the set-up difficulty by using the Docker. Using the web hosting would be limiting for our application so we would have to use own virtual server anyway. 
+
+\subsection{PostgreSQL}
+We decided to use PostgreSQL because it is open source, and unlike MySQL, it supports transactions, natively storing JSON, arrays and it has many plugins (e.g. plugin for storing geodata). Besides the transactions none of these features we use in our application now but why not to have this possibility when we would like to optimize something or extend it. Since we use Rails ORM (ActiveRecord), the choice of the database is not so critical - we can later migrate to the other database engine easily.
 \subsection{Sidekiq}
 We need a job processor to handle sending emails, SMS, and calculating favourite places for customers. 
 There are many job processors for Ruby\footnote{ Job processors comparison \url{http://api.rubyonrails.org/classes/ActiveJob/QueueAdapters.html}}. We decided to use Sidekiq because it is a long-standing project focused on efficiency and we have used it before. However, for a project with requirements like these, any of the processors could handle it equally well. 
