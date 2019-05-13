@@ -100,7 +100,7 @@ In the following scheme
 		In our application were helpers the first choice where to put the calculation of the distance between two coordinates. We use it in both controllers and workers and it is quite complex function to have it directly in place.
 		
 	\subsection{Mailers}
-		Ruby on Rails has built-in support for sending emails. For each entity we derive class from the Rails \textit{ApplicationMailer} class. Each public method (action) in this class stands for one type of email. The Rails mailer provides us with out-of-the box asynchronous queue sending via SMTP - configured in \path{config/initializers} folder.
+		Ruby on Rails has built-in support for sending emails. For each entity we derive class from the Rails \textit{ApplicationMailer} class. Each public method (action) in this class stands for one type of email. The Rails mailer provides us with out-of-the box asynchronous queue sending via SMTP - configured inside the \path{config/initializers} folder.
 		 
 		 The mail template which will be used for the email is specified in the \path{views/mailer_entity/mail_action.*}.
 		 
@@ -125,7 +125,7 @@ In the following scheme
 	\subsection{Configurations}
 		Ruby on Rails specifies that inside the  \path{config} folder lies all the application configurations. We describe the important ones which can be useful for future application modifications.
 		\subsubsection{Initializers}
-			Initializers handle the initialization and configuration of the modules and classes used across the application. Rails execute all the code in the \path{config/initializers} folder during the application start.
+			Initializers handle the initialization and configuration of the modules and classes used across the application. Rails during the application start goes through all the files inside the \path{config/initializers} folder and executes them.
 			
 			The important initializers in our application there are initializers for Google Maps API, Sidekiq (asynchronous jobs), Kaminari (pagination), Lograge (logs formatting), CML (our order scheduler) and CORS.
 			
@@ -158,11 +158,22 @@ In the following scheme
 		
 		The whole Pundit initialization is in \path{api/v2/api_v2_controller.rb} where is also defined what the application should do if the request is unauthorized. As we can see, our implementation returns error 403 with 'not authorized' error as specified.
 		
-		In each controller action we must call the \textit{authorize} method which will automatically checks the permissions for us. If we don't want to authorize the request we must explicitly call \textit{skip\_authorization}. In case we don't call it, there will be raised missing authorization exception on such endpoint. This mechanism is there to prevent the situation when programmer forgets to set authorization for the endpoint, which would lead to possible sensitive data exposure.
+		In each controller action we must call the \textit{authorize} method which will automatically checks the permissions for us. If we don't want to authorize the request we must explicitly call \textit{skip\_authorization}. In case we don't call it, there will be raised missing authorization exception on such endpoint. This mechanism is there to prevent the situation when a programmer forgets to set the authorization definitions for the endpoint, which could lead to sensitive data leak.
 
 	\subsection{Order scheduler}
-		The whole order scheduler logic lies in the CML module. We can find the source codes inside the \path{app/lib} folder. 
-	\subsection{Favorite locations}
-	\todo{dopsat}
-	\subsection{Generators}
-		\todo{dopsat}
+		The whole order scheduler logic as described in the solution design lies in the CML module. As you can see in \ref{scheduler-schema}, the whole scheduler consists of four classes: \textit{Scheduler}, \textit{OrderAddManipulator}, \textit{OrderTimeChangeManipulator}, and \textit{DistanceComputer}. 
+		\begin{figure}[h]\centering
+			\includegraphics[scale=0.53]{architecture/scheduler_UML.png}
+			\caption{Scheduler schema} 
+			\label{scheduler-schema}
+		\end{figure} 
+	
+		There is only one instance of the \textit{Scheduler} class which is initialized during the application start-up and contains all the constants used for calculating the distances and durations. \textit{Scheduler} class accepts all the operations described in the solution design.
+		
+		\textit{OrderAddManipulator} and \textit{OrderTimeChangeManipulator} classes contain the algorithms for manipulating the currently scheduled order and its dependencies.  
+		
+		\textit{DistanceComputer} class wraps the Google Maps API and defines the methods for retrieving the distances and durations between two locations or two location sets. 
+		
+		All the source codes are located inside the \path{app/lib} folder. 
+		
+		Our implementation is covered by integration tests that are based on the situations described in solution design. Because our \textit{DistanceComputer} uses the real Google Maps API for the distance calculation, we have implemented for the testing purposes our custom \textit{FakeDistanceComputer} mocking class. It implements the same interface as the original \textit{DistanceComputer}, but it supports setting the default time and distance duration between all the locations. It also supports defining custom distances for the specific location pairs. The \textit{FakeDistanceComputer} can be found inside the \path{spec/factories} folder. All the scheduler tests are located in the \path{spec/lib/cml/scheduler_spec.rb}
