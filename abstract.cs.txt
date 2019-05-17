@@ -1,0 +1,7 @@
+V poslední době začínají služby jako je Uber válcovat tradiční taxi společnosti.
+Cílem této práce je vytvořit back-end část aplikace pro místní taxislužbu.
+Vytvořená aplikace poskytuje rozhraní pro tvoření a správu objednávek, zaměstnanců,
+zákazníků a vozového parku. Součástí práce je také návrh plánovače objednávek,
+který automaticky počítá dobu objednávky, očekávaný čas příjezdu a rozděluje objednávky mezi
+právě dostupné řidiče. V důsledku aplikace zvyšuje efektivnost práce taxislužby a poskytuje
+uživatelům komfortnější způsob využívání jejich služeb.

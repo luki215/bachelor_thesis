@@ -1,0 +1,7 @@
+Nowadays services like Uber start to surpass taxi companies in comfort of transport. 
+In this thesis, we create a back-end part of an application for taxi companies in smaller towns. 
+This application provides an interface for creating and managing orders, employees, 
+customers, and vehicles. As part of the system, we constructed order scheduler 
+which calculates the order duration, estimated time of arrival and distributes 
+the order between available drivers automatically. Overall the application increases 
+the taxi company's efficiency and offers users a more comfortable experience. 
